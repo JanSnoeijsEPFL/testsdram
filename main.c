@@ -55,6 +55,7 @@ int main() {
     //memcpy((void *)uocram, (void*)words , sizeof(uint32_t));
     for (i=0; i<100; i++){
     	*(uocram + i) = *(words+i);
+    	usleep(ALT_MICROSECS_IN_A_SEC);
     	printf("when writing::: uocram+(i<<5): %x, words +i*20 : %x\n", *(uocram+i), *(words + i));
     }
     // cant use memcpy because physical addresses dont map exactly to virtual addresses.
