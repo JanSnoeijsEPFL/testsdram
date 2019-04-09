@@ -27,43 +27,6 @@
 #define HPS_0_ACCELERATOR_0_W_OCRAM_END 0x7ffff
 
 /*
- * Macros for device 'accelerator_0_avalon_slave', class 'accelerator'
- * Path to the device is from the master group 'hps_0'.
- * The macros are prefixed with 'HPS_0_ACCELERATOR_0_AVALON_SLAVE_'.
- * The prefix is the master group descriptor and the slave descriptor.
- */
-#define HPS_0_ACCELERATOR_0_AVALON_SLAVE_COMPONENT_TYPE accelerator
-#define HPS_0_ACCELERATOR_0_AVALON_SLAVE_COMPONENT_NAME accelerator_0
-#define HPS_0_ACCELERATOR_0_AVALON_SLAVE_BASE 0x0
-#define HPS_0_ACCELERATOR_0_AVALON_SLAVE_SPAN 32
-#define HPS_0_ACCELERATOR_0_AVALON_SLAVE_END 0x1f
-
-/*
- * Macros for device 'pio_0', class 'altera_avalon_pio'
- * Path to the device is from the master group 'hps_0'.
- * The macros are prefixed with 'HPS_0_PIO_0_'.
- * The prefix is the master group descriptor and the slave descriptor.
- */
-#define HPS_0_PIO_0_COMPONENT_TYPE altera_avalon_pio
-#define HPS_0_PIO_0_COMPONENT_NAME pio_0
-#define HPS_0_PIO_0_BASE 0x20
-#define HPS_0_PIO_0_SPAN 16
-#define HPS_0_PIO_0_END 0x2f
-#define HPS_0_PIO_0_BIT_CLEARING_EDGE_REGISTER 0
-#define HPS_0_PIO_0_BIT_MODIFYING_OUTPUT_REGISTER 0
-#define HPS_0_PIO_0_CAPTURE 0
-#define HPS_0_PIO_0_DATA_WIDTH 8
-#define HPS_0_PIO_0_DO_TEST_BENCH_WIRING 0
-#define HPS_0_PIO_0_DRIVEN_SIM_VALUE 0
-#define HPS_0_PIO_0_EDGE_TYPE NONE
-#define HPS_0_PIO_0_FREQ 100000000
-#define HPS_0_PIO_0_HAS_IN 0
-#define HPS_0_PIO_0_HAS_OUT 1
-#define HPS_0_PIO_0_HAS_TRI 0
-#define HPS_0_PIO_0_IRQ_TYPE NONE
-#define HPS_0_PIO_0_RESET_VALUE 0
-
-/*
  * Macros for device 'jtag_uart_0', class 'altera_avalon_jtag_uart'
  * Path to the device is from the master group 'hps_0'.
  * The macros are prefixed with 'HPS_0_JTAG_UART_0_'.
@@ -71,9 +34,9 @@
  */
 #define HPS_0_JTAG_UART_0_COMPONENT_TYPE altera_avalon_jtag_uart
 #define HPS_0_JTAG_UART_0_COMPONENT_NAME jtag_uart_0
-#define HPS_0_JTAG_UART_0_BASE 0x30
+#define HPS_0_JTAG_UART_0_BASE 0x0
 #define HPS_0_JTAG_UART_0_SPAN 8
-#define HPS_0_JTAG_UART_0_END 0x37
+#define HPS_0_JTAG_UART_0_END 0x7
 #define HPS_0_JTAG_UART_0_IRQ 0
 #define HPS_0_JTAG_UART_0_READ_DEPTH 64
 #define HPS_0_JTAG_UART_0_READ_THRESHOLD 8
@@ -105,6 +68,43 @@
 #define HPS_0_ACCELERATOR_0_X_OCRAM_END 0x91fff
 
 /*
+ * Macros for device 'accelerator_0_avalon_slave', class 'accelerator'
+ * Path to the device is from the master group 'hps_0'.
+ * The macros are prefixed with 'HPS_0_ACCELERATOR_0_AVALON_SLAVE_'.
+ * The prefix is the master group descriptor and the slave descriptor.
+ */
+#define HPS_0_ACCELERATOR_0_AVALON_SLAVE_COMPONENT_TYPE accelerator
+#define HPS_0_ACCELERATOR_0_AVALON_SLAVE_COMPONENT_NAME accelerator_0
+#define HPS_0_ACCELERATOR_0_AVALON_SLAVE_BASE 0x92000
+#define HPS_0_ACCELERATOR_0_AVALON_SLAVE_SPAN 32
+#define HPS_0_ACCELERATOR_0_AVALON_SLAVE_END 0x9201f
+
+/*
+ * Macros for device 'pio_0', class 'altera_avalon_pio'
+ * Path to the device is from the master group 'hps_0'.
+ * The macros are prefixed with 'HPS_0_PIO_0_'.
+ * The prefix is the master group descriptor and the slave descriptor.
+ */
+#define HPS_0_PIO_0_COMPONENT_TYPE altera_avalon_pio
+#define HPS_0_PIO_0_COMPONENT_NAME pio_0
+#define HPS_0_PIO_0_BASE 0x92020
+#define HPS_0_PIO_0_SPAN 16
+#define HPS_0_PIO_0_END 0x9202f
+#define HPS_0_PIO_0_BIT_CLEARING_EDGE_REGISTER 0
+#define HPS_0_PIO_0_BIT_MODIFYING_OUTPUT_REGISTER 0
+#define HPS_0_PIO_0_CAPTURE 0
+#define HPS_0_PIO_0_DATA_WIDTH 8
+#define HPS_0_PIO_0_DO_TEST_BENCH_WIRING 0
+#define HPS_0_PIO_0_DRIVEN_SIM_VALUE 0
+#define HPS_0_PIO_0_EDGE_TYPE NONE
+#define HPS_0_PIO_0_FREQ 100000000
+#define HPS_0_PIO_0_HAS_IN 0
+#define HPS_0_PIO_0_HAS_OUT 1
+#define HPS_0_PIO_0_HAS_TRI 0
+#define HPS_0_PIO_0_IRQ_TYPE NONE
+#define HPS_0_PIO_0_RESET_VALUE 0
+
+/*
  * Macros for device 'accelerator_0_w_ocram', class 'accelerator'
  * Path to the device is from the master group 'hps_0_bridges'.
  * The macros are prefixed with 'HPS_0_BRIDGES_ACCELERATOR_0_W_OCRAM_'.
@@ -117,43 +117,6 @@
 #define HPS_0_BRIDGES_ACCELERATOR_0_W_OCRAM_END 0x7ffff
 
 /*
- * Macros for device 'accelerator_0_avalon_slave', class 'accelerator'
- * Path to the device is from the master group 'hps_0_bridges'.
- * The macros are prefixed with 'HPS_0_BRIDGES_ACCELERATOR_0_AVALON_SLAVE_'.
- * The prefix is the master group descriptor and the slave descriptor.
- */
-#define HPS_0_BRIDGES_ACCELERATOR_0_AVALON_SLAVE_COMPONENT_TYPE accelerator
-#define HPS_0_BRIDGES_ACCELERATOR_0_AVALON_SLAVE_COMPONENT_NAME accelerator_0
-#define HPS_0_BRIDGES_ACCELERATOR_0_AVALON_SLAVE_BASE 0x0
-#define HPS_0_BRIDGES_ACCELERATOR_0_AVALON_SLAVE_SPAN 32
-#define HPS_0_BRIDGES_ACCELERATOR_0_AVALON_SLAVE_END 0x1f
-
-/*
- * Macros for device 'pio_0', class 'altera_avalon_pio'
- * Path to the device is from the master group 'hps_0_bridges'.
- * The macros are prefixed with 'HPS_0_BRIDGES_PIO_0_'.
- * The prefix is the master group descriptor and the slave descriptor.
- */
-#define HPS_0_BRIDGES_PIO_0_COMPONENT_TYPE altera_avalon_pio
-#define HPS_0_BRIDGES_PIO_0_COMPONENT_NAME pio_0
-#define HPS_0_BRIDGES_PIO_0_BASE 0x20
-#define HPS_0_BRIDGES_PIO_0_SPAN 16
-#define HPS_0_BRIDGES_PIO_0_END 0x2f
-#define HPS_0_BRIDGES_PIO_0_BIT_CLEARING_EDGE_REGISTER 0
-#define HPS_0_BRIDGES_PIO_0_BIT_MODIFYING_OUTPUT_REGISTER 0
-#define HPS_0_BRIDGES_PIO_0_CAPTURE 0
-#define HPS_0_BRIDGES_PIO_0_DATA_WIDTH 8
-#define HPS_0_BRIDGES_PIO_0_DO_TEST_BENCH_WIRING 0
-#define HPS_0_BRIDGES_PIO_0_DRIVEN_SIM_VALUE 0
-#define HPS_0_BRIDGES_PIO_0_EDGE_TYPE NONE
-#define HPS_0_BRIDGES_PIO_0_FREQ 100000000
-#define HPS_0_BRIDGES_PIO_0_HAS_IN 0
-#define HPS_0_BRIDGES_PIO_0_HAS_OUT 1
-#define HPS_0_BRIDGES_PIO_0_HAS_TRI 0
-#define HPS_0_BRIDGES_PIO_0_IRQ_TYPE NONE
-#define HPS_0_BRIDGES_PIO_0_RESET_VALUE 0
-
-/*
  * Macros for device 'jtag_uart_0', class 'altera_avalon_jtag_uart'
  * Path to the device is from the master group 'hps_0_bridges'.
  * The macros are prefixed with 'HPS_0_BRIDGES_JTAG_UART_0_'.
@@ -161,9 +124,9 @@
  */
 #define HPS_0_BRIDGES_JTAG_UART_0_COMPONENT_TYPE altera_avalon_jtag_uart
 #define HPS_0_BRIDGES_JTAG_UART_0_COMPONENT_NAME jtag_uart_0
-#define HPS_0_BRIDGES_JTAG_UART_0_BASE 0x30
+#define HPS_0_BRIDGES_JTAG_UART_0_BASE 0x0
 #define HPS_0_BRIDGES_JTAG_UART_0_SPAN 8
-#define HPS_0_BRIDGES_JTAG_UART_0_END 0x37
+#define HPS_0_BRIDGES_JTAG_UART_0_END 0x7
 #define HPS_0_BRIDGES_JTAG_UART_0_READ_DEPTH 64
 #define HPS_0_BRIDGES_JTAG_UART_0_READ_THRESHOLD 8
 #define HPS_0_BRIDGES_JTAG_UART_0_WRITE_DEPTH 64
@@ -192,6 +155,43 @@
 #define HPS_0_BRIDGES_ACCELERATOR_0_X_OCRAM_BASE 0x90000
 #define HPS_0_BRIDGES_ACCELERATOR_0_X_OCRAM_SPAN 8192
 #define HPS_0_BRIDGES_ACCELERATOR_0_X_OCRAM_END 0x91fff
+
+/*
+ * Macros for device 'accelerator_0_avalon_slave', class 'accelerator'
+ * Path to the device is from the master group 'hps_0_bridges'.
+ * The macros are prefixed with 'HPS_0_BRIDGES_ACCELERATOR_0_AVALON_SLAVE_'.
+ * The prefix is the master group descriptor and the slave descriptor.
+ */
+#define HPS_0_BRIDGES_ACCELERATOR_0_AVALON_SLAVE_COMPONENT_TYPE accelerator
+#define HPS_0_BRIDGES_ACCELERATOR_0_AVALON_SLAVE_COMPONENT_NAME accelerator_0
+#define HPS_0_BRIDGES_ACCELERATOR_0_AVALON_SLAVE_BASE 0x92000
+#define HPS_0_BRIDGES_ACCELERATOR_0_AVALON_SLAVE_SPAN 32
+#define HPS_0_BRIDGES_ACCELERATOR_0_AVALON_SLAVE_END 0x9201f
+
+/*
+ * Macros for device 'pio_0', class 'altera_avalon_pio'
+ * Path to the device is from the master group 'hps_0_bridges'.
+ * The macros are prefixed with 'HPS_0_BRIDGES_PIO_0_'.
+ * The prefix is the master group descriptor and the slave descriptor.
+ */
+#define HPS_0_BRIDGES_PIO_0_COMPONENT_TYPE altera_avalon_pio
+#define HPS_0_BRIDGES_PIO_0_COMPONENT_NAME pio_0
+#define HPS_0_BRIDGES_PIO_0_BASE 0x92020
+#define HPS_0_BRIDGES_PIO_0_SPAN 16
+#define HPS_0_BRIDGES_PIO_0_END 0x9202f
+#define HPS_0_BRIDGES_PIO_0_BIT_CLEARING_EDGE_REGISTER 0
+#define HPS_0_BRIDGES_PIO_0_BIT_MODIFYING_OUTPUT_REGISTER 0
+#define HPS_0_BRIDGES_PIO_0_CAPTURE 0
+#define HPS_0_BRIDGES_PIO_0_DATA_WIDTH 8
+#define HPS_0_BRIDGES_PIO_0_DO_TEST_BENCH_WIRING 0
+#define HPS_0_BRIDGES_PIO_0_DRIVEN_SIM_VALUE 0
+#define HPS_0_BRIDGES_PIO_0_EDGE_TYPE NONE
+#define HPS_0_BRIDGES_PIO_0_FREQ 100000000
+#define HPS_0_BRIDGES_PIO_0_HAS_IN 0
+#define HPS_0_BRIDGES_PIO_0_HAS_OUT 1
+#define HPS_0_BRIDGES_PIO_0_HAS_TRI 0
+#define HPS_0_BRIDGES_PIO_0_IRQ_TYPE NONE
+#define HPS_0_BRIDGES_PIO_0_RESET_VALUE 0
 
 /*
  * Macros for device 'hps_0_axi_sdram', class 'axi_sdram'
@@ -255,9 +255,9 @@
  */
 #define HPS_0_ARM_A9_0_ACCELERATOR_0_AVALON_SLAVE_COMPONENT_TYPE accelerator
 #define HPS_0_ARM_A9_0_ACCELERATOR_0_AVALON_SLAVE_COMPONENT_NAME accelerator_0
-#define HPS_0_ARM_A9_0_ACCELERATOR_0_AVALON_SLAVE_BASE 0xff200000
+#define HPS_0_ARM_A9_0_ACCELERATOR_0_AVALON_SLAVE_BASE 0xc0092000
 #define HPS_0_ARM_A9_0_ACCELERATOR_0_AVALON_SLAVE_SPAN 32
-#define HPS_0_ARM_A9_0_ACCELERATOR_0_AVALON_SLAVE_END 0xff20001f
+#define HPS_0_ARM_A9_0_ACCELERATOR_0_AVALON_SLAVE_END 0xc009201f
 
 /*
  * Macros for device 'pio_0', class 'altera_avalon_pio'
@@ -267,9 +267,9 @@
  */
 #define HPS_0_ARM_A9_0_PIO_0_COMPONENT_TYPE altera_avalon_pio
 #define HPS_0_ARM_A9_0_PIO_0_COMPONENT_NAME pio_0
-#define HPS_0_ARM_A9_0_PIO_0_BASE 0xff200020
+#define HPS_0_ARM_A9_0_PIO_0_BASE 0xc0092020
 #define HPS_0_ARM_A9_0_PIO_0_SPAN 16
-#define HPS_0_ARM_A9_0_PIO_0_END 0xff20002f
+#define HPS_0_ARM_A9_0_PIO_0_END 0xc009202f
 #define HPS_0_ARM_A9_0_PIO_0_BIT_CLEARING_EDGE_REGISTER 0
 #define HPS_0_ARM_A9_0_PIO_0_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define HPS_0_ARM_A9_0_PIO_0_CAPTURE 0
@@ -292,9 +292,9 @@
  */
 #define HPS_0_ARM_A9_0_JTAG_UART_0_COMPONENT_TYPE altera_avalon_jtag_uart
 #define HPS_0_ARM_A9_0_JTAG_UART_0_COMPONENT_NAME jtag_uart_0
-#define HPS_0_ARM_A9_0_JTAG_UART_0_BASE 0xff200030
+#define HPS_0_ARM_A9_0_JTAG_UART_0_BASE 0xff200000
 #define HPS_0_ARM_A9_0_JTAG_UART_0_SPAN 8
-#define HPS_0_ARM_A9_0_JTAG_UART_0_END 0xff200037
+#define HPS_0_ARM_A9_0_JTAG_UART_0_END 0xff200007
 #define HPS_0_ARM_A9_0_JTAG_UART_0_READ_DEPTH 64
 #define HPS_0_ARM_A9_0_JTAG_UART_0_READ_THRESHOLD 8
 #define HPS_0_ARM_A9_0_JTAG_UART_0_WRITE_DEPTH 64
@@ -834,9 +834,9 @@
  */
 #define HPS_0_ARM_A9_1_ACCELERATOR_0_AVALON_SLAVE_COMPONENT_TYPE accelerator
 #define HPS_0_ARM_A9_1_ACCELERATOR_0_AVALON_SLAVE_COMPONENT_NAME accelerator_0
-#define HPS_0_ARM_A9_1_ACCELERATOR_0_AVALON_SLAVE_BASE 0xff200000
+#define HPS_0_ARM_A9_1_ACCELERATOR_0_AVALON_SLAVE_BASE 0xc0092000
 #define HPS_0_ARM_A9_1_ACCELERATOR_0_AVALON_SLAVE_SPAN 32
-#define HPS_0_ARM_A9_1_ACCELERATOR_0_AVALON_SLAVE_END 0xff20001f
+#define HPS_0_ARM_A9_1_ACCELERATOR_0_AVALON_SLAVE_END 0xc009201f
 
 /*
  * Macros for device 'pio_0', class 'altera_avalon_pio'
@@ -846,9 +846,9 @@
  */
 #define HPS_0_ARM_A9_1_PIO_0_COMPONENT_TYPE altera_avalon_pio
 #define HPS_0_ARM_A9_1_PIO_0_COMPONENT_NAME pio_0
-#define HPS_0_ARM_A9_1_PIO_0_BASE 0xff200020
+#define HPS_0_ARM_A9_1_PIO_0_BASE 0xc0092020
 #define HPS_0_ARM_A9_1_PIO_0_SPAN 16
-#define HPS_0_ARM_A9_1_PIO_0_END 0xff20002f
+#define HPS_0_ARM_A9_1_PIO_0_END 0xc009202f
 #define HPS_0_ARM_A9_1_PIO_0_BIT_CLEARING_EDGE_REGISTER 0
 #define HPS_0_ARM_A9_1_PIO_0_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define HPS_0_ARM_A9_1_PIO_0_CAPTURE 0
@@ -871,9 +871,9 @@
  */
 #define HPS_0_ARM_A9_1_JTAG_UART_0_COMPONENT_TYPE altera_avalon_jtag_uart
 #define HPS_0_ARM_A9_1_JTAG_UART_0_COMPONENT_NAME jtag_uart_0
-#define HPS_0_ARM_A9_1_JTAG_UART_0_BASE 0xff200030
+#define HPS_0_ARM_A9_1_JTAG_UART_0_BASE 0xff200000
 #define HPS_0_ARM_A9_1_JTAG_UART_0_SPAN 8
-#define HPS_0_ARM_A9_1_JTAG_UART_0_END 0xff200037
+#define HPS_0_ARM_A9_1_JTAG_UART_0_END 0xff200007
 #define HPS_0_ARM_A9_1_JTAG_UART_0_READ_DEPTH 64
 #define HPS_0_ARM_A9_1_JTAG_UART_0_READ_THRESHOLD 8
 #define HPS_0_ARM_A9_1_JTAG_UART_0_WRITE_DEPTH 64
