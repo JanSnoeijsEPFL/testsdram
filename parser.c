@@ -23,7 +23,7 @@ void parse_weights(char* file, int32_t** words){
 	uint32_t word_cnt = 0;
 	do
 	{
-		//printf("why is this stuck\n");
+		printf("why is this stuck\n");
 		CH = fgetc(weights_file);
 		if(feof(weights_file))
 		{
