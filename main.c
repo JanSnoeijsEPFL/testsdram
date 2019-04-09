@@ -55,13 +55,13 @@ int main() {
     //memcpy((void *)uocram, (void*)words , sizeof(uint32_t));
     for (i=0; i<100; i++){
     	*(uint32_t*)(uocram + i) = *(uint32_t*)(words+i);
-    	//usleep(ALT_MICROSECS_IN_A_SEC);
+    	usleep(ALT_MICROSECS_IN_A_SEC);
     	printf("when writing::: uocram+(i<<5): %x, words +i*20 : %x\n", *(uint32_t*)(uocram+i), *(uint32_t*)(words + i));
     }
-    for (i=0; i<100; i++){
-    	*(uint32_t*)(wocram + i) = *(uint32_t*)(words+i);
-    	printf("when writing::: WWWocram+(i<<5): %x, words +i*20 : %x\n", *(uint32_t*)(wocram+i), *(uint32_t*)(words + i));
-    }
+   // for (i=0; i<100; i++){
+    	//*(uint32_t*)(wocram + i) = *(uint32_t*)(words+i);
+    //	printf("when writing::: WWWocram+(i<<5): %x, words +i*20 : %x\n", *(uint32_t*)(wocram+i), *(uint32_t*)(words + i));
+    //}
     // cant use memcpy because physical addresses dont map exactly to virtual addresses.
   //  printf("written to SDRAM\n");
    //8 uint32_t address = 0;
@@ -70,10 +70,10 @@ int main() {
 	{
     	data = *(uint32_t*)(words+i);
     	printf("----iteration %d---------\n", i);
-    	printf("data to be written to WWocram 0x%x\n", data);
+    	printf("data to be written to uocram 0x%x\n", data);
     	//check the first 10 words
     	data = *(uint32_t*)(wocram+i);
-    	printf("WRONG data read back from WWocram 0x%x\n", data);
+    	printf("WRONG data read back from uocram 0x%x\n", data);
     //	data = *(uint32_t*)(uocram+ i % 20 + (uint32_t)((i/20)<<5));
     	//printf("(uint32_t)((i/20)<<5):::  %d\n", (uint32_t)((i/20)<<5));
     //	printf("CORRECT data read back from uocram 0x%x\n", data);
