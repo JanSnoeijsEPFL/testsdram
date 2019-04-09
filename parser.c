@@ -37,6 +37,7 @@ void parse_weights(char* file, int32_t** words){
 				&& CH != '-' && CH != '+' && CH != 'e' && CH != '\n' && CH != ',' && CH != '.')
 		{
 			continue;
+			printf("here?\n");
 		}
 		else
 		{
