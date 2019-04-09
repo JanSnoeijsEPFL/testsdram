@@ -57,7 +57,7 @@ void parse_weights(char* file, int32_t** words){
 					for (i = 0; i < NBPARAM_IN_WORD; i++)
 						param[i]=0;
 
-					printf("after concate: 0x%x\n", *(word+word_cnt));
+					printf("after concatenate: 0x%x\n", *(word+word_cnt));
 					word_cnt ++;
 				}
 				else
