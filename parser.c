@@ -23,7 +23,7 @@ void parse_weights(char* file, int32_t** words){
 	uint32_t word_cnt = 0;
 	do
 	{
-		//printf("why is this stuck\n");
+		printf("why is this stuck\n");
 		CH = fgetc(weights_file);
 		if(feof(weights_file))
 		{
@@ -67,7 +67,7 @@ void parse_weights(char* file, int32_t** words){
 
 		}
 
-		//usleep(ALT_MICROSECS_IN_A_SEC/100);
+		usleep(ALT_MICROSECS_IN_A_SEC/100);
 	}while(1);
 	fclose(weights_file);
 	free(*words);
