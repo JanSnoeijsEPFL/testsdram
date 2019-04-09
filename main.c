@@ -64,13 +64,14 @@ int main() {
     for (i = 0; i < 100; i++)
 	{
     	data = *(uint32_t*)(words+i);
+    	printf("----iteration %d---------\n", i);
     	printf("data to be written to uocram 0x%x\n", data);
     	//check the first 10 words
     	data = *(uint32_t*)(uocram+i);
     	printf("WRONG data read back from uocram 0x%x\n", data);
-    	data = *(uint32_t*)(uocram+ i % 20 + (uint32_t)((i/20)<<5));
-    	printf("(uint32_t)((i/20)<<5):::  %d\n", (uint32_t)((i/20)<<5));
-    	printf("CORRECT data read back from uocram 0x%x\n", data);
+    //	data = *(uint32_t*)(uocram+ i % 20 + (uint32_t)((i/20)<<5));
+    	//printf("(uint32_t)((i/20)<<5):::  %d\n", (uint32_t)((i/20)<<5));
+    //	printf("CORRECT data read back from uocram 0x%x\n", data);
     	usleep(ALT_MICROSECS_IN_A_SEC / 100);
 	}
 
