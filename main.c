@@ -54,9 +54,9 @@ int main() {
   ///  uint32_t* xocram = get_xocram_base();
     //memcpy((void *)uocram, (void*)words , sizeof(uint32_t));
     for (i=0; i<100; i++){
-    	*(uint32_t*)(uocram + i*4) = *(uint32_t*)(words+i);
+    	*(uint32_t*)(uocram + i) = *(uint32_t*)(words+i);
     	usleep(ALT_MICROSECS_IN_A_SEC);
-    	printf("when writing::: uocram+(i<<5): %x, words +i*20 : %x\n", *(uint32_t*)(uocram+i*4), *(uint32_t*)(words + i));
+    	printf("when writing::: uocram+(i<<5): %x, words +i*20 : %x\n", *(uint32_t*)(uocram+i), *(uint32_t*)(words + i));
     }
    // for (i=0; i<100; i++){
     	//*(uint32_t*)(wocram + i) = *(uint32_t*)(words+i);
@@ -64,7 +64,7 @@ int main() {
     //}
     // cant use memcpy because physical addresses dont map exactly to virtual addresses.
   //  printf("written to SDRAM\n");
-   //8 uint32_t address = 0;
+    uint32_t address = 0;
     uint32_t data = 0;
     for (i = 0; i < 100; i++)
 	{
@@ -72,7 +72,7 @@ int main() {
     	printf("----iteration %d---------\n", i);
     	printf("data to be written to uocram 0x%x\n", data);
     	//check the first 10 words
-    	data = *(uint32_t*)(uocram+i*4);
+    	data = *(uint32_t*)(uocram+i);
     	printf("WRONG data read back from uocram 0x%x\n", data);
     //	data = *(uint32_t*)(uocram+ i % 20 + (uint32_t)((i/20)<<5));
     	//printf("(uint32_t)((i/20)<<5):::  %d\n", (uint32_t)((i/20)<<5));
@@ -82,14 +82,14 @@ int main() {
 
 	//}
     free(words);
-   // printf("writing to accelerator\n");
-    //read_accelerator(address+4);
-   // read_accelerator(address+1);
-	//write_accelerator(address);
-	//read_accelerator(address+4);
-	//read_accelerator(address+1);
+    printf("writing to accelerator\n");
+    read_accelerator(address+4);
+    read_accelerator(address+1);
+	write_accelerator(address);
+	read_accelerator(address+4);
+	read_accelerator(address+1);
 	//printf("observe signal tap\n");
-	//usleep(ALT_MICROSECS_IN_A_SEC / 10);
+	usleep(ALT_MICROSECS_IN_A_SEC / 10);
 
 
     munmap_peripherals();

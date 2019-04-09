@@ -71,37 +71,20 @@ void mmap_fpga_peripherals() {
 	//	exit(EXIT_FAILURE);
     //}
 
-    virtual_uOCRAM_base = mmap(NULL, ACCELERATOR_0_U_OCRAM_SPAN, (PROT_READ | PROT_WRITE), MAP_SHARED, fd_dev_mem, ALT_HWFPGASLVS_BASE+ACCELERATOR_0_U_OCRAM_BASE);
-    printf("passed mapping of uOCRAM\n");
-    if (virtual_lw_base == MAP_FAILED) {
-        printf("Error: h2f_lw_axi_master mmap() failed.\n");
-        printf("    errno = %s\n", strerror(errno));
-        close(fd_dev_mem);
-       exit(EXIT_FAILURE);
-    }
-    virtual_wOCRAM_base = mmap(NULL, ACCELERATOR_0_W_OCRAM_SPAN, (PROT_READ | PROT_WRITE), MAP_SHARED, fd_dev_mem, ALT_HWFPGASLVS_BASE+ACCELERATOR_0_W_OCRAM_BASE);
-    printf("passed mapping of wOCRAM\n");
-    if (virtual_lw_base == MAP_FAILED) {
-        printf("Error: h2f_lw_axi_master mmap() failed.\n");
-        printf("    errno = %s\n", strerror(errno));
-        close(fd_dev_mem);
-       exit(EXIT_FAILURE);
-    }
-    virtual_xOCRAM_base = mmap(NULL, ACCELERATOR_0_X_OCRAM_SPAN, (PROT_READ | PROT_WRITE), MAP_SHARED, fd_dev_mem, ALT_HWFPGASLVS_BASE+ACCELERATOR_0_X_OCRAM_BASE);
-    printf("passed mapping of xOCRAM\n");
-    if (virtual_lw_base == MAP_FAILED) {
-        printf("Error: h2f_lw_axi_master mmap() failed.\n");
-        printf("    errno = %s\n", strerror(errno));
-        close(fd_dev_mem);
-       exit(EXIT_FAILURE);
-    }
+    virtual_hw_base = mmap(NULL, ALT_HWFPGASLVS_SPAN, (PROT_READ | PROT_WRITE), MAP_SHARED, fd_dev_mem, ALT_HWFPGASLVS_BASE);
+    printf("passed mapping of hw bridge\n");
+	if (virtual_lw_base == MAP_FAILED) {
+		printf("Error: h2f_lw_axi_master mmap() failed.\n");
+		printf("    errno = %s\n", strerror(errno));
+		close(fd_dev_mem);
+	   exit(EXIT_FAILURE);
+	}
 
+    fpga_accelerator = (uint32_t *) (virtual_hw_base + (( ACCELERATOR_0_AVALON_SLAVE_BASE) & (ALT_HWFPGASLVS_MASK))) ;
+    uOCRAM = (uint32_t *) (virtual_hw_base + ((ACCELERATOR_0_U_OCRAM_BASE) & (ALT_HWFPGASLVS_MASK)));
+    wOCRAM = (uint32_t *) (virtual_hw_base + ((ACCELERATOR_0_W_OCRAM_BASE) & (ALT_HWFPGASLVS_MASK)));
+    xOCRAM = (uint32_t *) (virtual_hw_base + ((ACCELERATOR_0_X_OCRAM_BASE) & (ALT_HWFPGASLVS_MASK)));
 
-  //  shared_sdram = (uint32_t *) (virtual_sharedram_base);
-    fpga_accelerator = (uint32_t *) (virtual_lw_base + (( ACCELERATOR_0_AVALON_SLAVE_BASE) & (ALT_LWFPGASLVS_MASK))) ;
-    uOCRAM = (uint32_t *) virtual_uOCRAM_base;
-    wOCRAM = (uint32_t *) virtual_wOCRAM_base;
-    xOCRAM = (uint32_t *) virtual_xOCRAM_base;
 }
 
 void munmap_fpga_peripherals() {
@@ -111,30 +94,16 @@ void munmap_fpga_peripherals() {
         close(fd_dev_mem);
         exit(EXIT_FAILURE);
     }
-    if (munmap(virtual_uOCRAM_base, ACCELERATOR_0_U_OCRAM_SPAN) != 0) {
-	   printf("Error: h2f_lw_axi_master munmap() failed\n");
-	   printf("    errno = %s\n", strerror(errno));
-	   close(fd_dev_mem);
-	   exit(EXIT_FAILURE);
-    }
-    if (munmap(virtual_wOCRAM_base, ACCELERATOR_0_W_OCRAM_SPAN) != 0) {
-   	   printf("Error: h2f_lw_axi_master munmap() failed\n");
-   	   printf("    errno = %s\n", strerror(errno));
-   	   close(fd_dev_mem);
-   	   exit(EXIT_FAILURE);
-       }
-    if (munmap(virtual_xOCRAM_base, ACCELERATOR_0_X_OCRAM_SPAN) != 0) {
-   	   printf("Error: h2f_lw_axi_master munmap() failed\n");
-   	   printf("    errno = %s\n", strerror(errno));
-   	   close(fd_dev_mem);
-   	   exit(EXIT_FAILURE);
-       }
+    if (munmap(virtual_hw_base, ALT_HWFPGASLVS_SPAN) != 0) {
+          printf("Error: h2f_lw_axi_master munmap() failed\n");
+          printf("    errno = %s\n", strerror(errno));
+          close(fd_dev_mem);
+          exit(EXIT_FAILURE);
+      }
 
 
     virtual_lw_base = NULL;
-    virtual_uOCRAM_base = NULL;
-    virtual_wOCRAM_base = NULL;
-    virtual_xOCRAM_base = NULL;
+    virtual_hw_base = NULL;
     //virtual_sharedram_base = NULL;
 }
 
