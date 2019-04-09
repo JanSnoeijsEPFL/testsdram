@@ -33,8 +33,8 @@ void parse_weights(char* file, int32_t** words){
 		}
 		if (CH != '0' && CH != '1' && CH != '2' && CH != '3' && CH != '4' \
 				&& CH != '5' && CH != '6' && CH != '7' && CH != '8' && CH != '9' \
-				&& CH != '-' && CH != '+' && CH != 'e' && CH != '\n' && CH != ',' && CH != '.')
-		{
+				&& CH != '-' && CH != '+' && CH != 'e' && CH != '\n' && CH != ',' && CH != '.'){
+			printf("invalid character\n");
 			continue;
 		}
 		else
