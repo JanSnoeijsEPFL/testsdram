@@ -21,13 +21,13 @@ void parse_weights(char* file, int32_t** words){
 	char CH;
 	uint8_t k = 0,j,i;
 	uint32_t word_cnt = 0;
-	printf("i am done with unlegitimate bugs now \n");
 	do
 	{
 		//printf("why is this stuck\n");
 		CH = fgetc(weights_file);
 		if(feof(weights_file))
 		{
+			printf("already finished reading file?\n");
 			*(word+NBWORDS-1) = params2word(param);
 			printf("after concat: 0x%x\n", *(word+NBWORDS-1));
 			break;
