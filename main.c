@@ -72,7 +72,7 @@ int main() {
     	printf("----iteration %d---------\n", i);
     	printf("data to be written to uocram 0x%x\n", data);
     	//check the first 10 words
-    	data = *(uint32_t*)(wocram+i);
+    	data = *(uint32_t*)(uocram+i);
     	printf("WRONG data read back from uocram 0x%x\n", data);
     //	data = *(uint32_t*)(uocram+ i % 20 + (uint32_t)((i/20)<<5));
     	//printf("(uint32_t)((i/20)<<5):::  %d\n", (uint32_t)((i/20)<<5));
