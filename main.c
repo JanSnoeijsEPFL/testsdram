@@ -54,8 +54,8 @@ int main() {
   ///  uint32_t* xocram = get_xocram_base();
     //memcpy((void *)uocram, (void*)words , sizeof(uint32_t));
     for (i=0; i<100; i++){
-    	*(uocram + i % 20 + (uint32_t)(i/20*32)) = *(words+i);
-    	printf("when writing::: uocram+(i<<5): %x, words +i*20 : %x\n", *(uocram+i % 20 + (uint32_t)(i/20*32)), *(words + i));
+    	*(uocram + i) = *(words+i);
+    	printf("when writing::: uocram+(i<<5): %x, words +i*20 : %x\n", *(uocram+i), *(words + i));
     }
     // cant use memcpy because physical addresses dont map exactly to virtual addresses.
   //  printf("written to SDRAM\n");
