@@ -23,9 +23,7 @@ void parse_weights(char* file, int32_t** words){
 	uint32_t word_cnt = 0;
 	do
 	{
-		//printf("why is this stuck\n");
 		CH = fgetc(weights_file);
-		//printf("??????????????????????\n");
 		if(feof(weights_file))
 		{
 			printf("already finished reading file?\n");
@@ -37,9 +35,7 @@ void parse_weights(char* file, int32_t** words){
 				&& CH != '5' && CH != '6' && CH != '7' && CH != '8' && CH != '9' \
 				&& CH != '-' && CH != '+' && CH != 'e' && CH != '\n' && CH != ',' && CH != '.')
 		{
-			printf("here?\n");
 			continue;
-
 		}
 		else
 		{
