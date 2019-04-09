@@ -49,7 +49,7 @@ void parse_weights(char* file, int32_t** words){
 				//printf("OKOK\n");
 				param[j]=process_string((char*)STR, (uint8_t)NBCHAR);
 				printf("params before concat: %d \n", param[j]);
-				printf("k : %d, j : %d\n", k, j);
+				//printf("k : %d, j : %d \n", k, j);
 				if (j == 4)
 				{
 					j = 0;
@@ -67,7 +67,7 @@ void parse_weights(char* file, int32_t** words){
 
 		}
 
-		usleep(ALT_MICROSECS_IN_A_SEC/100);
+		//usleep(ALT_MICROSECS_IN_A_SEC/100);
 	}while(1);
 	fclose(weights_file);
 	free(*words);

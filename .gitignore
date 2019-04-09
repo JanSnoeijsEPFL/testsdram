@@ -1,0 +1,5 @@
+/Release/*.o
+/Release/*.d
+/Release/*.mk
+/Release/makefile
+/Debug
