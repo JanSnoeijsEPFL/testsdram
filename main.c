@@ -38,7 +38,7 @@ int main() {
     unsigned char SetBit(unsigned char x, unsigned char k, unsigned char b) {
         return (b ? x | (0x01 << k) : x & ~(0x01 << k));
     }
-    char a = SetBit(0x0,0,1);
+    char a = SetBit(0x0,0,0);
     printf("a %d\n", a);
     usleep(ALT_MICROSECS_IN_A_SEC);
     int32_t* words = calloc(NBWORDS, sizeof(int32_t));
