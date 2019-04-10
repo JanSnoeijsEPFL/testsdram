@@ -57,7 +57,7 @@ int main() {
     	j = (uint32_t)(i/20*32 + i%20);
     	printf("true ocram index:%d\n", j);
     	*(uint32_t*)(uocram + j) = *(uint32_t*)(words+i);
-    	//usleep(ALT_MICROSECS_IN_A_SEC);
+    	usleep(ALT_MICROSECS_IN_A_SEC);
     	printf("when writing::: uocram+(i<<5): %x, words +i*20 : %x\n", *(uint32_t*)(uocram+j), *(uint32_t*)(words + i));
     }
    // for (i=0; i<100; i++){
