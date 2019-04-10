@@ -35,7 +35,11 @@ int main() {
    // 	address++;
    // 	usleep(ALT_MICROSECS_IN_A_SEC / 100);
    // }
-
+    unsigned char SetBit(unsigned char x, unsigned char k, unsigned char b) {
+        return (b ? x | (0x01 << k) : x & ~(0x01 << k));
+    }
+    char a = SetBit(0x0,0,1);
+    printf("a %c\n", a);
     int32_t* words = calloc(NBWORDS, sizeof(int32_t));
     parse_weights("keras_param_3class_30e_5bits_onlysign_modifiedHardSigm.txt", &words);
     //concat_words(&words, words);
