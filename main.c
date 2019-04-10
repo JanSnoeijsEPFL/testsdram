@@ -35,12 +35,7 @@ int main() {
    // 	address++;
    // 	usleep(ALT_MICROSECS_IN_A_SEC / 100);
    // }
-    unsigned char SetBit(unsigned char x, unsigned char k, unsigned char b) {
-        return (b ? x | (0x01 << k) : x & ~(0x01 << k));
-    }
-    char a = SetBit(0x0,0,0);
-    printf("a %d\n", a);
-    usleep(ALT_MICROSECS_IN_A_SEC);
+
     int32_t* words = calloc(NBWORDS, sizeof(int32_t));
     parse_weights("keras_param_3class_30e_5bits_onlysign_modifiedHardSigm.txt", &words);
     //concat_words(&words, words);
@@ -58,11 +53,11 @@ int main() {
     uint32_t* wocram = get_wocram_base();
   ///  uint32_t* xocram = get_xocram_base();
     //memcpy((void *)uocram, (void*)words , sizeof(uint32_t));
-    for (i=0; i<100; i++){
-    	*(uint32_t*)(uocram + i) = *(uint32_t*)(words+i);
-    	usleep(ALT_MICROSECS_IN_A_SEC);
-    	printf("when writing::: uocram+(i<<5): %x, words +i*20 : %x\n", *(uint32_t*)(uocram+i), *(uint32_t*)(words + i));
-    }
+   // for (i=0; i<100; i++){
+   // 	*(uint32_t*)(uocram + i) = *(uint32_t*)(words+i);
+   // 	usleep(ALT_MICROSECS_IN_A_SEC);
+   // 	printf("when writing::: uocram+(i<<5): %x, words +i*20 : %x\n", *(uint32_t*)(uocram+i), *(uint32_t*)(words + i));
+  //  }
    // for (i=0; i<100; i++){
     	//*(uint32_t*)(wocram + i) = *(uint32_t*)(words+i);
     //	printf("when writing::: WWWocram+(i<<5): %x, words +i*20 : %x\n", *(uint32_t*)(wocram+i), *(uint32_t*)(words + i));
@@ -71,38 +66,41 @@ int main() {
   //  printf("written to SDRAM\n");
     uint32_t address = 0;
     uint32_t data = 0;
-    for (i = 0; i < 100; i++)
-	{
-    	data = *(uint32_t*)(words+i);
-    	printf("----iteration %d---------\n", i);
-    	printf("data to be written to uocram 0x%x\n", data);
-    	//check the first 10 words
-    	data = *(uint32_t*)(uocram+i);
-    	printf("WRONG data read back from uocram 0x%x\n", data);
+  //  for (i = 0; i < 100; i++)
+	//{
+  // 	data = *(uint32_t*)(words+i);
+   // 	printf("----iteration %d---------\n", i);
+    //	printf("data to be written to uocram 0x%x\n", data);
+   // 	//check the first 10 words
+    //	data = *(uint32_t*)(uocram+i);
+    //	printf("WRONG data read back from uocram 0x%x\n", data);
     //	data = *(uint32_t*)(uocram+ i % 20 + (uint32_t)((i/20)<<5));
     	//printf("(uint32_t)((i/20)<<5):::  %d\n", (uint32_t)((i/20)<<5));
     //	printf("CORRECT data read back from uocram 0x%x\n", data);
-    	usleep(ALT_MICROSECS_IN_A_SEC);
-	}
+    //	usleep(ALT_MICROSECS_IN_A_SEC);
+	//}
 
 	//}
     free(words);
     printf("writing to accelerator\n");
-    read_accelerator(address+4);
-    usleep(ALT_MICROSECS_IN_A_SEC*1);
-    printf("writing to accelerator\n");
-    read_accelerator(address+1);
-    usleep(ALT_MICROSECS_IN_A_SEC*1);
-    printf("writing to accelerator\n");
-	write_accelerator(address);
-    usleep(ALT_MICROSECS_IN_A_SEC*1);
-    printf("writing to accelerator\n");
-	read_accelerator(address+4);
-    usleep(ALT_MICROSECS_IN_A_SEC*1);
-    printf("writing to accelerator\n");
-	read_accelerator(address+1);
-	//printf("observe signal tap\n");
-	usleep(ALT_MICROSECS_IN_A_SEC * 1);
+    while(1)
+    {
+		read_accelerator(address+4);
+		usleep(ALT_MICROSECS_IN_A_SEC*1);
+		printf("writing to accelerator\n");
+		read_accelerator(address+1);
+		usleep(ALT_MICROSECS_IN_A_SEC*1);
+		printf("writing to accelerator\n");
+		write_accelerator(address);
+		usleep(ALT_MICROSECS_IN_A_SEC*1);
+		printf("writing to accelerator\n");
+		read_accelerator(address+4);
+		usleep(ALT_MICROSECS_IN_A_SEC*1);
+		printf("writing to accelerator\n");
+		read_accelerator(address+1);
+		//printf("observe signal tap\n");
+		usleep(ALT_MICROSECS_IN_A_SEC * 1);
+    }
 
 
     munmap_peripherals();
