@@ -84,20 +84,20 @@ int main() {
     free(words);
     printf("writing to accelerator\n");
     read_accelerator(address+4);
-    usleep(ALT_MICROSECS_IN_A_SEC*100);
+    usleep(ALT_MICROSECS_IN_A_SEC*1000);
     printf("writing to accelerator\n");
     read_accelerator(address+1);
-    usleep(ALT_MICROSECS_IN_A_SEC*100);
+    usleep(ALT_MICROSECS_IN_A_SEC*1000);
     printf("writing to accelerator\n");
 	write_accelerator(address);
-    usleep(ALT_MICROSECS_IN_A_SEC*100);
+    usleep(ALT_MICROSECS_IN_A_SEC*1000);
     printf("writing to accelerator\n");
 	read_accelerator(address+4);
-    usleep(ALT_MICROSECS_IN_A_SEC*100);
+    usleep(ALT_MICROSECS_IN_A_SEC*1000);
     printf("writing to accelerator\n");
 	read_accelerator(address+1);
 	//printf("observe signal tap\n");
-	usleep(ALT_MICROSECS_IN_A_SEC / 10);
+	usleep(ALT_MICROSECS_IN_A_SEC * 1000);
 
 
     munmap_peripherals();
