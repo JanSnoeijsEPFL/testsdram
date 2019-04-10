@@ -53,13 +53,25 @@ int main() {
     uint32_t* uocram = get_uocram_base();
  //   uint32_t* wocram = get_wocram_base();
   ///  uint32_t* xocram = get_xocram_base();
-    for (i=0; i<1000; i++){
+    for (i=0; i<10; i++){
     	j = (uint32_t)(i/20*32 + i%20);
     	printf("true ocram index:%d\n", j);
     	*(uint32_t*)(uocram + j) = *(uint32_t*)(words+i);
     	usleep(ALT_MICROSECS_IN_A_SEC);
     	printf("when writing::: uocram+(i<<5): %x, words +i*20 : %x\n", *(uint32_t*)(uocram+j), *(uint32_t*)(words + i));
     }
+    *(uocram +32) = *(words+20);
+    printf("when writing: at address 32: %x, words +i*20 : %x\n", *(uint32_t*)(uocram+32), *(uint32_t*)(words + 20));
+    usleep(ALT_MICROSECS_IN_A_SEC);
+    *(uocram +34) = *(words+22);
+    printf("when writing: at address 32: %x, words +i*20 : %x\n", *(uint32_t*)(uocram+32), *(uint32_t*)(words + 20));
+    usleep(ALT_MICROSECS_IN_A_SEC);
+    *(uocram +38) = *(words+26);
+    printf("when writing: at address 32: %x, words +i*20 : %x\n", *(uint32_t*)(uocram+32), *(uint32_t*)(words + 20));
+    usleep(ALT_MICROSECS_IN_A_SEC);
+    *(uocram +42) = *(words+30);
+    printf("when writing: at address 32: %x, words +i*20 : %x\n", *(uint32_t*)(uocram+32), *(uint32_t*)(words + 20));
+    usleep(ALT_MICROSECS_IN_A_SEC);
    // for (i=0; i<100; i++){
     	//*(uint32_t*)(wocram + i) = *(uint32_t*)(words+i);
     //	printf("when writing::: WWWocram+(i<<5): %x, words +i*20 : %x\n", *(uint32_t*)(wocram+i), *(uint32_t*)(words + i));
