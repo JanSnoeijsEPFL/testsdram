@@ -53,7 +53,7 @@ int main() {
     uint32_t* uocram = get_uocram_base();
  //   uint32_t* wocram = get_wocram_base();
   ///  uint32_t* xocram = get_xocram_base();
-    for (i=0; i<10; i++){
+    for (i=0; i<100; i++){
     	j = (uint32_t)(i/20*32 + i%20);
     	printf("true ocram index:%d\n", j);
     	*(uint32_t*)(uocram + j) = *(uint32_t*)(words+i);
