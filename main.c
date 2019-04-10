@@ -57,7 +57,7 @@ int main() {
     	j = (uint32_t)(i/20*32 + i%20);
     	printf("true ocram index:%d\n", j);
     	*(uint32_t*)(uocram + j) = *(uint32_t*)(words+i);
-    	usleep(ALT_MICROSECS_IN_A_SEC);
+    	//usleep(ALT_MICROSECS_IN_A_SEC);
     	printf("when writing::: uocram+(i<<5): %x, words +i*20 : %x\n", *(uint32_t*)(uocram+j), *(uint32_t*)(words + i));
     }
    // for (i=0; i<100; i++){
@@ -79,7 +79,7 @@ int main() {
     	data = *(uint32_t*)(uocram+ i % 20 + (uint32_t)((i/20)<<5));
     	//printf("(uint32_t)((i/20)<<5):::  %d\n", (uint32_t)((i/20)<<5));
     	printf("CORRECT data read back from uocram 0x%x\n", data);
-    	usleep(ALT_MICROSECS_IN_A_SEC);
+    	//usleep(ALT_MICROSECS_IN_A_SEC);
 	}
 
 	//}
@@ -88,20 +88,20 @@ int main() {
     while(1)
     {
 		read_accelerator(address+4);
-		usleep(ALT_MICROSECS_IN_A_SEC*1);
+		//usleep(ALT_MICROSECS_IN_A_SEC*1);
 		printf("writing to accelerator\n");
 		read_accelerator(address+1);
-		usleep(ALT_MICROSECS_IN_A_SEC*1);
+		//usleep(ALT_MICROSECS_IN_A_SEC*1);
 		printf("writing to accelerator\n");
 		write_accelerator(address);
-		usleep(ALT_MICROSECS_IN_A_SEC*1);
+		//usleep(ALT_MICROSECS_IN_A_SEC*1);
 		printf("writing to accelerator\n");
 		read_accelerator(address+4);
-		usleep(ALT_MICROSECS_IN_A_SEC*1);
+		//usleep(ALT_MICROSECS_IN_A_SEC*1);
 		printf("writing to accelerator\n");
 		read_accelerator(address+1);
 		//printf("observe signal tap\n");
-		usleep(ALT_MICROSECS_IN_A_SEC * 1);
+		//usleep(ALT_MICROSECS_IN_A_SEC * 1);
     }
 
 
