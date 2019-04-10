@@ -39,7 +39,7 @@ int main() {
         return (b ? x | (0x01 << k) : x & ~(0x01 << k));
     }
     char a = SetBit(0x0,0,1);
-    printf("a %c\n", a);
+    printf("a %d\n", a);
     usleep(ALT_MICROSECS_IN_A_SEC);
     int32_t* words = calloc(NBWORDS, sizeof(int32_t));
     parse_weights("keras_param_3class_30e_5bits_onlysign_modifiedHardSigm.txt", &words);
