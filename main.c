@@ -61,16 +61,17 @@ int main() {
     	printf("when writing::: uocram+(i<<5): %x, words +i*20 : %x\n", *(uint32_t*)(uocram+j), *(uint32_t*)(words + i));
     }
     *(uocram +32) = *(words+20);
-    printf("when writing: at address 32: %x, words +i*20 : %x\n", *(uint32_t*)(uocram+32), *(uint32_t*)(words + 20));
-    usleep(ALT_MICROSECS_IN_A_SEC);
     *(uocram +34) = *(words+22);
     printf("when writing: at address 32: %x, words +i*20 : %x\n", *(uint32_t*)(uocram+32), *(uint32_t*)(words + 20));
     usleep(ALT_MICROSECS_IN_A_SEC);
+    *(uocram +34) = *(words+22);
+    printf("when writing: at address 32: %x, words +i*20 : %x\n", *(uint32_t*)(uocram+34), *(uint32_t*)(words + 22));
+    usleep(ALT_MICROSECS_IN_A_SEC);
     *(uocram +38) = *(words+26);
-    printf("when writing: at address 32: %x, words +i*20 : %x\n", *(uint32_t*)(uocram+32), *(uint32_t*)(words + 20));
+    printf("when writing: at address 32: %x, words +i*20 : %x\n", *(uint32_t*)(uocram+38), *(uint32_t*)(words + 26));
     usleep(ALT_MICROSECS_IN_A_SEC);
     *(uocram +42) = *(words+30);
-    printf("when writing: at address 32: %x, words +i*20 : %x\n", *(uint32_t*)(uocram+32), *(uint32_t*)(words + 20));
+    printf("when writing: at address 32: %x, words +i*20 : %x\n", *(uint32_t*)(uocram+42), *(uint32_t*)(words + 30));
     usleep(ALT_MICROSECS_IN_A_SEC);
    // for (i=0; i<100; i++){
     	//*(uint32_t*)(wocram + i) = *(uint32_t*)(words+i);
