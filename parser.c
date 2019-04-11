@@ -207,8 +207,9 @@ int8_t quantize_param(char* STR, uint8_t size){
 		number = 1.9375;
 	else if (number <= -2)
 		number = -2;
-	quantized_nb = (int8_t)rint(number*16);
-	printf("%d\n and rint() output: %f\n", quantized_nb, rint(number*16));
+	number = number * 16;
+	quantized_nb = (int8_t)rint(number);
+	printf("%d\n and rint() output: %f\n", quantized_nb, rint(number));
 
 	usleep(ALT_MICROSECS_IN_A_SEC/10);
 
