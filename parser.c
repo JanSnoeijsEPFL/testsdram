@@ -114,7 +114,7 @@ void parse_rtdata(char* file, int32_t** words){
 					{
 						//printf("OKOK\n");
 						in_data[j]=quantize_param((char*)STR, (uint8_t)NBDIGIT_RTDATA);
-						printf("params before concat: %d data input number %d\n", in_data[j], j);
+						printf("params before concat: %d data input number %d\n", in_data[j], k);
 						//printf("k : %d, j : %d \n", k, j);
 						if (j == 4)
 						{
@@ -208,7 +208,7 @@ int8_t quantize_param(char* STR, uint8_t size){
 	else if (number <= -2)
 		number = -2;
 	quantized_nb = (int8_t)rint(number*16);
-	printf("%d\n", quantized_nb);
+	printf("%d\n and rint() output: %f\n", quantized_nb, rint(number*16));
 
 	usleep(ALT_MICROSECS_IN_A_SEC/10);
 
