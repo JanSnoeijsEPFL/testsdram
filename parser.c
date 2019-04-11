@@ -182,7 +182,8 @@ int8_t process_string(char* STR, uint8_t size){
 int8_t quantize_param(char* STR, uint8_t size){
 	char digit;
 	//char mantissa[4];
-	int8_t number=0;
+	float number=0;
+	int8_t quantized_nb = 0;
 	//uint8_t expt;
 	//uint16_t mant;
 	uint8_t i = 0;
@@ -196,9 +197,22 @@ int8_t quantize_param(char* STR, uint8_t size){
 	//strcpy(&STR[1], &STR[2]); //remove dot
 	// extract mantissa
 	printf("%s\n", STR);
-	usleep(ALT_MICROSECS_IN_A_SEC/10);
+	number = strtof(STR, (char**)NULL);
+	printf("%f\n", number);
+	number /= MAX_XDATA;
+	printf("%f\n", number);
+	if (sign == 1)
+		number -= number;
+	if (number >= 1.9375)
+		number = 1.9375;
+	else if (number <= -2)
+		number = -2;
+	quantized_nb = (int8_t)number*16;
+	printf("%d\n", quantized_nb);
 
-	return number;
+	usleep(ALT_MICROSECS_IN_A_SEC);
+
+	return quantized_nb;
 }
 int32_t params2word(int8_t param[NBPARAM_IN_WORD]){
 	int32_t word = 0;

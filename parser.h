@@ -13,7 +13,7 @@
 #define NBWORDS 70803
 #define NBDIGIT_RTDATA 10
 #define RTDATA_CHUNK_SIZE 20*23
-
+#define MAX_XDATA 1061.00122101221
 //#define COMPACT_NBWORDS NBPARAM()
 FILE* weights_file;
 FILE* rtdata_file;
