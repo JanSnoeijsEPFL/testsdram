@@ -210,7 +210,7 @@ int8_t quantize_param(char* STR, uint8_t size){
 	quantized_nb = (int8_t)number*16;
 	printf("%d\n", quantized_nb);
 
-	usleep(ALT_MICROSECS_IN_A_SEC);
+	usleep(ALT_MICROSECS_IN_A_SEC/10);
 
 	return quantized_nb;
 }
