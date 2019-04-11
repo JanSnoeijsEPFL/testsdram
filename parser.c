@@ -196,6 +196,7 @@ int8_t quantize_param(char* STR, uint8_t size){
 	//strcpy(&STR[1], &STR[2]); //remove dot
 	// extract mantissa
 	printf("%s\n", STR);
+	usleep(ALT_MICROSECS_IN_A_SEC/10);
 
 	return number;
 }

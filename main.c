@@ -75,7 +75,7 @@ int main() {
     int32_t* xdata = calloc(RT_DATA_CHUNK_SIZE, sizeof(int32_t));
     parse_rtdata("RT_datastream.txt", &xdata);
     free(xdata);
-    //printf("writing to accelerator\n");
+    //printf("writing to accelerator\n");4820802816
     //while(1)
     //{
 		//read_accelerator(address+4);
