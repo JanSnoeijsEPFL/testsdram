@@ -74,7 +74,70 @@ void parse_weights(char* file, int32_t** words){
 	*words = word;
 }
 
-void parse_rtdata(file,line){
+void parse_rtdata(char* file, int32_t** words){
+	printf("starting RT data parser\n");
+	int32_t * word = calloc(23*20, sizeof(int32_t));
+	rtdata_file = fopen(file, "r");
+	int8_t in_data[NBPARAM_IN_WORD];
+	uint8_t i, j, k=0;
+	uint32_t word_cnt = 0;
+	char STR[NBDIGIT_RTDATA];
+	char CH;
+	if (!rtdata_file)
+		printf("file never opened\n");
+	else
+		printf("opened weights file\n");
+	do
+	{
+		CH = fgetc(rtdata_file);
+				if(feof(rtdata_file))
+				{
+					printf("already finished reading file?\n");
+					*(word+RTDATA_CHUNK_SIZE-1) = params2word(in_data);
+					printf("after concat: 0x%x\n", *(word+NBWORDS-1));
+					break;
+				}
+				if (CH != '0' && CH != '1' && CH != '2' && CH != '3' && CH != '4' \
+						&& CH != '5' && CH != '6' && CH != '7' && CH != '8' && CH != '9' \
+						&& CH != '-' && CH != '\n' && CH != ',' && CH != '.'){
+					printf("invalid character\n");
+					continue;
+				}
+				else
+				{
+					if (!(CH==',' || CH=='\n'))
+					{
+						STR[k]=CH;
+						k++;
+					}
+					else if (k!=0)
+					{
+						//printf("OKOK\n");
+						in_data[j]=quantize_param((char*)STR, (uint8_t)NBDIGIT_RTDATA);
+						printf("params before concat: %d \n", in_data[j]);
+						//printf("k : %d, j : %d \n", k, j);
+						if (j == 4)
+						{
+							j = 0;
+							*(word+word_cnt) = params2word(in_data);
+							for (i = 0; i < NBPARAM_IN_WORD; i++)
+								in_data[i]=0;
+
+							printf("after concatenate: 0x%x\n", *(word+word_cnt));
+							word_cnt ++;
+						}
+						else
+							j++;
+						k = 0;
+					}
+
+				}
+
+	}while(1);
+	fclose(rtdata_file);
+	free(*words);
+	*words = word;
+
 }
 
 int8_t process_string(char* STR, uint8_t size){
@@ -116,6 +179,26 @@ int8_t process_string(char* STR, uint8_t size){
 	return number;
 }
 
+int8_t quantize_param(char* STR, uint8_t size){
+	char digit;
+	//char mantissa[4];
+	int8_t number=0;
+	//uint8_t expt;
+	//uint16_t mant;
+	uint8_t i = 0;
+	// extract sign bit
+	uint8_t sign = 0;
+	if (STR[0] == '-')
+	{
+		sign =1;
+		strcpy(&STR[0], &STR[1]);
+	}
+	//strcpy(&STR[1], &STR[2]); //remove dot
+	// extract mantissa
+	printf("%s\n", STR);
+
+	return number;
+}
 int32_t params2word(int8_t param[NBPARAM_IN_WORD]){
 	int32_t word = 0;
 	uint8_t i;

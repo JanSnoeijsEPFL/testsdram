@@ -6,17 +6,20 @@
 C_SRCS += \
 ../main.c \
 ../parser.c \
-../testsdram.c 
+../testsdram.c \
+../transfer_data.c 
 
 OBJS += \
 ./main.o \
 ./parser.o \
-./testsdram.o 
+./testsdram.o \
+./transfer_data.o 
 
 C_DEPS += \
 ./main.d \
 ./parser.d \
-./testsdram.d 
+./testsdram.d \
+./transfer_data.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

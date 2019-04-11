@@ -11,10 +11,15 @@
 #define CHARMAX NBCHAR*NBPARAM_IN_LINE
 #define NBITS 6
 #define NBWORDS 70803
+#define NBDIGIT_RTDATA 10
+#define RTDATA_CHUNK_SIZE 20*23
+
 //#define COMPACT_NBWORDS NBPARAM()
 FILE* weights_file;
 FILE* rtdata_file;
 void parse_weights(char* file, int32_t** words);
+void parse_rtdata(char* file, int32_t** words);
+int8_t quantize_param(char* STR, uint8_t size);
 int8_t process_string(char* STR, uint8_t size);
 int32_t params2word(int8_t param[NBPARAM_IN_WORD]);
 void concat_words(int32_t** words, int32_t paddedw[NBWORDS]);

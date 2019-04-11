@@ -6,7 +6,9 @@
 #include <stdio.h>
 //#include "globals.h"
 #include <string.h>
+#include "transfer_data.h"
 
+#define RT_DATA_CHUNK_SIZE 23*20
 int main() {
     printf("FPGA sdram test\n");
    // printf("check if recompiled\n");
@@ -16,44 +18,29 @@ int main() {
     printf("mapped the peripherals\n");
     uint32_t i = 0;
     uint32_t j = 0;
-    //int address = 0;
-   // for (i=0; i<50; i++){
-   // 	read_sram_fpga(address);
-   // 	address++;
-    //	usleep(ALT_MICROSECS_IN_A_SEC / 100);
-    //}
-
-    //address = 0;
-    //for (i=0; i<50; i++){
-    //	write_sram_fpga(address, i);
-    //	address++;
-    //	usleep(ALT_MICROSECS_IN_A_SEC / 100);
-    //}
-
-   // address = 0;
-   // for (i=0; i<50; i++){
-    //	read_sram_fpga(address);
-   // 	address++;
-   // 	usleep(ALT_MICROSECS_IN_A_SEC / 100);
-   // }
+    uint32_t* uocram = get_uocram_base();
+    uint32_t* wocram = get_wocram_base();
+    uint32_t* xocram = get_xocram_base();
+    uint32_t* av_slave = get_fpga_accelerator_base();
 
     int32_t* words = calloc(NBWORDS, sizeof(int32_t));
     parse_weights("keras_param_3class_30e_5bits_onlysign_modifiedHardSigm.txt", &words);
+    ocram_init(uocram, wocram, xocram);
+    load_param(av_slave, uocram, wocram, (uint32_t*) words);
+
     //concat_words(&words, words);
     //for (i = 0; i < NBWORDS; i++)
 	//{
 		//printf("words: 0x%x\n", words[i]);
 	//}
 
-    uint32_t ocram[20];
-    for (i= 0; i <20; i++)
-    {
-    	ocram[i]=0;
-    }
-    uint32_t* uocram = get_uocram_base();
-    uint32_t* wocram = get_wocram_base();
-  ///  uint32_t* xocram = get_xocram_base();
-    for (i=0; i<100; i++){
+   // uint32_t ocram[20];
+    //for (i= 0; i <20; i++)
+    //{
+    //	ocram[i]=0;
+    //}
+
+    /*for (i=0; i<100; i++){
     	j = (uint32_t)(i/20*32 + i%20);
     	printf("true ocram index:%d\n", j);
     	*(uint32_t*)(uocram + j) = *(uint32_t*)(words+i);
@@ -81,10 +68,14 @@ int main() {
     	//printf("(uint32_t)((i/20)<<5):::  %d\n", (uint32_t)((i/20)<<5));
     	printf("CORRECT data read back from uocram 0x%x\n", data);
     	usleep(ALT_MICROSECS_IN_A_SEC);
-	}
+	}*/
+
 
     free(words);
-    printf("writing to accelerator\n");
+    int32_t* xdata = calloc(RT_DATA_CHUNK_SIZE, sizeof(int32_t));
+    parse_rtdata("rtdatastream.txt", &xdata);
+    free(xdata);
+    //printf("writing to accelerator\n");
     //while(1)
     //{
 		//read_accelerator(address+4);

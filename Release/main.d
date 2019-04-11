@@ -1,4 +1,5 @@
-main.o: ../main.c ../testsdram.h ../socal/socal.h ../parser.h ../hwlib.h
+main.o: ../main.c ../testsdram.h ../socal/socal.h ../parser.h ../hwlib.h \
+ ../transfer_data.h
 
 ../testsdram.h:
 
@@ -7,3 +8,5 @@ main.o: ../main.c ../testsdram.h ../socal/socal.h ../parser.h ../hwlib.h
 ../parser.h:
 
 ../hwlib.h:
+
+../transfer_data.h:

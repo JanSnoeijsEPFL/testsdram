@@ -11,7 +11,6 @@
 #include <unistd.h>
 #include <errno.h>
 #include <fcntl.h>
-#include <unistd.h>
 #include "hps_0.h"
 #include <stdlib.h>
 #include <string.h>
@@ -138,7 +137,6 @@ uint32_t* get_wocram_base(){
 uint32_t* get_xocram_base(){
 	return xOCRAM;
 }
-
 uint32_t* get_fpga_accelerator_base(){
 	return fpga_accelerator;
 }

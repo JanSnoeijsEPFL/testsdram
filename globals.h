@@ -17,6 +17,7 @@
 //#define SHARED_SDRAM_SPAN ( 0x04000000 )
 //#define SHARED_SDRAM_MASK ( SHARED_SDRAM_SPAN -1 )
 
+
 //#define uOCRAM_BASE ( 0xc0080000 )
 //#define uOCRAM_SPAN ( 0x00009600 )
 
