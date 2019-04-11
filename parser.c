@@ -114,7 +114,7 @@ void parse_rtdata(char* file, int32_t** words){
 					{
 						//printf("OKOK\n");
 						in_data[j]=quantize_param((char*)STR, (uint8_t)NBDIGIT_RTDATA);
-						printf("params before concat: %d \n", in_data[j]);
+						printf("params before concat: %d data input number %d\n", in_data[j], j);
 						//printf("k : %d, j : %d \n", k, j);
 						if (j == 4)
 						{
@@ -196,7 +196,7 @@ int8_t quantize_param(char* STR, uint8_t size){
 	}
 	//strcpy(&STR[1], &STR[2]); //remove dot
 	// extract mantissa
-	printf("%s\n", STR);
+	printf("%s\n ", STR);
 	number = strtof(STR, (char**)NULL);
 	printf("%f\n", number);
 	number /= MAX_XDATA;
@@ -207,7 +207,7 @@ int8_t quantize_param(char* STR, uint8_t size){
 		number = 1.9375;
 	else if (number <= -2)
 		number = -2;
-	quantized_nb = (int8_t)round(number*16);
+	quantized_nb = (int8_t)rint(number*16);
 	printf("%d\n", quantized_nb);
 
 	usleep(ALT_MICROSECS_IN_A_SEC/10);
