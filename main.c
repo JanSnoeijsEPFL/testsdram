@@ -73,7 +73,7 @@ int main() {
 
     free(words);
     int32_t* xdata = calloc(RT_DATA_CHUNK_SIZE, sizeof(int32_t));
-    parse_rtdata("RT_datastream.txt", &xdata, 1);
+    parse_rtdata("RT_datastream.txt", &xdata, 0);
     free(xdata);
     //printf("writing to accelerator\n");4820802816
     //while(1)
