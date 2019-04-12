@@ -121,10 +121,10 @@ void parse_rtdata(char* file, int32_t** words, int32_t chunk_number){
 				{
 					j = 0;
 					if (word_cnt >= RTDATA_CHUNK_SIZE*chunk_number){
-						*(word+word_cnt) = params2word(in_data);
+						*(word+word_cnt-RTDATA_CHUNK_SIZE*chunk_number) = params2word(in_data);
 						for (i = 0; i < NBPARAM_IN_WORD; i++)
 							in_data[i]=0;
-						printf("after concatenate: 0x%x\n", *(word+word_cnt));
+						printf("after concatenate: 0x%x\n", *(word+word_cnt-RTDATA_CHUNK_SIZE*chunk_number));
 					}
 					word_cnt ++;
 				}
