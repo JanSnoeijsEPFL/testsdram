@@ -90,50 +90,50 @@ void parse_rtdata(char* file, int32_t** words){
 	do
 	{
 		CH = fgetc(rtdata_file);
-				if(feof(rtdata_file))
+		if(feof(rtdata_file))
+		{
+			printf("already finished reading file?\n");
+			*(word+RTDATA_CHUNK_SIZE-1) = params2word(in_data);
+			printf("after concat: 0x%x\n", *(word+RTDATA_CHUNK_SIZE-1));
+			break;
+		}
+		if (CH != '0' && CH != '1' && CH != '2' && CH != '3' && CH != '4' \
+				&& CH != '5' && CH != '6' && CH != '7' && CH != '8' && CH != '9' \
+				&& CH != '-' && CH != '\n' && CH != ',' && CH != '.'){
+			printf("invalid character\n");
+			continue;
+		}
+		else
+		{
+			if (!(CH==',' || CH=='\n'))
+			{
+				STR[k]=CH;
+				k++;
+			}
+			else if (k!=0)
+			{
+				//printf("OKOK\n");
+				in_data[j]=quantize_param((char*)STR, (uint8_t)NBDIGIT_RTDATA);
+				printf("params before concat: %d data input number %d\n", in_data[j], word_cnt);
+				//printf("k : %d, j : %d \n", k, j);
+				if (j == 4)
 				{
-					printf("already finished reading file?\n");
-					*(word+RTDATA_CHUNK_SIZE-1) = params2word(in_data);
-					printf("after concat: 0x%x\n", *(word+RTDATA_CHUNK_SIZE-1));
-					break;
-				}
-				if (CH != '0' && CH != '1' && CH != '2' && CH != '3' && CH != '4' \
-						&& CH != '5' && CH != '6' && CH != '7' && CH != '8' && CH != '9' \
-						&& CH != '-' && CH != '\n' && CH != ',' && CH != '.'){
-					printf("invalid character\n");
-					continue;
+					j = 0;
+					*(word+word_cnt) = params2word(in_data);
+					for (i = 0; i < NBPARAM_IN_WORD; i++)
+						in_data[i]=0;
+
+					printf("after concatenate: 0x%x\n", *(word+word_cnt));
+					word_cnt ++;
 				}
 				else
-				{
-					if (!(CH==',' || CH=='\n'))
-					{
-						STR[k]=CH;
-						k++;
-					}
-					else if (k!=0)
-					{
-						//printf("OKOK\n");
-						in_data[j]=quantize_param((char*)STR, (uint8_t)NBDIGIT_RTDATA);
-						printf("params before concat: %d data input number %d\n", in_data[j], word_cnt);
-						//printf("k : %d, j : %d \n", k, j);
-						if (j == 4)
-						{
-							j = 0;
-							*(word+word_cnt) = params2word(in_data);
-							for (i = 0; i < NBPARAM_IN_WORD; i++)
-								in_data[i]=0;
+					j++;
+				k = 0;
+			}
 
-							printf("after concatenate: 0x%x\n", *(word+word_cnt));
-							word_cnt ++;
-						}
-						else
-							j++;
-						k = 0;
-					}
+		}
 
-				}
-
-	}while(1);
+	}while(word_cnt < 460);
 	fclose(rtdata_file);
 	free(*words);
 	*words = word;
