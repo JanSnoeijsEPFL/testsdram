@@ -76,7 +76,7 @@ void parse_weights(char* file, int32_t** words){
 
 void parse_rtdata(char* file, int32_t** words, int32_t chunk_number){
 	printf("starting RT data parser\n");
-	int32_t * word = calloc(23*20, sizeof(int32_t));
+	int32_t * word = calloc(RTDATA_CHUNK_SIZE, sizeof(int32_t));
 	rtdata_file = fopen(file, "r");
 	int8_t in_data[NBPARAM_IN_WORD];
 	uint8_t i, j, k=0;
@@ -111,7 +111,7 @@ void parse_rtdata(char* file, int32_t** words, int32_t chunk_number){
 				k++;
 			}
 			else if (k!=0){
-				if (word_cnt >= NBDIGIT_RTDATA*chunk_number)
+				if (word_cnt >= RTDATA_CHUNK_SIZE*chunk_number)
 				{
 					in_data[j]=quantize_param((char*)STR, (uint8_t)NBDIGIT_RTDATA);
 					printf("params before concat: %d data input number %d\n", in_data[j], word_cnt);
@@ -120,7 +120,7 @@ void parse_rtdata(char* file, int32_t** words, int32_t chunk_number){
 				if (j == 4)
 				{
 					j = 0;
-					if (word_cnt >= NBDIGIT_RTDATA*chunk_number){
+					if (word_cnt >= RTDATA_CHUNK_SIZE*chunk_number){
 						*(word+word_cnt) = params2word(in_data);
 						for (i = 0; i < NBPARAM_IN_WORD; i++)
 							in_data[i]=0;
@@ -136,7 +136,7 @@ void parse_rtdata(char* file, int32_t** words, int32_t chunk_number){
 
 		}
 
-	}while(word_cnt < NBDIGIT_RTDATA*chunk_number+NBDIGIT_RTDATA);
+	}while(word_cnt < RTDATA_CHUNK_SIZE*chunk_number+RTDATA_CHUNK_SIZE);
 	fclose(rtdata_file);
 	free(*words);
 	*words = word;
