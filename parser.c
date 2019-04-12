@@ -212,7 +212,7 @@ int8_t quantize_param(char* STR, uint8_t size){
 	quantized_nb = (int8_t)round(number);
 	printf("%d\n and rint() output: %f\n", quantized_nb, round(number));
 
-	usleep(ALT_MICROSECS_IN_A_SEC/10);
+	//usleep(ALT_MICROSECS_IN_A_SEC/10);
 
 	return quantized_nb;
 }
