@@ -74,7 +74,7 @@ void parse_weights(char* file, int32_t** words){
 	*words = word;
 }
 
-void parse_rtdata(char* file, int32_t** words){
+void parse_rtdata(char* file, int32_t** words, int32_t chunk_number){
 	printf("starting RT data parser\n");
 	int32_t * word = calloc(23*20, sizeof(int32_t));
 	rtdata_file = fopen(file, "r");
@@ -110,22 +110,25 @@ void parse_rtdata(char* file, int32_t** words){
 				STR[k]=CH;
 				k++;
 			}
-			else if (k!=0)
-			{
-				//printf("OKOK\n");
-				in_data[j]=quantize_param((char*)STR, (uint8_t)NBDIGIT_RTDATA);
-				printf("params before concat: %d data input number %d\n", in_data[j], word_cnt);
-				//printf("k : %d, j : %d \n", k, j);
+			else if (k!=0){
+				if (word_cnt >= NBDIGIT_RTDATA*chunk_number)
+				{
+					in_data[j]=quantize_param((char*)STR, (uint8_t)NBDIGIT_RTDATA);
+					printf("params before concat: %d data input number %d\n", in_data[j], word_cnt);
+				}
+
 				if (j == 4)
 				{
 					j = 0;
-					*(word+word_cnt) = params2word(in_data);
-					for (i = 0; i < NBPARAM_IN_WORD; i++)
-						in_data[i]=0;
-
-					printf("after concatenate: 0x%x\n", *(word+word_cnt));
+					if (word_cnt >= NBDIGIT_RTDATA*chunk_number){
+						*(word+word_cnt) = params2word(in_data);
+						for (i = 0; i < NBPARAM_IN_WORD; i++)
+							in_data[i]=0;
+						printf("after concatenate: 0x%x\n", *(word+word_cnt));
+					}
 					word_cnt ++;
 				}
+
 				else
 					j++;
 				k = 0;
@@ -133,7 +136,7 @@ void parse_rtdata(char* file, int32_t** words){
 
 		}
 
-	}while(word_cnt < 460);
+	}while(word_cnt < NBDIGIT_RTDATA*chunk_number+NBDIGIT_RTDATA);
 	fclose(rtdata_file);
 	free(*words);
 	*words = word;
