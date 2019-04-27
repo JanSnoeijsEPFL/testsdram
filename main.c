@@ -24,9 +24,9 @@ int main() {
     uint32_t* av_slave = get_fpga_accelerator_base();
 
     int32_t* words = calloc(NBWORDS, sizeof(int32_t));
-   // parse_weights("keras_param_3class_30e_5bits_onlysign_modifiedHardSigm.txt", &words);
-    //ocram_init(uocram, wocram, xocram);
-    //load_param(av_slave, uocram, wocram, (uint32_t*) words);
+    parse_weights("keras_param_3class_30e_5bits_onlysign_modifiedHardSigm.txt", &words);
+    ocram_init(uocram, wocram, xocram);
+    load_param(av_slave, uocram, wocram, (uint32_t*) words);
 
     //concat_words(&words, words);
     //for (i = 0; i < NBWORDS; i++)
@@ -73,8 +73,16 @@ int main() {
 
     free(words);
     int32_t* xdata = calloc(RT_DATA_CHUNK_SIZE, sizeof(int32_t));
-    parse_rtdata("RT_datastream.txt", &xdata, 1);
+    parse_rtdata("RT_datastream.txt", &xdata, 0);
+    //set xocram B port mode to HPS (0)
+    write_accelerator(0, 0);
+    xocram_fill_RT(xocram, xdata);
     free(xdata);
+
+    write_accelerator(0, 3); // xocram B port in FPGA mode + trigger accelerator
+    usleep(ALT_MICROSECS_IN_A_SEC);
+    write_accelerator(0, 0); //switch back to HPS mode
+    xocram_read_Conv2D(xocram, 20*44);
     //printf("writing to accelerator\n");4820802816
     //while(1)
     //{

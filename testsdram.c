@@ -122,9 +122,9 @@ void read_accelerator(uint32_t address){
 	printf("reading %d at address %d\n", data, address);
 }
 
-void write_accelerator(uint32_t address){
+void write_accelerator(uint32_t address, uint32_t data){
 	printf("just before writing to accelerator slave interface\n");
-	*(uint32_t*) (fpga_accelerator+address) = 01;
+	*(uint32_t*) (fpga_accelerator+address) = data;
 	printf("writing 01 at address %d\n", address);
 }
 

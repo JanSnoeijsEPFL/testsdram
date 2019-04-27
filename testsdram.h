@@ -20,7 +20,7 @@ void mmap_peripherals();
 void munmap_peripherals();
 void write_sram_fpga(uint32_t address, uint32_t data);
 void read_sram_fpga(uint32_t address);
-void write_accelerator(uint32_t address);
+void write_accelerator(uint32_t address, uint32_t data);
 void read_accelerator(uint32_t address);
 uint32_t* get_uocram_base();
 uint32_t* get_wocram_base();

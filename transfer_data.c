@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "hwlib.h"
+#include <unistd.h>
 
 void load_param(uint32_t* av_slave, uint32_t* u_ocram, uint32_t* w_ocram, uint32_t* data_ptr)
 {
@@ -22,8 +24,8 @@ void load_param(uint32_t* av_slave, uint32_t* u_ocram, uint32_t* w_ocram, uint32
 	printf("Wz, Wr, Wh parameters stored\n");
 	for( i = 0; i < UOCRAM_SIZE-19; i++)
 	{
-		j = (uint32_t)(i/20*32 + i%20);
-		*(w_ocram + j) = *(data_ptr+i+2+WOCRAM_SIZE);
+		j = (uint32_t)(i/20*32 + i%20); //shift line address by 5 (2^5 = 32) lower part is the address inside a line
+		*(u_ocram + j) = *(data_ptr+i+2+WOCRAM_SIZE);
 	}
 	printf("Uz, Ur, Uh, Bz, Br, Bh, Wlin, Blin parameters stored\n");
 }
@@ -50,3 +52,13 @@ void ocram_empty(uint32_t* ocram, uint32_t RAM_SIZE){
 		*(ocram + j) = 0;
 	}
 }
+
+void xocram_read_Conv2D(uint32_t* x_ocram, uint32_t size){
+	uint32_t i, j;
+	for( i = 0; i < size; i++){
+		j = (uint32_t)(i/20*32 + i%20);
+		printf("data %d : %d\n", i, *(x_ocram+j));
+		usleep(ALT_MICROSECS_IN_A_SEC);
+	}
+}
+

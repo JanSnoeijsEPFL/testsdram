@@ -140,7 +140,7 @@ void parse_rtdata(char* file, int32_t** words, int32_t chunk_number){
 	fclose(rtdata_file);
 	free(*words);
 	*words = word;
-	printf("check if program crashed \n");
+	//printf("check if program crashed \n");
 
 }
 
