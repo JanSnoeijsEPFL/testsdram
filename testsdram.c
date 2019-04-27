@@ -117,15 +117,15 @@ void munmap_peripherals() {
 }
 
 void read_accelerator(uint32_t address){
-	printf("just before reading acccelerator's slave interface\n");
+	//printf("just before reading acccelerator's slave interface\n");
 	uint32_t data = *(uint32_t*)(fpga_accelerator+address);
 	printf("reading %d at address %d\n", data, address);
 }
 
 void write_accelerator(uint32_t address, uint32_t data){
-	printf("just before writing to accelerator slave interface\n");
+	//printf("just before writing to accelerator slave interface\n");
 	*(uint32_t*) (fpga_accelerator+address) = data;
-	printf("writing 01 at address %d\n", address);
+	printf("writing %d at address %d\n", data, address);
 }
 
 uint32_t* get_uocram_base(){
