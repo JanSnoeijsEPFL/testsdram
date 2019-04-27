@@ -45,6 +45,24 @@ void xocram_fill_RT(uint32_t* x_ocram, uint32_t* data_ptr){
 	}
 
 }
+void read_xocram(uint32_t* ocram){
+	uint32_t i, j;
+	for( i = 0; i < RTDATA_CHUNK_SIZE; i++)
+	{
+		j = (uint32_t)(i/20*32 + i%20);
+		printf("xocram data %d\n",*(ocram + j));
+		usleep(ALT_MICROSECS_IN_A_SEC/10);
+	}
+}
+void read_uocram(uint32_t* ocram){
+	uint32_t i, j;
+	for( i = 0; i < RTDATA_CHUNK_SIZE; i++)
+	{
+		j = (uint32_t)(i/20*32 + i%20);
+		printf("uocram data %d\n",*(ocram + j));
+		usleep(ALT_MICROSECS_IN_A_SEC/10);
+	}
+}
 void ocram_empty(uint32_t* ocram, uint32_t RAM_SIZE){
 	uint32_t i, j;
 	for( i = 0; i < RAM_SIZE; i ++){
