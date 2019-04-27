@@ -55,7 +55,7 @@ void ocram_empty(uint32_t* ocram, uint32_t RAM_SIZE){
 
 void xocram_read_Conv2D(uint32_t* x_ocram, uint32_t size){
 	uint32_t i, j;
-	for( i = 0; i < size; i++){
+	for( i = 23; i < size+23; i++){
 		j = (uint32_t)(i/20*32 + i%20);
 		printf("data %d : %d\n", i, *(x_ocram+j));
 		usleep(ALT_MICROSECS_IN_A_SEC);
