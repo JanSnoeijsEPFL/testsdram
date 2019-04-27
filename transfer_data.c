@@ -47,10 +47,10 @@ void xocram_fill_RT(uint32_t* x_ocram, uint32_t* data_ptr){
 }
 void read_xocram(uint32_t* ocram){
 	uint32_t i, j;
-	for( i = 0+23*32; i < 60+23*32; i++)
+	for( i = 0+23*32; i < 10+23*32; i++)
 	{
 		j = (uint32_t)(i/20*32 + i%20);
-		printf("xocram data %d\n",*(ocram + j));
+		printf("xocram data %d at address %d\n",*(ocram + j), j);
 		usleep(ALT_MICROSECS_IN_A_SEC/10);
 	}
 }
