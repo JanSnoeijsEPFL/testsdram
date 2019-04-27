@@ -47,7 +47,7 @@ void xocram_fill_RT(uint32_t* x_ocram, uint32_t* data_ptr){
 }
 void read_xocram(uint32_t* ocram){
 	uint32_t i, j;
-	for( i = 0+23*32; i < 10+23*32; i++)
+	for( i = 0+23*20; i < 10+23*20; i++)
 	{
 		j = (uint32_t)(i/20*32 + i%20);
 		printf("xocram data %d at address %d\n",*(ocram + j), j);
