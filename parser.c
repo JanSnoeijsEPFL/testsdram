@@ -201,11 +201,11 @@ int8_t quantize_param(char* STR, uint8_t size){
 	}
 	//strcpy(&STR[1], &STR[2]); //remove dot
 	// extract mantissa
-	printf("%s\n ", STR);
+	//printf("%s\n ", STR);
 	number = strtof(STR, (char**)NULL);
-	printf("%f\n", number);
+	//printf("%f\n", number);
 	number /= MAX_XDATA;
-	printf("%f\n", number);
+	//printf("%f\n", number);
 	if (sign == 1)
 		number = -number;
 	if (number >= 1.9375)
@@ -213,9 +213,9 @@ int8_t quantize_param(char* STR, uint8_t size){
 	else if (number <= -2)
 		number = -2;
 	number = number * 16;
-	printf("multiplied by 16 : %f\n", number);
+	//printf("multiplied by 16 : %f\n", number);
 	quantized_nb = (int8_t)round(number);
-	printf("%d\n and rint() output: %f\n", quantized_nb, round(number));
+	//printf("%d\n and rint() output: %f\n", quantized_nb, round(number));
 
 	//usleep(ALT_MICROSECS_IN_A_SEC/10);
 
