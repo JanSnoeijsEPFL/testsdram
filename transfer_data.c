@@ -46,7 +46,7 @@ void xocram_fill_RT(uint32_t* x_ocram, uint32_t* data_ptr){
 	for (i =  0; i <40;  i++)
 	{
 		j = (uint32_t)(i/20*32 + i%20);
-		printf("FIRST TWO LINES OF XOCRAM: %x", *(data_ptr+i));
+		printf("FIRST TWO LINES OF XOCRAM: %x \n", *(data_ptr+i));
 	}
 }
 void read_xocram(uint32_t* ocram){
