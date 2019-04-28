@@ -81,7 +81,7 @@ int main() {
     read_xocram(xocram);
     //read_uocram(uocram);
     write_accelerator(0, 3); // xocram B port in FPGA mode + trigger accelerator
-    usleep(100*ALT_MICROSECS_IN_A_SEC);
+    //usleep(100*ALT_MICROSECS_IN_A_SEC);
     read_accelerator(1);
     write_accelerator(0, 0); //switch back to HPS mode
     read_xocram(xocram);
