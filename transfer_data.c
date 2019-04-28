@@ -84,10 +84,10 @@ void rearrange_conv2d_param(int32_t * word0, int32_t* word1){
 	int32_t mask = 0b111111;
 	int32_t wordconv0, wordconv1;
 
-	wordconv0 = (*word0 & mask) |  (*word0 & (mask<<12)) | (*word0 & (mask<<24))
-				|  (*word1 & (mask<<6)) |  (*word1 & (mask <<18));
-	wordconv1 = (*word1 & mask) |  (*word1 & (mask<<12)) | (*word1 & (mask<<24))
-					|  (*word0 & (mask<<6)) |  (*word0 & (mask <<18));
+	wordconv0 = (*word0 & mask) |  ((*word0 & (mask<<12))>>6) | ((*word0 & (mask<<24))>>12)
+				|  ((*word1 & (mask<<6))<<12) |  ((*word1 & (mask <<18))<<6);
+	wordconv1 = ((*word1 & mask)<<12) |  ((*word1 & (mask<<12))<<6) | (*word1 & (mask<<24))
+					|  ((*word0 & (mask<<6))>>6) |  ((*word0 & (mask <<18))>>12);
 
 	printf("word0 & mask : %x \n",(*word0 & mask) );
 	printf("word0 & mask<<6 : %x \n",(*word0 & (mask<<6))>>6);
