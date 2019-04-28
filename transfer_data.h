@@ -5,6 +5,7 @@ void ocram_empty(uint32_t* ocram, uint32_t RAM_SIZE);
 void xocram_read_Conv2D(uint32_t* x_ocram, uint32_t size);
 void read_xocram(uint32_t* ocram);
 void read_uocram(uint32_t* ocram);
+void rearrange_conv2d_param(int32_t * word0, int32_t* word1);
 
 #define UOCRAM_SIZE 307*20
 #define WOCRAM_SIZE 3234*20

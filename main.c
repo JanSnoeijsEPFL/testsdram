@@ -26,6 +26,7 @@ int main() {
     int32_t* words = calloc(NBWORDS, sizeof(int32_t));
     parse_weights("FINAL_signed_6b.txt", &words);
     ocram_init(uocram, wocram, xocram);
+    rearrange_conv2d_param(words, words+1);
     load_param(av_slave, uocram, wocram, (uint32_t*) words);
 
     //concat_words(&words, words);
