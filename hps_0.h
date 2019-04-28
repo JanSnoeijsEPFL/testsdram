@@ -66,8 +66,8 @@
 #define ACCELERATOR_0_X_OCRAM_COMPONENT_TYPE accelerator
 #define ACCELERATOR_0_X_OCRAM_COMPONENT_NAME accelerator_0
 #define ACCELERATOR_0_X_OCRAM_BASE 0x90000
-#define ACCELERATOR_0_X_OCRAM_SPAN 8192
-#define ACCELERATOR_0_X_OCRAM_END 0x91fff
+#define ACCELERATOR_0_X_OCRAM_SPAN 16384
+#define ACCELERATOR_0_X_OCRAM_END 0x93fff
 
 /*
  * Macros for device 'accelerator_0_avalon_slave', class 'accelerator'
@@ -76,9 +76,9 @@
  */
 #define ACCELERATOR_0_AVALON_SLAVE_COMPONENT_TYPE accelerator
 #define ACCELERATOR_0_AVALON_SLAVE_COMPONENT_NAME accelerator_0
-#define ACCELERATOR_0_AVALON_SLAVE_BASE 0x92000
+#define ACCELERATOR_0_AVALON_SLAVE_BASE 0x94000
 #define ACCELERATOR_0_AVALON_SLAVE_SPAN 32
-#define ACCELERATOR_0_AVALON_SLAVE_END 0x9201f
+#define ACCELERATOR_0_AVALON_SLAVE_END 0x9401f
 
 /*
  * Macros for device 'pio_0', class 'altera_avalon_pio'
@@ -87,9 +87,9 @@
  */
 #define PIO_0_COMPONENT_TYPE altera_avalon_pio
 #define PIO_0_COMPONENT_NAME pio_0
-#define PIO_0_BASE 0x92020
+#define PIO_0_BASE 0x94020
 #define PIO_0_SPAN 16
-#define PIO_0_END 0x9202f
+#define PIO_0_END 0x9402f
 #define PIO_0_BIT_CLEARING_EDGE_REGISTER 0
 #define PIO_0_BIT_MODIFYING_OUTPUT_REGISTER 0
 #define PIO_0_CAPTURE 0
@@ -97,7 +97,7 @@
 #define PIO_0_DO_TEST_BENCH_WIRING 0
 #define PIO_0_DRIVEN_SIM_VALUE 0
 #define PIO_0_EDGE_TYPE NONE
-#define PIO_0_FREQ 100000000
+#define PIO_0_FREQ 50000000
 #define PIO_0_HAS_IN 0
 #define PIO_0_HAS_OUT 1
 #define PIO_0_HAS_TRI 0
