@@ -9,5 +9,5 @@ void rearrange_conv2d_param(int32_t * word0, int32_t* word1);
 
 #define UOCRAM_SIZE 307*20
 #define WOCRAM_SIZE 3234*20
-#define XOCRAM_SIZE 46*20
+#define XOCRAM_SIZE 72*20
 #define RTDATA_CHUNK_SIZE 20*23 //2300 6bit words => 20*30 30bit words

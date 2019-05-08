@@ -76,20 +76,20 @@ int main() {
     int32_t* xdata = calloc(RT_DATA_CHUNK_SIZE, sizeof(int32_t));
     parse_rtdata("RT_datastream.txt", &xdata, 0);
     //set xocram B port mode to HPS (0)
-    write_accelerator(0, 0);
-    xocram_fill_RT(xocram, xdata);
-    free(xdata);
-    read_xocram(xocram);
+    //write_accelerator(0, 0);
+   // xocram_fill_RT(xocram, xdata);
+   // free(xdata);
+   // read_xocram(xocram);
     //read_uocram(uocram);
-    write_accelerator(0, 3); // xocram B port in FPGA mode + trigger accelerator
+  //  write_accelerator(0, 3); // xocram B port in FPGA mode + trigger accelerator
     //usleep(ALT_MICROSECS_IN_A_SEC);
-    read_accelerator(1);
-    write_accelerator(0, 0); //switch back to HPS mode
-    read_xocram(xocram);
+  //  read_accelerator(1);
+  //  write_accelerator(0, 0); //switch back to HPS mode
+  //  read_xocram(xocram);
     //xocram_read_Conv2D(xocram, 20*44);
     //printf("writing to accelerator\n");4820802816
-    //while(1)
-    //{
+    while(1)
+    {
 		//read_accelerator(address+4);
 		//usleep(ALT_MICROSECS_IN_A_SEC*1);
 		//printf("writing to accelerator\n");
@@ -105,7 +105,7 @@ int main() {
 		//read_accelerator(address+1);
 		//printf("observe signal tap\n");
 		//usleep(ALT_MICROSECS_IN_A_SEC * 1);
-    //}
+    }
 
 
     munmap_peripherals();
