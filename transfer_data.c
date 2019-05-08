@@ -54,7 +54,7 @@ void read_xocram(uint32_t* ocram){
 	for( i = 0+23*20; i < 20*25+23*20; i++)
 	{
 		j = (uint32_t)(i/20*32 + i%20);
-		printf("xocram data %d at address %d\n",*(ocram + j), j);
+		printf("xocram data %d at address %d and line-address %d \n",*(ocram + j), j, i/20);
 		usleep(ALT_MICROSECS_IN_A_SEC/10);
 	}
 }
