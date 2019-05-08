@@ -14,7 +14,7 @@ int main() {
    // printf("check if recompiled\n");
     open_physical_memory_device();
     printf("Physical memory device opened\n");
-   // mmap_peripherals();
+    mmap_peripherals();
     printf("mapped the peripherals\n");
     uint32_t i = 0;
     uint32_t j = 0;
