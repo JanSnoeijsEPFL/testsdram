@@ -71,7 +71,7 @@ void ocram_empty(uint32_t* ocram, uint32_t RAM_SIZE){
 	uint32_t i, j;
 	for( i = 0; i < RAM_SIZE; i ++){
 		j = (uint32_t)(i/20*32 + i%20);
-		*(ocram + j) = -1;
+		*(ocram + j) = 0;
 	}
 }
 
