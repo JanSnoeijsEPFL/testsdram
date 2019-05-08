@@ -14,7 +14,7 @@ int main() {
    // printf("check if recompiled\n");
     open_physical_memory_device();
     printf("Physical memory device opened\n");
-    mmap_peripherals();
+   // mmap_peripherals();
     printf("mapped the peripherals\n");
     uint32_t i = 0;
     uint32_t j = 0;
@@ -25,7 +25,7 @@ int main() {
 
    // int32_t* words = calloc(NBWORDS, sizeof(int32_t));
     //parse_weights("FINAL_signed_6b.txt", &words);
-    ocram_init(uocram, wocram, xocram);
+   // ocram_init(uocram, wocram, xocram);
     //rearrange_conv2d_param(words, words+1);
     //load_param(av_slave, uocram, wocram, (uint32_t*) words);
 

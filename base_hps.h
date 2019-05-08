@@ -248,18 +248,6 @@
 #define HPS_0_ARM_A9_0_ACCELERATOR_0_X_OCRAM_END 0xc0093fff
 
 /*
- * Macros for device 'accelerator_0_avalon_slave', class 'accelerator'
- * Path to the device is from the master group 'hps_0_arm_a9_0'.
- * The macros are prefixed with 'HPS_0_ARM_A9_0_ACCELERATOR_0_AVALON_SLAVE_'.
- * The prefix is the master group descriptor and the slave descriptor.
- */
-#define HPS_0_ARM_A9_0_ACCELERATOR_0_AVALON_SLAVE_COMPONENT_TYPE accelerator
-#define HPS_0_ARM_A9_0_ACCELERATOR_0_AVALON_SLAVE_COMPONENT_NAME accelerator_0
-#define HPS_0_ARM_A9_0_ACCELERATOR_0_AVALON_SLAVE_BASE 0xc0094000
-#define HPS_0_ARM_A9_0_ACCELERATOR_0_AVALON_SLAVE_SPAN 32
-#define HPS_0_ARM_A9_0_ACCELERATOR_0_AVALON_SLAVE_END 0xc009401f
-
-/*
  * Macros for device 'pio_0', class 'altera_avalon_pio'
  * Path to the device is from the master group 'hps_0_arm_a9_0'.
  * The macros are prefixed with 'HPS_0_ARM_A9_0_PIO_0_'.
@@ -299,6 +287,18 @@
 #define HPS_0_ARM_A9_0_JTAG_UART_0_READ_THRESHOLD 8
 #define HPS_0_ARM_A9_0_JTAG_UART_0_WRITE_DEPTH 64
 #define HPS_0_ARM_A9_0_JTAG_UART_0_WRITE_THRESHOLD 8
+
+/*
+ * Macros for device 'accelerator_0_avalon_slave', class 'accelerator'
+ * Path to the device is from the master group 'hps_0_arm_a9_0'.
+ * The macros are prefixed with 'HPS_0_ARM_A9_0_ACCELERATOR_0_AVALON_SLAVE_'.
+ * The prefix is the master group descriptor and the slave descriptor.
+ */
+#define HPS_0_ARM_A9_0_ACCELERATOR_0_AVALON_SLAVE_COMPONENT_TYPE accelerator
+#define HPS_0_ARM_A9_0_ACCELERATOR_0_AVALON_SLAVE_COMPONENT_NAME accelerator_0
+#define HPS_0_ARM_A9_0_ACCELERATOR_0_AVALON_SLAVE_BASE 0xff294000
+#define HPS_0_ARM_A9_0_ACCELERATOR_0_AVALON_SLAVE_SPAN 32
+#define HPS_0_ARM_A9_0_ACCELERATOR_0_AVALON_SLAVE_END 0xff29401f
 
 /*
  * Macros for device 'hps_0_gmac0', class 'stmmac'
@@ -827,18 +827,6 @@
 #define HPS_0_ARM_A9_1_ACCELERATOR_0_X_OCRAM_END 0xc0093fff
 
 /*
- * Macros for device 'accelerator_0_avalon_slave', class 'accelerator'
- * Path to the device is from the master group 'hps_0_arm_a9_1'.
- * The macros are prefixed with 'HPS_0_ARM_A9_1_ACCELERATOR_0_AVALON_SLAVE_'.
- * The prefix is the master group descriptor and the slave descriptor.
- */
-#define HPS_0_ARM_A9_1_ACCELERATOR_0_AVALON_SLAVE_COMPONENT_TYPE accelerator
-#define HPS_0_ARM_A9_1_ACCELERATOR_0_AVALON_SLAVE_COMPONENT_NAME accelerator_0
-#define HPS_0_ARM_A9_1_ACCELERATOR_0_AVALON_SLAVE_BASE 0xc0094000
-#define HPS_0_ARM_A9_1_ACCELERATOR_0_AVALON_SLAVE_SPAN 32
-#define HPS_0_ARM_A9_1_ACCELERATOR_0_AVALON_SLAVE_END 0xc009401f
-
-/*
  * Macros for device 'pio_0', class 'altera_avalon_pio'
  * Path to the device is from the master group 'hps_0_arm_a9_1'.
  * The macros are prefixed with 'HPS_0_ARM_A9_1_PIO_0_'.
@@ -878,6 +866,18 @@
 #define HPS_0_ARM_A9_1_JTAG_UART_0_READ_THRESHOLD 8
 #define HPS_0_ARM_A9_1_JTAG_UART_0_WRITE_DEPTH 64
 #define HPS_0_ARM_A9_1_JTAG_UART_0_WRITE_THRESHOLD 8
+
+/*
+ * Macros for device 'accelerator_0_avalon_slave', class 'accelerator'
+ * Path to the device is from the master group 'hps_0_arm_a9_1'.
+ * The macros are prefixed with 'HPS_0_ARM_A9_1_ACCELERATOR_0_AVALON_SLAVE_'.
+ * The prefix is the master group descriptor and the slave descriptor.
+ */
+#define HPS_0_ARM_A9_1_ACCELERATOR_0_AVALON_SLAVE_COMPONENT_TYPE accelerator
+#define HPS_0_ARM_A9_1_ACCELERATOR_0_AVALON_SLAVE_COMPONENT_NAME accelerator_0
+#define HPS_0_ARM_A9_1_ACCELERATOR_0_AVALON_SLAVE_BASE 0xff294000
+#define HPS_0_ARM_A9_1_ACCELERATOR_0_AVALON_SLAVE_SPAN 32
+#define HPS_0_ARM_A9_1_ACCELERATOR_0_AVALON_SLAVE_END 0xff29401f
 
 /*
  * Macros for device 'hps_0_gmac0', class 'stmmac'

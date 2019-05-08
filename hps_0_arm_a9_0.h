@@ -70,17 +70,6 @@
 #define ACCELERATOR_0_X_OCRAM_END 0xc0093fff
 
 /*
- * Macros for device 'accelerator_0_avalon_slave', class 'accelerator'
- * The macros are prefixed with 'ACCELERATOR_0_AVALON_SLAVE_'.
- * The prefix is the slave descriptor.
- */
-#define ACCELERATOR_0_AVALON_SLAVE_COMPONENT_TYPE accelerator
-#define ACCELERATOR_0_AVALON_SLAVE_COMPONENT_NAME accelerator_0
-#define ACCELERATOR_0_AVALON_SLAVE_BASE 0xc0094000
-#define ACCELERATOR_0_AVALON_SLAVE_SPAN 32
-#define ACCELERATOR_0_AVALON_SLAVE_END 0xc009401f
-
-/*
  * Macros for device 'pio_0', class 'altera_avalon_pio'
  * The macros are prefixed with 'PIO_0_'.
  * The prefix is the slave descriptor.
@@ -118,6 +107,17 @@
 #define JTAG_UART_0_READ_THRESHOLD 8
 #define JTAG_UART_0_WRITE_DEPTH 64
 #define JTAG_UART_0_WRITE_THRESHOLD 8
+
+/*
+ * Macros for device 'accelerator_0_avalon_slave', class 'accelerator'
+ * The macros are prefixed with 'ACCELERATOR_0_AVALON_SLAVE_'.
+ * The prefix is the slave descriptor.
+ */
+#define ACCELERATOR_0_AVALON_SLAVE_COMPONENT_TYPE accelerator
+#define ACCELERATOR_0_AVALON_SLAVE_COMPONENT_NAME accelerator_0
+#define ACCELERATOR_0_AVALON_SLAVE_BASE 0xff294000
+#define ACCELERATOR_0_AVALON_SLAVE_SPAN 32
+#define ACCELERATOR_0_AVALON_SLAVE_END 0xff29401f
 
 /*
  * Macros for device 'hps_0_gmac0', class 'stmmac'
