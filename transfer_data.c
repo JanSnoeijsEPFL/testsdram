@@ -122,6 +122,7 @@ void get_data_maxp(int32_t* data, int32_t* word_data)
 			i = counter/5+line*20;
 			j = counter%5;
 			*(data+counter+line*49) = (*(word_data+i) & (mask << j*6))>>j*6;
+			printf("extracted val %d, word %d\n", *(data+counter+line*49), *(word_data+i));
 		}
 	}
 }
