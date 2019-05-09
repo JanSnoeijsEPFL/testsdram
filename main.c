@@ -89,6 +89,8 @@ int main() {
 				fprintf(res_file, "%f ",((float)*(DEBUG_data_gru+i))/16);
 		}
 	}
+	fclose(res_file);
+
     //xocram_read_Conv2D(xocram, 20*44);
     //printf("writing to accelerator\n");4820802816
     //while(1)
