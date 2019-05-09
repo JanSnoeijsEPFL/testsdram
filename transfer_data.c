@@ -59,6 +59,7 @@ void read_xocram(uint32_t mode, int32_t* ocram, int32_t* data){
 		}
 		else if (mode == 1){
 			*(data+i) = *(ocram+j);
+			printf("xocram data %d at address %d and line-address %d \n",*(ocram + j), j, i/20);
 		}
 		//usleep(ALT_MICROSECS_IN_A_SEC/10);
 	}

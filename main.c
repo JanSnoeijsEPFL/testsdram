@@ -90,7 +90,9 @@ int main() {
 		}
 	}
 	fclose(res_file);
-
+	free(DEBUG_data_gru);
+	free(DEBUG_data_maxp);
+	free(DEBUG_data_words);
     //xocram_read_Conv2D(xocram, 20*44);
     //printf("writing to accelerator\n");4820802816
     //while(1)
