@@ -45,6 +45,7 @@ int main() {
     int32_t* xdata = calloc(RT_DATA_CHUNK_SIZE, sizeof(int32_t));
     parse_rtdata("RT_datastream.txt", &xdata, 0);
     //set xocram B port mode to HPS (0)
+    read_accelerator(0);
     write_accelerator(0, 0);
     read_accelerator(1);
     xocram_fill_RT(xocram, xdata);
