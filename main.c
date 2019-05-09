@@ -61,6 +61,10 @@ int main() {
     int32_t* DEBUG_data_gru = calloc(400, sizeof(int32_t));
     read_xocram(1, (int32_t*)xocram, DEBUG_data_words);
     get_data_maxp(DEBUG_data_maxp, DEBUG_data_words);
+    for (i = 0; i < 100; i++)
+    {
+    	printf("EXTRACTED MAXP VECTORS %d\n", *(DEBUG_data_words+i));
+    }
     get_data_gru(DEBUG_data_gru, DEBUG_data_words+20*22);
     FILE* res_file;
     res_file = fopen("res_acc/MAXP_t0.txt", "w");
