@@ -49,13 +49,18 @@ void xocram_fill_RT(uint32_t* x_ocram, uint32_t* data_ptr){
 		printf("FIRST TWO LINES OF XOCRAM: %x \n", *(data_ptr+i));
 	}
 }
-void read_xocram(uint32_t* ocram){
+void read_xocram(uint32_t mode, int32_t* ocram, int32_t* data){
 	uint32_t i, j;
-	for( i = 0+23*20; i < 20+23*20; i++)
+	for( i = 0+23*20; i < 20*26+23*20; i++)
 	{
 		j = (uint32_t)(i/20*32 + i%20);
-		printf("xocram data %d at address %d and line-address %d \n",*(ocram + j), j, i/20);
-		usleep(ALT_MICROSECS_IN_A_SEC/10);
+		if (mode == 0){
+			printf("xocram data %d at address %d and line-address %d \n",*(ocram + j), j, i/20);
+		}
+		else if (mode == 1){
+			*(data+i) = *(ocram+j);
+		}
+		//usleep(ALT_MICROSECS_IN_A_SEC/10);
 	}
 }
 void read_uocram(uint32_t* ocram){
@@ -104,4 +109,29 @@ void rearrange_conv2d_param(int32_t * word0, int32_t* word1){
 	usleep(ALT_MICROSECS_IN_A_SEC);
 	*word0 = wordconv0;
 	*word1 = wordconv1;
+}
+
+void get_data_maxp(int32_t* data, int32_t* word_data)
+{
+	int32_t mask = 0b111111;
+	uint32_t i,j = 0;
+	uint32_t counter,line=0;
+	for (line =  0; line <22; line++){
+		for (counter = 0; counter<49; counter++){
+			i = counter/5+line*20;
+			j = counter%5;
+			*(data+counter+line*49) = (*(word_data+i) & (mask << j*6))>>j*6;
+		}
+	}
+}
+
+void get_data_gru(int32_t* data, int32_t *word_data)
+{
+	int32_t mask = 0b111111;
+	uint32_t k,i,j = 0;
+	for (k = 0; k <400; k++){
+		i = k/5;
+		j = i%5;
+		*(data + k) = (*(word_data+i) & (mask << j*6))>>j*6;
+	}
 }

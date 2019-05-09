@@ -50,13 +50,45 @@ int main() {
     read_accelerator(1);
     xocram_fill_RT(xocram, xdata);
     free(xdata);
-    read_xocram(xocram);
+    //read_xocram(xocram);
    //read_uocram(uocram);
     write_accelerator(0, 3); // xocram B port in FPGA mode + trigger accelerator
     usleep(ALT_MICROSECS_IN_A_SEC);
     read_accelerator(1);
     write_accelerator(0, 0); //switch back to HPS mode
-    read_xocram(xocram);
+    int32_t* DEBUG_data_words = calloc(26*20, sizeof(int32_t));
+    int32_t* DEBUG_data_maxp = calloc(1078, sizeof(int32_t));
+    int32_t* DEBUG_data_gru = calloc(400, sizeof(int32_t));
+    read_xocram(1, (int32_t*)xocram, DEBUG_data_words);
+    get_data_maxp(DEBUG_data_maxp, DEBUG_data_words);
+    get_data_gru(DEBUG_data_gru, DEBUG_data_words+20*22);
+    FILE* res_file;
+    res_file = fopen("res_acc/MAXP_t0.txt", "w");
+	if (!res_file)
+		printf("file never opened\n");
+	else{
+		printf("opened resfile\n");
+		j=0;
+		for (i=0; i<1078; i++){
+			j ++;
+			if (j == 49){
+				j = 0;
+				fprintf(res_file,"\n");
+			}
+			fprintf(res_file, "%f ",((float)*(DEBUG_data_maxp+i))/16);
+		}
+	}
+	fclose(res_file);
+	res_file = fopen("res_acc/GRU_t0.txt", "w");
+	if (!res_file)
+			printf("file never opened\n");
+		else{
+			printf("opened resfile\n");
+			j=0;
+			for (i=0; i<400; i++){
+				fprintf(res_file, "%f ",((float)*(DEBUG_data_gru+i))/16);
+		}
+	}
     //xocram_read_Conv2D(xocram, 20*44);
     //printf("writing to accelerator\n");4820802816
     //while(1)
