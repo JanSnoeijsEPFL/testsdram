@@ -75,11 +75,11 @@ int main() {
 		j=0;
 		for (i=0; i<1078; i++){
 			j ++;
-			if (j == 49){
-				j = 0;
-				fprintf(res_file,"\n");
-			}
-			fprintf(res_file, "%f ",((float)*(DEBUG_data_maxp+i))/16);
+			//if (j == 49){
+			//	j = 0;
+			//	fprintf(res_file,"\n");
+			//}
+			fprintf(res_file, "%f\n",((float)*(DEBUG_data_maxp+i))/16);
 		}
 	}
 	fclose(res_file);
@@ -90,7 +90,7 @@ int main() {
 			printf("opened resfile\n");
 			j=0;
 			for (i=0; i<400; i++){
-				fprintf(res_file, "%f ",((float)*(DEBUG_data_gru+i))/16);
+				fprintf(res_file, "%f\n",((float)*(DEBUG_data_gru+i))/16);
 		}
 	}
 	fclose(res_file);
