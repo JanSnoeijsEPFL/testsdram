@@ -79,7 +79,7 @@ void mmap_fpga_peripherals() {
 	   exit(EXIT_FAILURE);
 	}
 
-    fpga_accelerator = (uint32_t *) (virtual_hw_base + (( ACCELERATOR_0_AVALON_SLAVE_BASE) & (ALT_HWFPGASLVS_MASK))) ;
+    fpga_accelerator = (uint32_t *) (virtual_lw_base + (( ACCELERATOR_0_AVALON_SLAVE_BASE) & (ALT_HWFPGASLVS_MASK))) ;
     uOCRAM = (uint32_t *) (virtual_hw_base + ((ACCELERATOR_0_U_OCRAM_BASE) & (ALT_HWFPGASLVS_MASK)));
     wOCRAM = (uint32_t *) (virtual_hw_base + ((ACCELERATOR_0_W_OCRAM_BASE) & (ALT_HWFPGASLVS_MASK)));
     xOCRAM = (uint32_t *) (virtual_hw_base + ((ACCELERATOR_0_X_OCRAM_BASE) & (ALT_HWFPGASLVS_MASK)));
