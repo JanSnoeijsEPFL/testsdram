@@ -46,6 +46,7 @@ int main() {
     parse_rtdata("RT_datastream.txt", &xdata, 0);
     //set xocram B port mode to HPS (0)
     write_accelerator(0, 0);
+    read_accelerator(1);
     xocram_fill_RT(xocram, xdata);
     free(xdata);
     read_xocram(xocram);
