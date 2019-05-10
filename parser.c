@@ -214,7 +214,8 @@ int8_t quantize_param(char* STR, uint8_t size){
 		number = 1.9375;
 	else if (number <= -2)
 		number = -2;
-	number = number * 16;
+	else
+		number = number * 16;
 	//printf("multiplied by 16 : %f\n", number);
 	quantized_nb = (int8_t)round(number);
 	//printf("%d\n and rint() output: %f\n", quantized_nb, round(number));
