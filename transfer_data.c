@@ -11,8 +11,8 @@ void load_param(uint32_t* av_slave, uint32_t* u_ocram, uint32_t* w_ocram, uint32
 {
 	uint32_t i, j;
 	//first 2 words are conv2D parameters
-	*(av_slave+4) = *(data_ptr+1);
-	*(av_slave+5) = *(data_ptr);
+	*(av_slave+4) = *(data_ptr);
+	*(av_slave+5) = *(data_ptr+1);
 	printf("Conv-2D parameters stored\n");
 	//next words are Wz, Wr, Wh parameters
 	for( i = 0; i < WOCRAM_SIZE; i++)
