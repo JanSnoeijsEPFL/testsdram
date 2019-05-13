@@ -133,7 +133,7 @@ void get_data_gru(int32_t* data, int32_t *word_data)
 	uint32_t k,i,j = 0;
 	for (k = 0; k <400; k++){
 		i = k/5;
-		j = i%5;
+		j = k%5;
 		*(data + k) = (*(word_data+i) & (mask << j*6))>>j*6;
 	}
 }
