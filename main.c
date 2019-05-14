@@ -29,8 +29,8 @@ int main() {
     	return EXIT_FAILURE;
     parse_weights("FINAL_signed_6b.txt", words);
     ocram_init(uocram, wocram, xocram);
-    rearrange_conv2d_param(words, words+1);
-    load_param(av_slave, uocram, wocram, (uint32_t*) words);
+   // rearrange_conv2d_param(words, words+1);
+  //  load_param(av_slave, uocram, wocram, (uint32_t*) words);
     free(words);
 
 
