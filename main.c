@@ -39,7 +39,7 @@ int main() {
     int32_t* DEBUG_data_maxp = NULL;
     int32_t* DEBUG_data_gru = NULL;
 
-    xdata = calloc(RT_DATA_CHUNK_SIZE, sizeof(int32_t));
+   // xdata = calloc(RT_DATA_CHUNK_SIZE, sizeof(int32_t));
     if (xdata == NULL)
     	return EXIT_FAILURE;
 
@@ -63,9 +63,9 @@ int main() {
 	char filename[20];
 
 	//FIRST algorithm iteration
-	parse_rtdata("RT_datastream.txt", &xdata, 0);
+	//parse_rtdata("RT_datastream.txt", &xdata, 0);
 	xocram_fill_RT(xocram, xdata);
-	free(xdata);
+	//free(xdata);
     for (timesteps=0; timesteps < 10; i++){
     	printf("iteration number %d\n", i);
 
