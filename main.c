@@ -31,7 +31,7 @@ int main() {
     free(words);
 
 
-    int32_t* xdata = calloc(RT_DATA_CHUNK_SIZE, sizeof(int32_t));
+    //int32_t* xdata = calloc(RT_DATA_CHUNK_SIZE, sizeof(int32_t));
 	//int32_t* DEBUG_data_words = calloc(26*20, sizeof(int32_t));
 	//int32_t* DEBUG_data_maxp = calloc(1078, sizeof(int32_t));
 	//int32_t* DEBUG_data_gru = calloc(400, sizeof(int32_t));
@@ -42,8 +42,8 @@ int main() {
 	char filename[20];
 
 	//FIRST algorithm iteration
-	parse_rtdata("RT_datastream.txt", &xdata, 0);
-	xocram_fill_RT(xocram, xdata);
+	//parse_rtdata("RT_datastream.txt", &xdata, 0);
+	//xocram_fill_RT(xocram, xdata);
 
     for (timesteps=0; timesteps < 10; i++){
     	printf("iteration number %d\n", i);
@@ -56,11 +56,11 @@ int main() {
 		}
 		if (timesteps != 9)
 		{
-			parse_rtdata("RT_datastream.txt", &xdata, i+1);
+			//parse_rtdata("RT_datastream.txt", &xdata, i+1);
 
 			write_accelerator(0, 0); //switch back to HPS mode
-			xocram_fill_RT(xocram, xdata);
-			write_accelerator(0, 2); // allow accelerator to write to XOCRAM B port
+			//xocram_fill_RT(xocram, xdata);
+			//write_accelerator(0, 2); // allow accelerator to write to XOCRAM B port
 		}
 
 		while(hps_DEBUG_read == 0){
@@ -99,7 +99,7 @@ int main() {
 		}
 		fclose(res_file);
     }
-	free(xdata);
+	//free(xdata);
 	//free(DEBUG_data_gru);
 	//free(DEBUG_data_maxp);
 	//free(DEBUG_data_words);
