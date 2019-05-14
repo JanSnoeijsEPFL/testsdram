@@ -70,7 +70,7 @@ int main() {
 	parse_rtdata("RT_datastream.txt", xdata, 0);
 	xocram_fill_RT(xocram, xdata);
 	//free(xdata);
-
+/*
     for (timesteps=0; timesteps < 10; i++){
     	printf("iteration number %d\n", i);
 
@@ -137,7 +137,7 @@ int main() {
 			}
 		}
 		fclose(res_file);
-    }
+    }*/
 	//free(xdata);
 	//free(DEBUG_data_gru);
 	//free(DEBUG_data_maxp);
