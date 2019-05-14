@@ -23,7 +23,7 @@ int main() {
     uint32_t* xocram = get_xocram_base();
     uint32_t* av_slave = get_fpga_accelerator_base();
 
-    int32_t* words = calloc(NBWORDS, sizeof(int32_t));
+    /*int32_t* words = calloc(NBWORDS, sizeof(int32_t));
     printf("%p\n",words);
     if (words == NULL)
     	return EXIT_FAILURE;
@@ -31,7 +31,7 @@ int main() {
     ocram_init(uocram, wocram, xocram);
     rearrange_conv2d_param(words, words+1);
     load_param(av_slave, uocram, wocram, (uint32_t*) words);
-    free(words);
+    free(words);*/
 
 
     int32_t* xdata = NULL;
@@ -39,7 +39,7 @@ int main() {
     int32_t* DEBUG_data_maxp = NULL;
     int32_t* DEBUG_data_gru = NULL;
 
-   /* xdata = calloc(RT_DATA_CHUNK_SIZE, sizeof(int32_t));
+    xdata = calloc(RT_DATA_CHUNK_SIZE, sizeof(int32_t));
     if (xdata == NULL)
     	return EXIT_FAILURE;
 
@@ -66,6 +66,7 @@ int main() {
 	parse_rtdata("RT_datastream.txt", xdata, 0);
 	xocram_fill_RT(xocram, xdata);
 	free(xdata);
+	/*
     for (timesteps=0; timesteps < 10; i++){
     	printf("iteration number %d\n", i);
 
