@@ -60,7 +60,7 @@ int main() {
 	//	return EXIT_FAILURE;
 
 
-   /* uint8_t timesteps = 0;
+    uint8_t timesteps = 0;
     uint8_t hps_DEBUG_read = 0;
     uint8_t hps_write_new_batch = 0;
 	FILE* res_file;
@@ -70,7 +70,7 @@ int main() {
 	parse_rtdata("RT_datastream.txt", xdata, 0);
 	xocram_fill_RT(xocram, xdata);
 	//free(xdata);
-
+/*
     for (timesteps=0; timesteps < 10; i++){
     	printf("iteration number %d\n", i);
 
