@@ -8,6 +8,8 @@
 //#include "globals.h"
 
 void parse_weights(char* file, int32_t* words){
+	free(words);
+	words = calloc(NBWORDS, sizeof(int32_t));
 	printf("Starting parser\n");
 	//int32_t * word = calloc(NBWORDS, sizeof(int32_t));
 	if (words != NULL)
@@ -78,6 +80,8 @@ void parse_weights(char* file, int32_t* words){
 }
 
 void parse_rtdata(char* file, int32_t* words, int32_t chunk_number){
+	free(words);
+	words = calloc(RTDATA_CHUNK_SIZE, sizeof(int32_t));
 	printf("starting RT data parser\n");
 	//int32_t * word = calloc(RTDATA_CHUNK_SIZE, sizeof(int32_t));
 	if (words != NULL)
