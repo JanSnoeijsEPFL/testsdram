@@ -24,6 +24,7 @@ int main() {
     uint32_t* av_slave = get_fpga_accelerator_base();
 
     int32_t* words = calloc(NBWORDS, sizeof(int32_t));
+    printf("%p\n",words);
     if (words == NULL)
     	return EXIT_FAILURE;
     parse_weights("FINAL_signed_6b.txt", &words);
