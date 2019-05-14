@@ -10,7 +10,7 @@
 void parse_weights(char* file, int32_t* words){
 	free(words);
 	words = calloc(NBWORDS/1000, sizeof(int32_t));
-	printf("Starting parser\n");
+	/*printf("Starting parser\n");
 	//int32_t * word = calloc(NBWORDS, sizeof(int32_t));
 	if (words!= NULL)
 	{
@@ -76,7 +76,7 @@ void parse_weights(char* file, int32_t* words){
 			//usleep(ALT_MICROSECS_IN_A_SEC/100);
 		}while(1);
 	fclose(weights_file);
-	}
+	}*/
 }
 
 void parse_rtdata(char* file, int32_t* words, int32_t chunk_number){
