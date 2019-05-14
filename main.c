@@ -32,9 +32,9 @@ int main() {
 
 
     int32_t* xdata = calloc(RT_DATA_CHUNK_SIZE, sizeof(int32_t));
-	int32_t* DEBUG_data_words = calloc(26*20, sizeof(int32_t));
-	int32_t* DEBUG_data_maxp = calloc(1078, sizeof(int32_t));
-	int32_t* DEBUG_data_gru = calloc(400, sizeof(int32_t));
+	//int32_t* DEBUG_data_words = calloc(26*20, sizeof(int32_t));
+	//int32_t* DEBUG_data_maxp = calloc(1078, sizeof(int32_t));
+	//int32_t* DEBUG_data_gru = calloc(400, sizeof(int32_t));
     uint8_t timesteps = 0;
     uint8_t hps_DEBUG_read = 0;
     uint8_t hps_write_new_batch = 0;
@@ -68,10 +68,10 @@ int main() {
 		}
 
 		write_accelerator(0, 0); //switch back to HPS mode
-		read_xocram(1, (int32_t*)xocram, DEBUG_data_words);
+		//read_xocram(1, (int32_t*)xocram, DEBUG_data_words);
 
-		get_data_maxp(DEBUG_data_maxp, DEBUG_data_words);
-		get_data_gru(DEBUG_data_gru, DEBUG_data_words+20*22);
+		//get_data_maxp(DEBUG_data_maxp, DEBUG_data_words);
+		//get_data_gru(DEBUG_data_gru, DEBUG_data_words+20*22);
 
 		snprintf(filename, "res_acc/MAXP_t%c.txt", (char) timesteps);
 		res_file = fopen(filename, "w");
@@ -82,7 +82,7 @@ int main() {
 			j=0;
 			for (i=0; i<1078; i++){
 				j ++;
-				fprintf(res_file, "%f\n",((float)*(DEBUG_data_maxp+i))/16);
+			//	fprintf(res_file, "%f\n",((float)*(DEBUG_data_maxp+i))/16);
 			}
 		}
 		fclose(res_file);
@@ -94,15 +94,15 @@ int main() {
 				printf("opened resfile\n");
 				j=0;
 				for (i=0; i<400; i++){
-					fprintf(res_file, "%f\n",((float)*(DEBUG_data_gru+i))/16);
+				//	fprintf(res_file, "%f\n",((float)*(DEBUG_data_gru+i))/16);
 			}
 		}
 		fclose(res_file);
     }
 	free(xdata);
-	free(DEBUG_data_gru);
-	free(DEBUG_data_maxp);
-	free(DEBUG_data_words);
+	//free(DEBUG_data_gru);
+	//free(DEBUG_data_maxp);
+	//free(DEBUG_data_words);
     munmap_peripherals();
     close_physical_memory_device();
     return 0;
