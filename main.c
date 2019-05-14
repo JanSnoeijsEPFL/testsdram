@@ -39,7 +39,7 @@ int main() {
     int32_t* DEBUG_data_maxp = NULL;
     int32_t* DEBUG_data_gru = NULL;
 
-    xdata = calloc(RT_DATA_CHUNK_SIZE, sizeof(int32_t));
+    //xdata = calloc(RT_DATA_CHUNK_SIZE, sizeof(int32_t));
     if (xdata == NULL)
     	return EXIT_FAILURE;
 
