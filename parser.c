@@ -10,139 +10,145 @@
 void parse_weights(char* file, int32_t** words){
 	printf("Starting parser\n");
 	int32_t * word = calloc(NBWORDS, sizeof(int32_t));
-	int8_t param[NBPARAM_IN_WORD];
-	int32_t nbw = 0;
-	printf("file %s \n", file);
-	weights_file = fopen(file, "r");
-	if (!weights_file)
-		printf("file never opened\n");
-	else
-		printf("opened weights file\n");
-	char STR[NBCHAR];
-	char CH;
-	uint8_t k = 0,j,i;
-	uint32_t word_cnt = 0;
-	do
+	if (word != NULL)
 	{
-		CH = fgetc(weights_file);
-		if(feof(weights_file))
-		{
-			printf("already finished reading file?\n");
-			*(word+NBWORDS-1) = params2word(param);
-			printf("after concat: 0x%x\n", *(word+NBWORDS-1));
-			break;
-		}
-		if (CH != '0' && CH != '1' && CH != '2' && CH != '3' && CH != '4' \
-				&& CH != '5' && CH != '6' && CH != '7' && CH != '8' && CH != '9' \
-				&& CH != '-' && CH != '+' && CH != 'e' && CH != '\n' && CH != ',' && CH != '.'){
-			printf("invalid character\n");
-			continue;
-		}
+		int8_t param[NBPARAM_IN_WORD];
+		//int32_t nbw = 0;
+		printf("file %s \n", file);
+		weights_file = fopen(file, "r");
+		if (!weights_file)
+			printf("file never opened\n");
 		else
+			printf("opened weights file\n");
+		char STR[NBCHAR];
+		char CH;
+		uint8_t k = 0,j,i;
+		uint32_t word_cnt = 0;
+		do
 		{
-			if (!(CH==',' || CH=='\n'))
+			CH = fgetc(weights_file);
+			if(feof(weights_file))
 			{
-				STR[k]=CH;
-				k++;
+				printf("already finished reading file?\n");
+				*(word+NBWORDS-1) = params2word(param);
+				printf("after concat: 0x%x\n", *(word+NBWORDS-1));
+				break;
 			}
-			else if (k!=0)
+			if (CH != '0' && CH != '1' && CH != '2' && CH != '3' && CH != '4' \
+					&& CH != '5' && CH != '6' && CH != '7' && CH != '8' && CH != '9' \
+					&& CH != '-' && CH != '+' && CH != 'e' && CH != '\n' && CH != ',' && CH != '.'){
+				printf("invalid character\n");
+				continue;
+			}
+			else
 			{
-				//printf("OKOK\n");
-				param[j]=process_string((char*)STR, (uint8_t)NBCHAR);
-				printf("params before concat: %d \n", param[j]);
-				//printf("k : %d, j : %d \n", k, j);
-				if (j == 4)
+				if (!(CH==',' || CH=='\n'))
 				{
-					j = 0;
-					*(word+word_cnt) = params2word(param);
-					for (i = 0; i < NBPARAM_IN_WORD; i++)
-						param[i]=0;
-
-					printf("after concatenate: 0x%x\n", *(word+word_cnt));
-					printf("PARAMWORD NUMBER %d \n ", word_cnt);
-					word_cnt ++;
+					STR[k]=CH;
+					k++;
 				}
-				else
-					j++;
-				k = 0;
+				else if (k!=0)
+				{
+					//printf("OKOK\n");
+					param[j]=process_string((char*)STR, (uint8_t)NBCHAR);
+					printf("params before concat: %d \n", param[j]);
+					//printf("k : %d, j : %d \n", k, j);
+					if (j == 4)
+					{
+						j = 0;
+						*(word+word_cnt) = params2word(param);
+						for (i = 0; i < NBPARAM_IN_WORD; i++)
+							param[i]=0;
+
+						printf("after concatenate: 0x%x\n", *(word+word_cnt));
+						printf("PARAMWORD NUMBER %d \n ", word_cnt);
+						word_cnt ++;
+					}
+					else
+						j++;
+					k = 0;
+				}
+
 			}
 
-		}
-
-		//usleep(ALT_MICROSECS_IN_A_SEC/100);
-	}while(1);
+			//usleep(ALT_MICROSECS_IN_A_SEC/100);
+		}while(1);
 	fclose(weights_file);
 	free(*words);
 	*words = word;
+	}
 }
 
 void parse_rtdata(char* file, int32_t** words, int32_t chunk_number){
 	printf("starting RT data parser\n");
 	int32_t * word = calloc(RTDATA_CHUNK_SIZE, sizeof(int32_t));
-	rtdata_file = fopen(file, "r");
-	int8_t in_data[NBPARAM_IN_WORD];
-	uint8_t i, j, k=0;
-	uint32_t word_cnt = 0;
-	char STR[NBDIGIT_RTDATA];
-	char CH;
-	if (!rtdata_file)
-		printf("file never opened\n");
-	else
-		printf("opened xData file\n");
-	do
+	if (word != NULL)
 	{
-		CH = fgetc(rtdata_file);
-		if(feof(rtdata_file))
-		{
-			printf("already finished reading file?\n");
-			*(word+RTDATA_CHUNK_SIZE-1) = params2word(in_data);
-			printf("after concat: 0x%x\n", *(word+RTDATA_CHUNK_SIZE-1));
-			break;
-		}
-		if (CH != '0' && CH != '1' && CH != '2' && CH != '3' && CH != '4' \
-				&& CH != '5' && CH != '6' && CH != '7' && CH != '8' && CH != '9' \
-				&& CH != '-' && CH != '\n' && CH != ',' && CH != '.'){
-			printf("invalid character\n");
-			continue;
-		}
+		rtdata_file = fopen(file, "r");
+		int8_t in_data[NBPARAM_IN_WORD];
+		uint8_t i, j, k=0;
+		uint32_t word_cnt = 0;
+		char STR[NBDIGIT_RTDATA];
+		char CH;
+		if (!rtdata_file)
+			printf("file never opened\n");
 		else
+			printf("opened xData file\n");
+		do
 		{
-			if (!(CH==',' || CH=='\n'))
+			CH = fgetc(rtdata_file);
+			if(feof(rtdata_file))
 			{
-				STR[k]=CH;
-				k++;
+				printf("already finished reading file?\n");
+				*(word+RTDATA_CHUNK_SIZE-1) = params2word(in_data);
+				printf("after concat: 0x%x\n", *(word+RTDATA_CHUNK_SIZE-1));
+				break;
 			}
-			else if (k!=0){
-				if (word_cnt >= RTDATA_CHUNK_SIZE*chunk_number)
+			if (CH != '0' && CH != '1' && CH != '2' && CH != '3' && CH != '4' \
+					&& CH != '5' && CH != '6' && CH != '7' && CH != '8' && CH != '9' \
+					&& CH != '-' && CH != '\n' && CH != ',' && CH != '.'){
+				printf("invalid character\n");
+				continue;
+			}
+			else
+			{
+				if (!(CH==',' || CH=='\n'))
 				{
-					in_data[j]=quantize_param((char*)STR, (uint8_t)NBDIGIT_RTDATA);
-					printf("params before concat: %d data input number %d\n", in_data[j], word_cnt);
+					STR[k]=CH;
+					k++;
 				}
-
-				if (j == 4)
-				{
-					j = 0;
-					if (word_cnt >= RTDATA_CHUNK_SIZE*chunk_number){
-						*(word+word_cnt-RTDATA_CHUNK_SIZE*chunk_number) = params2word(in_data);
-						for (i = 0; i < NBPARAM_IN_WORD; i++)
-							in_data[i]=0;
-						printf("after concatenate: 0x%x\n", *(word+word_cnt-RTDATA_CHUNK_SIZE*chunk_number));
-						//usleep(ALT_MICROSECS_IN_A_SEC/10);
+				else if (k!=0){
+					if (word_cnt >= RTDATA_CHUNK_SIZE*chunk_number)
+					{
+						in_data[j]=quantize_param((char*)STR, (uint8_t)NBDIGIT_RTDATA);
+						printf("params before concat: %d data input number %d\n", in_data[j], word_cnt);
 					}
-					word_cnt ++;
+
+					if (j == 4)
+					{
+						j = 0;
+						if (word_cnt >= RTDATA_CHUNK_SIZE*chunk_number){
+							*(word+word_cnt-RTDATA_CHUNK_SIZE*chunk_number) = params2word(in_data);
+							for (i = 0; i < NBPARAM_IN_WORD; i++)
+								in_data[i]=0;
+							printf("after concatenate: 0x%x\n", *(word+word_cnt-RTDATA_CHUNK_SIZE*chunk_number));
+							//usleep(ALT_MICROSECS_IN_A_SEC/10);
+						}
+						word_cnt ++;
+					}
+
+					else
+						j++;
+					k = 0;
 				}
 
-				else
-					j++;
-				k = 0;
 			}
 
-		}
-
-	}while(word_cnt < RTDATA_CHUNK_SIZE*chunk_number+RTDATA_CHUNK_SIZE);
-	fclose(rtdata_file);
-	free(*words);
-	*words = word;
+		}while(word_cnt < RTDATA_CHUNK_SIZE*chunk_number+RTDATA_CHUNK_SIZE);
+		fclose(rtdata_file);
+		free(*words);
+		*words = word;
+	}
 	//printf("check if program crashed \n");
 
 }
