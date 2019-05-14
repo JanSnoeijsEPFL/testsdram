@@ -17,7 +17,7 @@
 //#define COMPACT_NBWORDS NBPARAM()
 FILE* weights_file;
 FILE* rtdata_file;
-void parse_weights(char* file, int32_t** words);
+void parse_weights(char* file, int32_t* words);
 void parse_rtdata(char* file, int32_t** words, int32_t chunk_number);
 int8_t quantize_param(char* STR, uint8_t size);
 int8_t process_string(char* STR, uint8_t size);
