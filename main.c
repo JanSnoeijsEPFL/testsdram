@@ -91,7 +91,7 @@ int main() {
 			xocram_fill_RT(xocram, xdata);
 			write_accelerator(0, 2); // allow accelerator to write to XOCRAM B port
 		}
-		free(xdata);
+		//free(xdata);
 		while(hps_DEBUG_read == 0){
 			hps_DEBUG_read = (2 & read_accelerator(1) >> 1);
 		}

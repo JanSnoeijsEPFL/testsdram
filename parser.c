@@ -12,71 +12,70 @@ void parse_weights(char* file, int32_t* words){
 	//words = calloc(NBWORDS/1000, sizeof(int32_t));
 	printf("Starting parser\n");
 	//int32_t * word = calloc(NBWORDS, sizeof(int32_t));
-	if (words!= NULL)
+
+	int8_t param[NBPARAM_IN_WORD];
+	//int32_t nbw = 0;
+	printf("file %s \n", file);
+	weights_file = fopen(file, "r");
+	if (!weights_file)
+		printf("file never opened\n");
+	else
+		printf("opened weights file\n");
+	char STR[NBCHAR];
+	char CH;
+	uint8_t k = 0,j,i;
+	uint32_t word_cnt = 0;
+	do
 	{
-		int8_t param[NBPARAM_IN_WORD];
-		//int32_t nbw = 0;
-		printf("file %s \n", file);
-		weights_file = fopen(file, "r");
-		if (!weights_file)
-			printf("file never opened\n");
-		else
-			printf("opened weights file\n");
-		char STR[NBCHAR];
-		char CH;
-		uint8_t k = 0,j,i;
-		uint32_t word_cnt = 0;
-		do
+		CH = fgetc(weights_file);
+		if(feof(weights_file))
 		{
-			CH = fgetc(weights_file);
-			if(feof(weights_file))
+			printf("already finished reading file?\n");
+			*(words+NBWORDS-1) = params2word(param);
+			printf("after concat: 0x%x\n", *(words+NBWORDS-1));
+			break;
+		}
+		if (CH != '0' && CH != '1' && CH != '2' && CH != '3' && CH != '4' \
+				&& CH != '5' && CH != '6' && CH != '7' && CH != '8' && CH != '9' \
+				&& CH != '-' && CH != '+' && CH != 'e' && CH != '\n' && CH != ',' && CH != '.'){
+			printf("invalid character\n");
+			continue;
+		}
+		else
+		{
+			if (!(CH==',' || CH=='\n'))
 			{
-				printf("already finished reading file?\n");
-				*(words+NBWORDS-1) = params2word(param);
-				printf("after concat: 0x%x\n", *(words+NBWORDS-1));
-				break;
+				STR[k]=CH;
+				k++;
 			}
-			if (CH != '0' && CH != '1' && CH != '2' && CH != '3' && CH != '4' \
-					&& CH != '5' && CH != '6' && CH != '7' && CH != '8' && CH != '9' \
-					&& CH != '-' && CH != '+' && CH != 'e' && CH != '\n' && CH != ',' && CH != '.'){
-				printf("invalid character\n");
-				continue;
-			}
-			else
+			else if (k!=0)
 			{
-				if (!(CH==',' || CH=='\n'))
+				//printf("OKOK\n");
+				param[j]=process_string((char*)STR, (uint8_t)NBCHAR);
+				printf("params before concat: %d \n", param[j]);
+				//printf("k : %d, j : %d \n", k, j);
+				if (j == 4)
 				{
-					STR[k]=CH;
-					k++;
-				}
-				else if (k!=0)
-				{
-					//printf("OKOK\n");
-					param[j]=process_string((char*)STR, (uint8_t)NBCHAR);
-					printf("params before concat: %d \n", param[j]);
-					//printf("k : %d, j : %d \n", k, j);
-					if (j == 4)
-					{
-						j = 0;
-						*(words+word_cnt) = params2word(param);
-						for (i = 0; i < NBPARAM_IN_WORD; i++)
-							param[i]=0;
+					j = 0;
+					*(words+word_cnt) = params2word(param);
+					for (i = 0; i < NBPARAM_IN_WORD; i++)
+						param[i]=0;
 
-						printf("after concatenate: 0x%x\n", *(words+word_cnt));
-						printf("PARAMWORD NUMBER %d \n ", word_cnt);
-						word_cnt ++;
-					}
-					else
-						j++;
-					k = 0;
+					printf("after concatenate: 0x%x\n", *(words+word_cnt));
+					printf("PARAMWORD NUMBER %d \n ", word_cnt);
+					word_cnt ++;
 				}
-
+				else
+					j++;
+				k = 0;
 			}
 
-			//usleep(ALT_MICROSECS_IN_A_SEC/100);
-		}while(1);
+		}
+
+		//usleep(ALT_MICROSECS_IN_A_SEC/100);
+	}while(1);
 	fclose(weights_file);
-	}
+
 }
 
 void parse_rtdata(char* file, int32_t* words, int32_t chunk_number){
@@ -242,7 +241,7 @@ int32_t params2word(int8_t param[NBPARAM_IN_WORD]){
 	return word;
 }
 
-void concat_words(int32_t** words, int32_t paddedw[NBWORDS]){
+/*void concat_words(int32_t** words, int32_t paddedw[NBWORDS]){
 	int32_t * word = calloc(NBWORDS, sizeof(int32_t));
 	uint8_t i, j=0;
 	uint32_t k = 0;
@@ -288,4 +287,4 @@ void concat_words(int32_t** words, int32_t paddedw[NBWORDS]){
 	}
 	free(*words);
 	*words = word;
-}
+}*/
