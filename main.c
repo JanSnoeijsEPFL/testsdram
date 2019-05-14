@@ -68,7 +68,7 @@ int main() {
 
 	//FIRST algorithm iteration
 	parse_rtdata("RT_datastream.txt", xdata, 0);
-	xocram_fill_RT(xocram, xdata);
+	//xocram_fill_RT(xocram, xdata);
 	//free(xdata);
 /*
     for (timesteps=0; timesteps < 10; i++){
