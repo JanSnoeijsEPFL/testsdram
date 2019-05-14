@@ -131,7 +131,6 @@ void get_data_gru(int32_t* data, int32_t *word_data)
 {
 	int32_t mask = 0b111111;
 	int32_t sgnextneg = 0b11111111111111111111111111000000;
-	//int32_t sgnextpos = 0b11111111111111111111111111000000;
 	uint32_t k,i,j = 0;
 	for (k = 0; k <400; k++){
 		i = k/5;
