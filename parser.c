@@ -9,7 +9,7 @@
 
 void parse_weights(char* file, int32_t* words){
 	free(words);
-	words = calloc(NBWORDS/100, sizeof(int32_t));
+	words = calloc(NBWORDS/1000, sizeof(int32_t));
 	printf("Starting parser\n");
 	//int32_t * word = calloc(NBWORDS, sizeof(int32_t));
 	if (words!= NULL)
