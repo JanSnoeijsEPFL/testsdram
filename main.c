@@ -28,7 +28,7 @@ int main() {
     int32_t DEBUG_data_words[26*20];
     int32_t DEBUG_data_maxp[1078];
     int32_t DEBUG_data_gru[400];
-    printf("%p\n",&words);
+    //printf("%p\n",&words);
     //if (words == NULL)
     //	return EXIT_FAILURE;
    // parse_weights("FINAL_signed_6b.txt", words);
@@ -137,7 +137,7 @@ int main() {
 			}
 		}
 		fclose(res_file);
-    }*/
+    }
 	//free(xdata);
 	//free(DEBUG_data_gru);
 	//free(DEBUG_data_maxp);
