@@ -88,7 +88,7 @@ void parse_rtdata(char* file, int32_t** words, int32_t chunk_number){
 	if (!rtdata_file)
 		printf("file never opened\n");
 	else
-		printf("opened weights file\n");
+		printf("opened xData file\n");
 	do
 	{
 		CH = fgetc(rtdata_file);
