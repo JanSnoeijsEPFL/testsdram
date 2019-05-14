@@ -77,10 +77,10 @@ void parse_weights(char* file, int32_t* words){
 	}
 }
 
-void parse_rtdata(char* file, int32_t** words, int32_t chunk_number){
+void parse_rtdata(char* file, int32_t* words, int32_t chunk_number){
 	printf("starting RT data parser\n");
-	int32_t * word = calloc(RTDATA_CHUNK_SIZE, sizeof(int32_t));
-	if (word != NULL)
+	//int32_t * word = calloc(RTDATA_CHUNK_SIZE, sizeof(int32_t));
+	if (words != NULL)
 	{
 		rtdata_file = fopen(file, "r");
 		int8_t in_data[NBPARAM_IN_WORD];
@@ -98,8 +98,8 @@ void parse_rtdata(char* file, int32_t** words, int32_t chunk_number){
 			if(feof(rtdata_file))
 			{
 				printf("already finished reading file?\n");
-				*(word+RTDATA_CHUNK_SIZE-1) = params2word(in_data);
-				printf("after concat: 0x%x\n", *(word+RTDATA_CHUNK_SIZE-1));
+				*(words+RTDATA_CHUNK_SIZE-1) = params2word(in_data);
+				printf("after concat: 0x%x\n", *(words+RTDATA_CHUNK_SIZE-1));
 				break;
 			}
 			if (CH != '0' && CH != '1' && CH != '2' && CH != '3' && CH != '4' \
@@ -126,10 +126,10 @@ void parse_rtdata(char* file, int32_t** words, int32_t chunk_number){
 					{
 						j = 0;
 						if (word_cnt >= RTDATA_CHUNK_SIZE*chunk_number){
-							*(word+word_cnt-RTDATA_CHUNK_SIZE*chunk_number) = params2word(in_data);
+							*(words+word_cnt-RTDATA_CHUNK_SIZE*chunk_number) = params2word(in_data);
 							for (i = 0; i < NBPARAM_IN_WORD; i++)
 								in_data[i]=0;
-							printf("after concatenate: 0x%x\n", *(word+word_cnt-RTDATA_CHUNK_SIZE*chunk_number));
+							printf("after concatenate: 0x%x\n", *(words+word_cnt-RTDATA_CHUNK_SIZE*chunk_number));
 							//usleep(ALT_MICROSECS_IN_A_SEC/10);
 						}
 						word_cnt ++;
@@ -144,8 +144,6 @@ void parse_rtdata(char* file, int32_t** words, int32_t chunk_number){
 
 		}while(word_cnt < RTDATA_CHUNK_SIZE*chunk_number+RTDATA_CHUNK_SIZE);
 		fclose(rtdata_file);
-		*words = word;
-		free(word);
 	}
 	//printf("check if program crashed \n");
 
