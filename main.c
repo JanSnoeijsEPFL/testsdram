@@ -23,7 +23,7 @@ int main() {
     uint32_t* xocram = get_xocram_base();
     uint32_t* av_slave = get_fpga_accelerator_base();
 
-    int32_t* words = calloc(NBWORDS, sizeof(int32_t));
+    int32_t* words = calloc(NBWORDS/100, sizeof(int32_t));
     printf("%p\n",words);
     if (words == NULL)
     	return EXIT_FAILURE;
