@@ -54,7 +54,7 @@ void xocram_fill_RT(uint32_t* x_ocram, uint32_t* data_ptr){
 	//	printf("FIRST TWO LINES OF XOCRAM: %x \n", *(data_ptr+i));
 	//}
 }
-void read_xocram(uint32_t mode, uint32_t* ocram, uint32_t* data){
+void read_xocram(uint32_t mode, uint32_t* ocram, int32_t* data){
 	uint32_t i, j;
 	for( i = 0+23*20; i < 20*26+23*20; i++)
 	{
@@ -97,7 +97,7 @@ void xocram_read_Conv2D(uint32_t* x_ocram, uint32_t size){
 	}
 }
 
-void rearrange_conv2d_param(uint32_t * word0, uint32_t* word1){
+void rearrange_conv2d_param(int32_t * word0, int32_t* word1){
 	int32_t mask = 0b111111;
 	int32_t wordconv0, wordconv1;
 

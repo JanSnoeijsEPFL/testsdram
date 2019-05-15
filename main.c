@@ -25,8 +25,8 @@ int main() {
     uint32_t* av_slave = get_fpga_accelerator_base();
 	write_accelerator(0, 0);
 
-    uint32_t words[NBWORDS];
-    uint32_t xdata[RT_DATA_CHUNK_SIZE];
+    int32_t words[NBWORDS];
+    int32_t xdata[RT_DATA_CHUNK_SIZE];
     int32_t DEBUG_data_words[520];
     int32_t DEBUG_data_maxp[1078];
     int32_t DEBUG_data_gru[400];
@@ -35,7 +35,7 @@ int main() {
     //	return EXIT_FAILURE;
     parse_weights("FINAL_signed_6b.txt", words);
     ocram_init(uocram, wocram, xocram);
-    rearrange_conv2d_param(words, words+1);
+    rearrange_conv2d_param(&words[0], &words[1]);
     load_param(av_slave, uocram, wocram, words);
 
    // free(words);

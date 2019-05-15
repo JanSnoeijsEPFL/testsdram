@@ -7,7 +7,7 @@
 #include <unistd.h>
 //#include "globals.h"
 
-void parse_weights(char* file, uint32_t* words){
+void parse_weights(char* file, int32_t* words){
 	//free(words);
 	//words = calloc(NBWORDS/1000, sizeof(int32_t));
 	printf("Starting parser\n");
@@ -78,7 +78,7 @@ void parse_weights(char* file, uint32_t* words){
 
 }
 
-void parse_rtdata(char* file, uint32_t* words, int32_t chunk_number){
+void parse_rtdata(char* file, int32_t* words, int32_t chunk_number){
 	//free(words);
 	//words = calloc(RTDATA_CHUNK_SIZE, sizeof(int32_t));
 	//printf("starting RT data parser\n");
@@ -101,7 +101,7 @@ void parse_rtdata(char* file, uint32_t* words, int32_t chunk_number){
 			if(feof(rtdata_file))
 			{
 				//printf("already finished reading file?\n");
-				*(int32_t*)(words+RTDATA_CHUNK_SIZE-1) = params2word(in_data);
+				*(words+RTDATA_CHUNK_SIZE-1) = params2word(in_data);
 				//printf("after concat: 0x%x\n", *(words+RTDATA_CHUNK_SIZE-1));
 				break;
 			}
@@ -129,7 +129,7 @@ void parse_rtdata(char* file, uint32_t* words, int32_t chunk_number){
 					{
 						j = 0;
 						if (word_cnt >= RTDATA_CHUNK_SIZE*chunk_number){
-							*(int32_t*)(words+word_cnt-RTDATA_CHUNK_SIZE*chunk_number) = params2word(in_data);
+							*(words+word_cnt-RTDATA_CHUNK_SIZE*chunk_number) = params2word(in_data);
 							for (i = 0; i < NBPARAM_IN_WORD; i++)
 								in_data[i]=0;
 							//printf("after concatenate: 0x%x\n", *(int32_t*)(words+word_cnt-RTDATA_CHUNK_SIZE*chunk_number));
