@@ -79,7 +79,7 @@ int main() {
 	//free(xdata);
 
     for (timesteps=0; timesteps < 10; timesteps++){
-    	prt_step = i +'0';
+    	prt_step = timesteps +'0';
     	printf("iteration number %d\n", timesteps);
 
 		write_accelerator(0, 3); // xocram B port in FPGA mode + trigger accelerator
@@ -95,7 +95,7 @@ int main() {
 
 		//free(xdata);
 		while(hps_DEBUG_read == 0){
-			hps_DEBUG_read = (2 & read_accelerator(1)) >> 1;
+			hps_DEBUG_read =  read_accelerator(1) >> 1;
 		}
 
 		write_accelerator(0, 0); //switch back to HPS mode
@@ -114,7 +114,7 @@ int main() {
 		get_data_gru(DEBUG_data_gru, DEBUG_data_words+20*22);
 		//free(DEBUG_data_gru);
 		//free(DEBUG_data_words);
-		snprintf(filename, sizeof (filename), "res_acc/MAXP_t%c.txt", prt_step);
+		snprintf(filename, sizeof(filename), "res_acc/MAXP_t%c.txt", prt_step);
 		res_file = fopen(filename, "w");
 		printf("%s\n", filename);
 		if (!res_file)
