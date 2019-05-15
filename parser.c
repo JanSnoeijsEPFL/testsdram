@@ -57,7 +57,7 @@ void parse_weights(char* file, int32_t* words){
 				if (j == 4)
 				{
 					j = 0;
-					*(words+word_cnt) = params2word(param);
+					*(words+word_cnt) = params2word(&param[0]);
 					for (i = 0; i < NBPARAM_IN_WORD; i++)
 						param[i]=0;
 
