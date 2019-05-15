@@ -8,7 +8,7 @@
 #include <string.h>
 #include "transfer_data.h"
 
-#define RT_DATA_CHUNK_SIZE 1000
+#define RT_DATA_CHUNK_SIZE 460 //23*20
 int main() {
     printf("FPGA sdram test\n");
    // printf("check if recompiled\n");
@@ -37,7 +37,6 @@ int main() {
    // load_param(av_slave, uocram, wocram, (uint32_t*) words);
    // free(words);
 
-printf("awesome!\n");
     //int32_t* xdata = NULL;
    // int32_t* DEBUG_data_words = NULL;
    // int32_t* DEBUG_data_maxp = NULL;
