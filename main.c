@@ -10,6 +10,7 @@
 
 #define RT_DATA_CHUNK_SIZE 460 //23*20
 int main() {
+	write_accelerator(0, 0);
     printf("FPGA sdram test\n");
    // printf("check if recompiled\n");
     open_physical_memory_device();
