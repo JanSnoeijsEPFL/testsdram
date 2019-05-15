@@ -23,7 +23,7 @@ int main() {
     uint32_t* xocram = get_xocram_base();
     uint32_t* av_slave = get_fpga_accelerator_base();
 
-   // int32_t words[NBWORDS];
+    int32_t words[NBWORDS];
     int32_t xdata[RT_DATA_CHUNK_SIZE];
     int32_t DEBUG_data_words[2600];
     int32_t DEBUG_data_maxp[1078];
@@ -31,10 +31,10 @@ int main() {
     //printf("%p\n",&words);
     //if (words == NULL)
     //	return EXIT_FAILURE;
-   // parse_weights("FINAL_signed_6b.txt", words);
+    parse_weights("FINAL_signed_6b.txt", words);
     ocram_init(uocram, wocram, xocram);
-  //  rearrange_conv2d_param(words, words+1);
-   // load_param(av_slave, uocram, wocram, (uint32_t*) words);
+    rearrange_conv2d_param(words, words+1);
+    load_param(av_slave, uocram, wocram, (uint32_t*) words);
    // free(words);
 
     //int32_t* xdata = NULL;
