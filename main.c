@@ -78,12 +78,12 @@ int main() {
     for (timesteps=0; timesteps < 10; i++){
     	printf("iteration number %d\n", i);
 
-		write_accelerator(0, 3); // xocram B port in FPGA mode + trigger accelerator
-		write_accelerator(0, 2); //  deassert trigger
+		//write_accelerator(0, 3); // xocram B port in FPGA mode + trigger accelerator
+		//write_accelerator(0, 2); //  deassert trigger
 		//xdata = calloc(RT_DATA_CHUNK_SIZE, sizeof(int32_t));
 		//if (xdata == NULL)
 		//	return EXIT_FAILURE;
-		parse_rtdata("RT_datastream.txt", xdata, i+1);
+		//parse_rtdata("RT_datastream.txt", xdata, i+1);
 
 		/*while(hps_write_new_batch == 0){
 			hps_write_new_batch = 1 & read_accelerator(1);
