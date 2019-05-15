@@ -88,16 +88,10 @@ int main() {
 		//	return EXIT_FAILURE;
 		//
 
-		while(hps_write_new_batch == 0){
-			hps_write_new_batch = 1 & read_accelerator(1);
-		}
-		if (timesteps != 9)
-		{
+		//while(hps_write_new_batch == 0){
+		//	hps_write_new_batch = 1 & read_accelerator(1);
+		//}
 
-			write_accelerator(0, 0); //switch back to HPS mode
-			xocram_fill_RT(xocram, xdata);
-			write_accelerator(0, 2); // allow accelerator to write to XOCRAM B port
-		}
 		//free(xdata);
 		while(hps_DEBUG_read == 0){
 			hps_DEBUG_read = (2 & read_accelerator(1) >> 1);
@@ -145,7 +139,10 @@ int main() {
 		}
 		fclose(res_file);
 		parse_rtdata("RT_datastream.txt", xdata, timesteps+1);
+		if (timesteps != 9)
+			xocram_fill_RT(xocram, xdata);
     }
+
 	//free(xdata);
 	//free(DEBUG_data_gru);
 	//free(DEBUG_data_maxp);
