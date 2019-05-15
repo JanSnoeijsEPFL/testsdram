@@ -72,13 +72,14 @@ int main() {
     uint8_t hps_write_new_batch = 0;
 	FILE* res_file;
 	char filename[20];
-
+	char prt_step;
 	//FIRST algorithm iteration
 	parse_rtdata("RT_datastream.txt", xdata, 0);
 	xocram_fill_RT(xocram, xdata);
 	//free(xdata);
 
     for (timesteps=0; timesteps < 10; timesteps++){
+    	prt_step = i +'0';
     	printf("iteration number %d\n", timesteps);
 
 		write_accelerator(0, 3); // xocram B port in FPGA mode + trigger accelerator
@@ -113,7 +114,7 @@ int main() {
 		get_data_gru(DEBUG_data_gru, DEBUG_data_words+20*22);
 		//free(DEBUG_data_gru);
 		//free(DEBUG_data_words);
-		snprintf(filename, "res_acc/MAXP_t%c.txt", (char) timesteps);
+		snprintf(filename, sizeof (filename), "res_acc/MAXP_t%c.txt", prt_step);
 		res_file = fopen(filename, "w");
 		printf("%s\n", filename);
 		if (!res_file)
@@ -127,7 +128,7 @@ int main() {
 			}
 		}
 		fclose(res_file);
-		snprintf(filename,"res_acc/GRU_t%c.txt", (char) timesteps);
+		snprintf(filename,sizeof(filename), "res_acc/GRU_t%c.txt", prt_step);
 		res_file = fopen(filename, "w");
 		if (!res_file)
 				printf("file never opened\n");
