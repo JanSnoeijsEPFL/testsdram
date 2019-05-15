@@ -13,7 +13,7 @@ void parse_weights(char* file, int32_t* words){
 	printf("Starting parser\n");
 	//int32_t * word = calloc(NBWORDS, sizeof(int32_t));
 
-	int8_t param[NBPARAM_IN_WORD];
+	int8_t* param = calloc(NBPARAM_IN_WORD, sizeof(int8_t));
 	//int32_t nbw = 0;
 	printf("file %s \n", file);
 	weights_file = fopen(file, "r");
@@ -80,6 +80,7 @@ void parse_weights(char* file, int32_t* words){
 
 		//usleep(ALT_MICROSECS_IN_A_SEC/100);
 	}while(1);
+	free(param);
 	fclose(weights_file);
 
 }
