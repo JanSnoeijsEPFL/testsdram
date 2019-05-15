@@ -81,7 +81,7 @@ void parse_weights(char* file, int32_t* words){
 void parse_rtdata(char* file, int32_t* words, int32_t chunk_number){
 	//free(words);
 	//words = calloc(RTDATA_CHUNK_SIZE, sizeof(int32_t));
-	printf("starting RT data parser\n");
+	//printf("starting RT data parser\n");
 	//int32_t * word = calloc(RTDATA_CHUNK_SIZE, sizeof(int32_t));
 	if (words != NULL)
 	{
@@ -94,21 +94,21 @@ void parse_rtdata(char* file, int32_t* words, int32_t chunk_number){
 		if (!rtdata_file)
 			printf("file never opened\n");
 		else
-			printf("opened xData file\n");
+			//printf("opened xData file\n");
 		do
 		{
 			CH = fgetc(rtdata_file);
 			if(feof(rtdata_file))
 			{
-				printf("already finished reading file?\n");
+				//printf("already finished reading file?\n");
 				*(int32_t*)(words+RTDATA_CHUNK_SIZE-1) = params2word(in_data);
-				printf("after concat: 0x%x\n", *(words+RTDATA_CHUNK_SIZE-1));
+				//printf("after concat: 0x%x\n", *(words+RTDATA_CHUNK_SIZE-1));
 				break;
 			}
 			if (CH != '0' && CH != '1' && CH != '2' && CH != '3' && CH != '4' \
 					&& CH != '5' && CH != '6' && CH != '7' && CH != '8' && CH != '9' \
 					&& CH != '-' && CH != '\n' && CH != ',' && CH != '.'){
-				printf("invalid character\n");
+				//printf("invalid character\n");
 				continue;
 			}
 			else
@@ -122,7 +122,7 @@ void parse_rtdata(char* file, int32_t* words, int32_t chunk_number){
 					if (word_cnt >= RTDATA_CHUNK_SIZE*chunk_number)
 					{
 						in_data[j]=quantize_param((char*)STR, (uint8_t)NBDIGIT_RTDATA);
-						printf("params before concat: %d data input number %d\n", in_data[j], word_cnt);
+						//printf("params before concat: %d data input number %d\n", in_data[j], word_cnt);
 					}
 
 					if (j == 4)
@@ -132,7 +132,7 @@ void parse_rtdata(char* file, int32_t* words, int32_t chunk_number){
 							*(int32_t*)(words+word_cnt-RTDATA_CHUNK_SIZE*chunk_number) = params2word(in_data);
 							for (i = 0; i < NBPARAM_IN_WORD; i++)
 								in_data[i]=0;
-							printf("after concatenate: 0x%x\n", *(int32_t*)(words+word_cnt-RTDATA_CHUNK_SIZE*chunk_number));
+							//printf("after concatenate: 0x%x\n", *(int32_t*)(words+word_cnt-RTDATA_CHUNK_SIZE*chunk_number));
 							//usleep(ALT_MICROSECS_IN_A_SEC/10);
 						}
 						word_cnt ++;
