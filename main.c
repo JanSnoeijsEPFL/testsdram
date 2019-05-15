@@ -17,8 +17,7 @@ int main() {
     mmap_peripherals();
     printf("mapped the peripherals\n");
 
-    uint32_t i = 0;
-    uint32_t j = 0;
+    uint32_t n = 0;
     uint32_t* uocram = get_uocram_base();
     uint32_t* wocram = get_wocram_base();
     uint32_t* xocram = get_xocram_base();
@@ -116,10 +115,8 @@ int main() {
 			printf("file never opened\n");
 		else{
 			printf("opened resfile\n");
-			j=0;
-			for (i=0; i<1078; i++){
-				j ++;
-				fprintf(res_file, "%f\n",((float)*(DEBUG_data_maxp+i))/16);
+			for (n=0; n<1078; n++){
+				fprintf(res_file, "%f\n",((float)*(DEBUG_data_maxp+n))/16);
 			}
 		}
 		fclose(res_file);
@@ -129,9 +126,8 @@ int main() {
 				printf("file never opened\n");
 			else{
 				printf("opened resfile\n");
-				j=0;
-				for (i=0; i<400; i++){
-					fprintf(res_file, "%f\n",((float)*(DEBUG_data_gru+i))/16);
+				for (n=0; n<400; n++){
+					fprintf(res_file, "%f\n",((float)*(DEBUG_data_gru+n))/16);
 			}
 		}
 		fclose(res_file);

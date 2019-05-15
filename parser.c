@@ -23,7 +23,7 @@ void parse_weights(char* file, int32_t* words){
 		printf("opened weights file\n");
 	char STR[NBCHAR];
 	char CH;
-	uint8_t k = 0,j,i;
+	uint8_t k = 0,j=0,i=0;
 	uint32_t word_cnt = 0;
 	do
 	{
