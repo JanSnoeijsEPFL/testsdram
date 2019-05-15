@@ -31,9 +31,14 @@ void load_param(uint32_t* av_slave, int32_t* u_ocram, int32_t* w_ocram, int32_t*
 }
 
 void ocram_init(int32_t* u_ocram, int32_t* w_ocram, int32_t* x_ocram){
+	printf("in ocram init\n");
 	ocram_empty(u_ocram, UOCRAM_SIZE);
+	printf("in ocram init\n");
 	ocram_empty(w_ocram, WOCRAM_SIZE);
+	printf("in ocram init\n");
 	ocram_empty(x_ocram, XOCRAM_SIZE);
+	printf("in ocram init\n");
+
 }
 
 void xocram_fill_RT(int32_t* x_ocram, int32_t* data_ptr){
