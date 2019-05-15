@@ -237,8 +237,10 @@ int32_t params2word(int8_t param[NBPARAM_IN_WORD]){
 	for (i = 0; i <NBPARAM_IN_WORD; i++)
 	{
 		word = word | ((param[i]&MASK)<<(i*NBITS));
-		//printf("0x%x\n", param[i]);
+		printf("%d\n", param[i]);
+
 	}
+	printf(" word : %x \n", word);
 	return word;
 }
 
