@@ -52,12 +52,12 @@ void parse_weights(char* file, int32_t* words){
 			{
 				//printf("OKOK\n");
 				param[j]=process_string((char*)STR, (uint8_t)NBCHAR);
-				printf("params before concat: %d %d \n", param[j],j);
+				printf("params before concat: %d %d \n", param[0],j);
 				//printf("k : %d, j : %d \n", k, j);
 				if (j == 4)
 				{
 					j = 0;
-					printf("reprint right before..... : %d %d \n", param[j],j);
+					printf("reprint right before..... : %d %d \n", param[0],j);
 
 					*(words+word_cnt) = params2word(&param[0]);
 					for (i = 0; i < NBPARAM_IN_WORD; i++)
@@ -70,7 +70,7 @@ void parse_weights(char* file, int32_t* words){
 				}
 				else
 				{
-					printf("params before concat: %d %d \n", param[j],j);
+					printf("params before concat: %d %d \n", param[0],j);
 					j++;
 				}
 				k = 0;
