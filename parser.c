@@ -64,6 +64,7 @@ void parse_weights(char* file, int32_t* words){
 					printf("after concatenate: 0x%x\n", *(words+word_cnt));
 					printf("PARAMWORD NUMBER %d \n ", word_cnt);
 					word_cnt ++;
+					usleep(ALT_MICROSECS_IN_A_SEC);
 				}
 				else
 					j++;
