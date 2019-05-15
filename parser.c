@@ -13,7 +13,7 @@ void parse_weights(char* file, int32_t* words){
 	printf("Starting parser\n");
 	//int32_t * word = calloc(NBWORDS, sizeof(int32_t));
 
-	int8_t* param = calloc(NBPARAM_IN_WORD, sizeof(int8_t));
+	int8_t* param = malloc(5* sizeof(int8_t));
 	//int32_t nbw = 0;
 	printf("file %s \n", file);
 	weights_file = fopen(file, "r");
