@@ -80,8 +80,10 @@ void read_uocram(int32_t* ocram){
 }
 void ocram_empty(int32_t* ocram, uint32_t RAM_SIZE){
 	uint32_t i, j;
+	printf("in xocram empty\n");
 	for( i = 0; i < RAM_SIZE; i ++){
 		j = (uint32_t)(i/20*32 + i%20);
+		printf("iter %d\n", i);
 		*(ocram + j) = 0;
 	}
 }
