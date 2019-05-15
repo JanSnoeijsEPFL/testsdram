@@ -200,7 +200,7 @@ int8_t quantize_param(char* STR, uint8_t size){
 	if (STR[0] == '-')
 	{
 		sign =1;
-		printf("here? in quantize param\n");
+		//printf("here? in quantize param\n");
 		strcpy(&STR[0], &STR[1]);
 	}
 	//strcpy(&STR[1], &STR[2]); //remove dot
@@ -208,7 +208,7 @@ int8_t quantize_param(char* STR, uint8_t size){
 	//printf("%s\n ", STR);
 
 	number = strtof(STR, (char**)NULL);
-	printf("here? in quantize param2\n");
+	//printf("here? in quantize param2\n");
 
 	//printf("%f\n", number);
 	number /= MAX_XDATA;
