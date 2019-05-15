@@ -47,8 +47,8 @@ size_t hps_gpio_ofst = ALT_GPIO1_OFST;
 
 uint32_t *fpga_accelerator = NULL; // lightweight bridge slave
 //uint32_t *shared_sdram = NULL;
-uint32_t *uOCRAM = NULL;
-uint32_t *wOCRAM = NULL;
-uint32_t *xOCRAM = NULL;
+int32_t *uOCRAM = NULL;
+int32_t *wOCRAM = NULL;
+int32_t *xOCRAM = NULL;
 
 #endif

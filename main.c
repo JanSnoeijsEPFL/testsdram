@@ -18,9 +18,9 @@ int main() {
     printf("mapped the peripherals\n");
     uint32_t i = 0;
     uint32_t j = 0;
-    uint32_t* uocram = get_uocram_base();
-    uint32_t* wocram = get_wocram_base();
-    uint32_t* xocram = get_xocram_base();
+    int32_t* uocram = get_uocram_base();
+    int32_t* wocram = get_wocram_base();
+    int32_t* xocram = get_xocram_base();
     uint32_t* av_slave = get_fpga_accelerator_base();
 
     int32_t words[NBWORDS];
@@ -34,8 +34,12 @@ int main() {
     parse_weights("FINAL_signed_6b.txt", words);
     printf("after parse weights\n");
     ocram_init(uocram, wocram, xocram);
+    printf("after uocram init\n");
     rearrange_conv2d_param(words, words+1);
-    load_param(av_slave, uocram, wocram, (uint32_t*) words);
+    printf("after rearrange conv2d\n");
+    load_param(av_slave, uocram, wocram, words);
+    printf("after load param in memory\n");
+
    // free(words);
 
     //int32_t* xdata = NULL;

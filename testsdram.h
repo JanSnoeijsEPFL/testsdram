@@ -22,8 +22,8 @@ void write_sram_fpga(uint32_t address, uint32_t data);
 void read_sram_fpga(uint32_t address);
 void write_accelerator(uint32_t address, uint32_t data);
 uint32_t read_accelerator(uint32_t address);
-uint32_t* get_uocram_base();
-uint32_t* get_wocram_base();
-uint32_t* get_xocram_base();
+int32_t* get_uocram_base();
+int32_t* get_wocram_base();
+int32_t* get_xocram_base();
 uint32_t* get_fpga_accelerator_base();
 #endif /* TESTSDRAM_H_ */
