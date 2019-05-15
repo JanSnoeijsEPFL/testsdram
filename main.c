@@ -86,7 +86,7 @@ int main() {
 		//xdata = calloc(RT_DATA_CHUNK_SIZE, sizeof(int32_t));
 		//if (xdata == NULL)
 		//	return EXIT_FAILURE;
-		parse_rtdata("RT_datastream.txt", xdata, timesteps+1);
+		//parse_rtdata("RT_datastream.txt", xdata, timesteps+1);
 
 		while(hps_write_new_batch == 0){
 			hps_write_new_batch = 1 & read_accelerator(1);
