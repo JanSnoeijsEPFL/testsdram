@@ -10,19 +10,20 @@
 
 #define RT_DATA_CHUNK_SIZE 460 //23*20
 int main() {
-	write_accelerator(0, 0);
     printf("FPGA sdram test\n");
    // printf("check if recompiled\n");
     open_physical_memory_device();
     printf("Physical memory device opened\n");
     mmap_peripherals();
     printf("mapped the peripherals\n");
+
     uint32_t i = 0;
     uint32_t j = 0;
     int32_t* uocram = get_uocram_base();
     int32_t* wocram = get_wocram_base();
     int32_t* xocram = get_xocram_base();
     uint32_t* av_slave = get_fpga_accelerator_base();
+	write_accelerator(0, 0);
 
     int32_t words[NBWORDS];
     int32_t xdata[RT_DATA_CHUNK_SIZE];
