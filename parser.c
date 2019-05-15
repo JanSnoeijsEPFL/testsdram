@@ -230,14 +230,14 @@ int8_t quantize_param(char* STR, uint8_t size){
 
 	return quantized_nb;
 }
-int32_t params2word(int8_t param[NBPARAM_IN_WORD]){
+int32_t params2word(int8_t* param){
 	int32_t word = 0;
 	uint8_t i;
 	uint8_t MASK = 0b00111111;
 	for (i = 0; i <NBPARAM_IN_WORD; i++)
 	{
-		word = word | ((param[i]&MASK)<<(i*NBITS));
-		printf("%d\n", param[i]);
+		word = word | (*(param+i)&MASK)<<(i*NBITS);
+		printf("%d\n", *(param+i));
 
 	}
 	printf(" word : %x \n", word);
