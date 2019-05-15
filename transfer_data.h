@@ -11,4 +11,4 @@ void get_data_gru(int32_t* data, int32_t*word_data);
 #define UOCRAM_SIZE 307*20
 #define WOCRAM_SIZE 3234*20
 #define XOCRAM_SIZE 72*20
-#define RTDATA_CHUNK_SIZE 20*23 //2300 6bit words => 20*30 30bit words
+#define RTDATA_CHUNK_SIZE 460 //2300 6bit words => 20*30 30bit words
