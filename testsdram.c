@@ -107,11 +107,16 @@ void munmap_fpga_peripherals() {
 }
 
 void mmap_peripherals() {
+
     mmap_hps_peripherals();
     mmap_fpga_peripherals();
 }
 
 void munmap_peripherals() {
+	fpga_accelerator = NULL;
+	uOCRAM = NULL;
+	wOCRAM = NULL;
+	xOCRAM = NULL;
     munmap_hps_peripherals();
     munmap_fpga_peripherals();
 }
