@@ -80,9 +80,9 @@ void mmap_fpga_peripherals() {
 	}
 
     fpga_accelerator = (uint32_t *) (virtual_lw_base + (( ACCELERATOR_0_AVALON_SLAVE_BASE) & (ALT_HWFPGASLVS_MASK))) ;
-    uOCRAM = (int32_t *) (virtual_hw_base + ((ACCELERATOR_0_U_OCRAM_BASE) & (ALT_HWFPGASLVS_MASK)));
-    wOCRAM = (int32_t *) (virtual_hw_base + ((ACCELERATOR_0_W_OCRAM_BASE) & (ALT_HWFPGASLVS_MASK)));
-    xOCRAM = (int32_t *) (virtual_hw_base + ((ACCELERATOR_0_X_OCRAM_BASE) & (ALT_HWFPGASLVS_MASK)));
+    uOCRAM = (uint32_t *) (virtual_hw_base + ((ACCELERATOR_0_U_OCRAM_BASE) & (ALT_HWFPGASLVS_MASK)));
+    wOCRAM = (uint32_t *) (virtual_hw_base + ((ACCELERATOR_0_W_OCRAM_BASE) & (ALT_HWFPGASLVS_MASK)));
+    xOCRAM = (uint32_t *) (virtual_hw_base + ((ACCELERATOR_0_X_OCRAM_BASE) & (ALT_HWFPGASLVS_MASK)));
 
 }
 
@@ -134,13 +134,13 @@ void write_accelerator(uint32_t address, uint32_t data){
 	//printf("writing %d at address %d\n", data, address);
 }
 
-int32_t* get_uocram_base(){
+uint32_t* get_uocram_base(){
 	return uOCRAM;
 }
-int32_t* get_wocram_base(){
+uint32_t* get_wocram_base(){
 	return wOCRAM;
 }
-int32_t* get_xocram_base(){
+uint32_t* get_xocram_base(){
 	return xOCRAM;
 }
 uint32_t* get_fpga_accelerator_base(){

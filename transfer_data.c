@@ -7,7 +7,7 @@
 #include "hwlib.h"
 #include <unistd.h>
 
-void load_param(uint32_t* av_slave, int32_t* u_ocram, int32_t* w_ocram, int32_t* data_ptr)
+void load_param(uint32_t* av_slave, uint32_t* u_ocram, uint32_t* w_ocram, uint32_t* data_ptr)
 {
 	uint32_t i, j;
 	//first 2 words are conv2D parameters
@@ -30,7 +30,7 @@ void load_param(uint32_t* av_slave, int32_t* u_ocram, int32_t* w_ocram, int32_t*
 	printf("Uz, Ur, Uh, Bz, Br, Bh, Wlin, Blin parameters stored\n");
 }
 
-void ocram_init(int32_t* u_ocram, int32_t* w_ocram, int32_t* x_ocram){
+void ocram_init(uint32_t* u_ocram, uint32_t* w_ocram, uint32_t* x_ocram){
 	printf("in ocram init\n");
 	ocram_empty(u_ocram, UOCRAM_SIZE);
 	printf("in ocram init\n");
@@ -41,7 +41,7 @@ void ocram_init(int32_t* u_ocram, int32_t* w_ocram, int32_t* x_ocram){
 
 }
 
-void xocram_fill_RT(int32_t* x_ocram, int32_t* data_ptr){
+void xocram_fill_RT(uint32_t* x_ocram, uint32_t* data_ptr){
 	uint32_t i, j;
 	for( i = 0; i < RTDATA_CHUNK_SIZE; i++)
 	{
@@ -54,7 +54,7 @@ void xocram_fill_RT(int32_t* x_ocram, int32_t* data_ptr){
 	//	printf("FIRST TWO LINES OF XOCRAM: %x \n", *(data_ptr+i));
 	//}
 }
-void read_xocram(uint32_t mode, int32_t* ocram, int32_t* data){
+void read_xocram(uint32_t mode, uint32_t* ocram, uint32_t* data){
 	uint32_t i, j;
 	for( i = 0+23*20; i < 20*26+23*20; i++)
 	{
@@ -69,7 +69,7 @@ void read_xocram(uint32_t mode, int32_t* ocram, int32_t* data){
 		//usleep(ALT_MICROSECS_IN_A_SEC/10);
 	}
 }
-void read_uocram(int32_t* ocram){
+void read_uocram(uint32_t* ocram){
 	uint32_t i, j;
 	for( i = 0; i < RTDATA_CHUNK_SIZE; i++)
 	{
@@ -78,7 +78,7 @@ void read_uocram(int32_t* ocram){
 		usleep(ALT_MICROSECS_IN_A_SEC/10);
 	}
 }
-void ocram_empty(int32_t* ocram, uint32_t RAM_SIZE){
+void ocram_empty(uint32_t* ocram, uint32_t RAM_SIZE){
 	uint32_t i, j;
 	printf("in xocram empty\n");
 	for( i = 0; i < RAM_SIZE; i ++){
@@ -88,7 +88,7 @@ void ocram_empty(int32_t* ocram, uint32_t RAM_SIZE){
 	}
 }
 
-void xocram_read_Conv2D(int32_t* x_ocram, uint32_t size){
+void xocram_read_Conv2D(uint32_t* x_ocram, uint32_t size){
 	uint32_t i, j;
 	for( i = 23; i < size+23; i++){
 		j = (uint32_t)(i/20*32 + i%20);
@@ -97,7 +97,7 @@ void xocram_read_Conv2D(int32_t* x_ocram, uint32_t size){
 	}
 }
 
-void rearrange_conv2d_param(int32_t * word0, int32_t* word1){
+void rearrange_conv2d_param(uint32_t * word0, uint32_t* word1){
 	int32_t mask = 0b111111;
 	int32_t wordconv0, wordconv1;
 

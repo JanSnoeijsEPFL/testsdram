@@ -19,14 +19,14 @@ int main() {
 
     uint32_t i = 0;
     uint32_t j = 0;
-    int32_t* uocram = get_uocram_base();
-    int32_t* wocram = get_wocram_base();
-    int32_t* xocram = get_xocram_base();
+    uint32_t* uocram = get_uocram_base();
+    uint32_t* wocram = get_wocram_base();
+    uint32_t* xocram = get_xocram_base();
     uint32_t* av_slave = get_fpga_accelerator_base();
 	write_accelerator(0, 0);
 
-    int32_t words[NBWORDS];
-    int32_t xdata[RT_DATA_CHUNK_SIZE];
+    uint32_t words[NBWORDS];
+    uint32_t xdata[RT_DATA_CHUNK_SIZE];
     int32_t DEBUG_data_words[520];
     int32_t DEBUG_data_maxp[1078];
     int32_t DEBUG_data_gru[400];
@@ -97,7 +97,7 @@ int main() {
 	  //  DEBUG_data_words = calloc(26*20, sizeof(int32_t));
 	   // if (DEBUG_data_words == NULL)
 	   // 	return EXIT_FAILURE;
-		read_xocram(1, (int32_t*)xocram, DEBUG_data_words);
+		read_xocram(1, xocram, DEBUG_data_words);
 		 ///DEBUG_data_maxp = calloc(1078, sizeof(int32_t));
 		//if (DEBUG_data_maxp == NULL)
 		//	return EXIT_FAILURE;
