@@ -121,7 +121,6 @@ void parse_rtdata(char* file, int32_t* words, int32_t chunk_number){
 				else if (k!=0){
 					if (word_cnt >= RTDATA_CHUNK_SIZE*chunk_number)
 					{
-						printf("adding this printf prevents program from crashing %d\n", j);
 						in_data[j]=quantize_param((char*)STR, (uint8_t)NBDIGIT_RTDATA);
 						printf("params before concat: %d data input number %d\n", in_data[j], word_cnt);
 					}
