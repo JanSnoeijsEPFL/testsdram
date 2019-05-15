@@ -115,6 +115,7 @@ int main() {
 		//free(DEBUG_data_words);
 		snprintf(filename, "res_acc/MAXP_t%c.txt", (char) timesteps);
 		res_file = fopen(filename, "w");
+		printf("%s\n", filename);
 		if (!res_file)
 			printf("file never opened\n");
 		else{
@@ -126,7 +127,7 @@ int main() {
 			}
 		}
 		fclose(res_file);
-		snprintf(filename,"res_acc/MAXP_t%c.txt", (char) timesteps);
+		snprintf(filename,"res_acc/GRU_t%c.txt", (char) timesteps);
 		res_file = fopen(filename, "w");
 		if (!res_file)
 				printf("file never opened\n");
