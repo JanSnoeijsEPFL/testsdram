@@ -97,7 +97,7 @@ int main() {
 		while(hps_DEBUG_read == 0){
 			hps_DEBUG_read =  read_accelerator(1) >> 1;
 		}
-
+		hps_DEBUG_read = 0;
 		write_accelerator(0, 0); //switch back to HPS mode
 	  //  DEBUG_data_words = calloc(26*20, sizeof(int32_t));
 	   // if (DEBUG_data_words == NULL)
