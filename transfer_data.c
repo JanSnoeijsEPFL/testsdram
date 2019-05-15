@@ -64,7 +64,7 @@ void read_xocram(uint32_t mode, int32_t* ocram, int32_t* data){
 		}
 		else if (mode == 1){
 			*(int32_t*)(data+i-23*20) = *(int32_t*)(ocram+j);
-			printf("xocram data %d at address %d and line-address %d \n",*(ocram + j), j, i/20);
+			//printf("xocram data %d at address %d and line-address %d \n",*(ocram + j), j, i/20);
 		}
 		//usleep(ALT_MICROSECS_IN_A_SEC/10);
 	}
@@ -129,7 +129,7 @@ void get_data_maxp(int32_t* data, int32_t* word_data)
 			i = counter/5+line*20;
 			j = counter%5;
 			*(data+counter+line*49) = (*(word_data+i) & (mask << j*6))>>j*6;
-			printf("extracted val %d, word %d\n", *(data+counter+line*49), *(word_data+i));
+			//printf("extracted val %d, word %d\n", *(data+counter+line*49), *(word_data+i));
 		}
 	}
 }
