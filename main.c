@@ -75,8 +75,8 @@ int main() {
 	//xocram_fill_RT(xocram, xdata);
 	//free(xdata);
 
-    for (timesteps=0; timesteps < 10; timesteps++){
-    	printf("iteration number %d\n", timesteps);
+   // for (timesteps=0; timesteps < 10; timesteps++){
+    //	printf("iteration number %d\n", timesteps);
 
 		//write_accelerator(0, 3); // xocram B port in FPGA mode + trigger accelerator
 		//write_accelerator(0, 2); //  deassert trigger
@@ -141,7 +141,7 @@ int main() {
 			}
 		}
 		fclose(res_file);*/
-    }
+    //}
 	//free(xdata);
 	//free(DEBUG_data_gru);
 	//free(DEBUG_data_maxp);
