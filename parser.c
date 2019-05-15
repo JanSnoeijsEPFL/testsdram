@@ -69,7 +69,10 @@ void parse_weights(char* file, int32_t* words){
 					usleep(ALT_MICROSECS_IN_A_SEC);
 				}
 				else
+				{
+					printf("params before concat: %d %d \n", param[j],j);
 					j++;
+				}
 				k = 0;
 			}
 
