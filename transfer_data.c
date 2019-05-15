@@ -18,14 +18,14 @@ void load_param(uint32_t* av_slave, int32_t* u_ocram, int32_t* w_ocram, int32_t*
 	for( i = 0; i < WOCRAM_SIZE; i++)
 	{
 		j = (uint32_t)(i/20*32 + i%20);
-		*(w_ocram + j) = *(data_ptr+i+2);
+		*(w_ocram + j) = *(int32_t*)(data_ptr+i+2);
 	}
 	//rest are all to be stored in the UOCRAM (including dense layer' parameters)
 	printf("Wz, Wr, Wh parameters stored\n");
 	for( i = 0; i < UOCRAM_SIZE-19; i++)
 	{
 		j = (uint32_t)(i/20*32 + i%20); //shift line address by 5 (2^5 = 32) lower part is the address inside a line
-		*(u_ocram + j) = *(data_ptr+i+2+WOCRAM_SIZE);
+		*(u_ocram + j) = *(int32_t*)(data_ptr+i+2+WOCRAM_SIZE);
 	}
 	printf("Uz, Ur, Uh, Bz, Br, Bh, Wlin, Blin parameters stored\n");
 }
@@ -46,7 +46,7 @@ void xocram_fill_RT(int32_t* x_ocram, int32_t* data_ptr){
 	for( i = 0; i < RTDATA_CHUNK_SIZE; i++)
 	{
 		j = (uint32_t)(i/20*32 + i%20);
-		*(x_ocram + j) = *(data_ptr+i);
+		*(x_ocram + j) = *(int32_t*)(data_ptr+i);
 	}
 	for (i =  0; i <40;  i++)
 	{
@@ -63,7 +63,7 @@ void read_xocram(uint32_t mode, int32_t* ocram, int32_t* data){
 			printf("xocram data %d at address %d and line-address %d \n",*(ocram + j), j, i/20);
 		}
 		else if (mode == 1){
-			*(data+i-23*20) = *(ocram+j);
+			*(int32_t*)(data+i-23*20) = *(int32_t*)(ocram+j);
 			printf("xocram data %d at address %d and line-address %d \n",*(ocram + j), j, i/20);
 		}
 		//usleep(ALT_MICROSECS_IN_A_SEC/10);

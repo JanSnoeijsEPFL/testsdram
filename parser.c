@@ -31,8 +31,8 @@ void parse_weights(char* file, int32_t* words){
 		if(feof(weights_file))
 		{
 			printf("already finished reading file?\n");
-			*(words+NBWORDS-1) = params2word(param);
-			printf("after concat: 0x%x\n", *(words+NBWORDS-1));
+			*(int32_t*)(words+NBWORDS-1) = params2word(param);
+			printf("after concat: 0x%x\n", *(int32_t*)(words+NBWORDS-1));
 			break;
 		}
 		if (CH != '0' && CH != '1' && CH != '2' && CH != '3' && CH != '4' \
@@ -57,11 +57,11 @@ void parse_weights(char* file, int32_t* words){
 				if (j == 4)
 				{
 					j = 0;
-					*(words+word_cnt) = params2word(param);
+					*(int32_t*)(words+word_cnt) = params2word(param);
 					for (i = 0; i < NBPARAM_IN_WORD; i++)
 						param[i]=0;
 
-					printf("after concatenate: 0x%x\n", *(words+word_cnt));
+					printf("after concatenate: 0x%x\n", *(int32_t*)(words+word_cnt));
 					printf("PARAMWORD NUMBER %d \n ", word_cnt);
 					word_cnt ++;
 				}
@@ -101,7 +101,7 @@ void parse_rtdata(char* file, int32_t* words, int32_t chunk_number){
 			if(feof(rtdata_file))
 			{
 				printf("already finished reading file?\n");
-				*(words+RTDATA_CHUNK_SIZE-1) = params2word(in_data);
+				*(int32_t*)(words+RTDATA_CHUNK_SIZE-1) = params2word(in_data);
 				printf("after concat: 0x%x\n", *(words+RTDATA_CHUNK_SIZE-1));
 				break;
 			}
@@ -130,10 +130,10 @@ void parse_rtdata(char* file, int32_t* words, int32_t chunk_number){
 					{
 						j = 0;
 						if (word_cnt >= RTDATA_CHUNK_SIZE*chunk_number){
-							*(words+word_cnt-RTDATA_CHUNK_SIZE*chunk_number) = params2word(in_data);
+							*(int32_t*)(words+word_cnt-RTDATA_CHUNK_SIZE*chunk_number) = params2word(in_data);
 							for (i = 0; i < NBPARAM_IN_WORD; i++)
 								in_data[i]=0;
-							printf("after concatenate: 0x%x\n", *(words+word_cnt-RTDATA_CHUNK_SIZE*chunk_number));
+							printf("after concatenate: 0x%x\n", *(int32_t*)(words+word_cnt-RTDATA_CHUNK_SIZE*chunk_number));
 							//usleep(ALT_MICROSECS_IN_A_SEC/10);
 						}
 						word_cnt ++;
