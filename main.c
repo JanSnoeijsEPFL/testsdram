@@ -85,7 +85,7 @@ int main() {
 		//	return EXIT_FAILURE;
 		parse_rtdata("RT_datastream.txt", xdata, i+1);
 
-		while(hps_write_new_batch == 0){
+		/*while(hps_write_new_batch == 0){
 			hps_write_new_batch = 1 & read_accelerator(1);
 		}
 		if (timesteps != 9)
@@ -98,9 +98,9 @@ int main() {
 		//free(xdata);
 		while(hps_DEBUG_read == 0){
 			hps_DEBUG_read = (2 & read_accelerator(1) >> 1);
-		}
+		}*/
 
-		write_accelerator(0, 0); //switch back to HPS mode
+		/*write_accelerator(0, 0); //switch back to HPS mode
 	  //  DEBUG_data_words = calloc(26*20, sizeof(int32_t));
 	   // if (DEBUG_data_words == NULL)
 	   // 	return EXIT_FAILURE;
@@ -140,7 +140,7 @@ int main() {
 					fprintf(res_file, "%f\n",((float)*(DEBUG_data_gru+i))/16);
 			}
 		}
-		fclose(res_file);
+		fclose(res_file);*/
     }
 	//free(xdata);
 	//free(DEBUG_data_gru);
