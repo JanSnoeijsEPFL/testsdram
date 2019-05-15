@@ -25,7 +25,7 @@ int main() {
 
     int32_t words[NBWORDS];
     int32_t xdata[RT_DATA_CHUNK_SIZE];
-    int32_t DEBUG_data_words[2600];
+    int32_t DEBUG_data_words[520];
     int32_t DEBUG_data_maxp[1078];
     int32_t DEBUG_data_gru[400];
     //printf("%p\n",&words);
@@ -71,8 +71,8 @@ int main() {
 	char filename[20];
 
 	//FIRST algorithm iteration
-	//parse_rtdata("RT_datastream.txt", xdata, 0);
-	//xocram_fill_RT(xocram, xdata);
+	parse_rtdata("RT_datastream.txt", xdata, 0);
+	xocram_fill_RT(xocram, xdata);
 	//free(xdata);
 
    // for (timesteps=0; timesteps < 10; timesteps++){
