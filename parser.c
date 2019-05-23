@@ -12,8 +12,8 @@ void parse_weights(char* file, int32_t* words){
 	//words = calloc(NBWORDS/1000, sizeof(int32_t));
 	printf("Starting parser\n");
 	//int32_t * word = calloc(NBWORDS, sizeof(int32_t));
-
-	int8_t param[NBPARAM_IN_WORD];
+	int32_t mask = 0b111111;
+	int32_t* param= malloc(5*sizeof(int32_t));
 	//int32_t nbw = 0;
 	printf("file %s \n", file);
 	weights_file = fopen(file, "r");
@@ -23,7 +23,7 @@ void parse_weights(char* file, int32_t* words){
 		printf("opened weights file\n");
 	char STR[NBCHAR];
 	char CH;
-	uint8_t k = 0,j=0,i=0;
+	uint32_t k = 0,j=0,i=0;
 	uint32_t word_cnt = 0;
 	do
 	{
@@ -43,7 +43,6 @@ void parse_weights(char* file, int32_t* words){
 		}
 		else
 		{
-			printf("params before concat before setting anything...: %d %d \n", param[0],j);
 			if (!(CH==',' || CH=='\n'))
 			{
 				STR[k]=CH;
@@ -51,23 +50,19 @@ void parse_weights(char* file, int32_t* words){
 			}
 			else if (k!=0)
 			{
-				printf("params before concat before setting param j: %d %d \n", param[0],j);
 				//param[j]=process_string((char*)STR, (uint8_t)NBCHAR);
-				param[j] = 1;
-				printf("params before concat: %d %d \n", param[0],j);
-				//printf("k : %d, j : %d \n", k, j);
+				*(param+j)=process_string((char*)STR, (uint8_t)NBCHAR);
 				if (j == 4)
 				{
 					j = 0;
-
-					*(words+word_cnt) = params2word(&param[0]);
+					*(words+word_cnt) = params2word(param);
 					for (i = 0; i < NBPARAM_IN_WORD; i++)
-						param[i]=0;
+						*(param+i)=0;
 
 					printf("after concatenate: 0x%x\n", *(words+word_cnt));
 					printf("PARAMWORD NUMBER %d \n ", word_cnt);
+
 					word_cnt ++;
-					usleep(ALT_MICROSECS_IN_A_SEC);
 				}
 				else
 				{
@@ -80,22 +75,22 @@ void parse_weights(char* file, int32_t* words){
 
 		//usleep(ALT_MICROSECS_IN_A_SEC/100);
 	}while(1);
+	free(param);
 	fclose(weights_file);
 
 }
 
 void parse_rtdata(char* file, int32_t* words, int32_t chunk_number){
-	//free(words);
-	//words = calloc(RTDATA_CHUNK_SIZE, sizeof(int32_t));
-	//printf("starting RT data parser\n");
-	//int32_t * word = calloc(RTDATA_CHUNK_SIZE, sizeof(int32_t));
 	if (words != NULL)
 	{
 		rtdata_file = fopen(file, "r");
-		int8_t in_data[NBPARAM_IN_WORD];
-		uint8_t i, j, k=0;
+		printf("parsing RT files\n");
+		int32_t* in_data = malloc(5*sizeof(int32_t));
+		printf("pointer malloc : %p\n", in_data);
+
+		uint32_t i=0, j=0, k=0;
 		uint32_t word_cnt = 0;
-		char STR[NBDIGIT_RTDATA];
+		char STR[8];
 		char CH;
 		if (!rtdata_file)
 			printf("file never opened\n");
@@ -113,33 +108,40 @@ void parse_rtdata(char* file, int32_t* words, int32_t chunk_number){
 			}
 			if (CH != '0' && CH != '1' && CH != '2' && CH != '3' && CH != '4' \
 					&& CH != '5' && CH != '6' && CH != '7' && CH != '8' && CH != '9' \
-					&& CH != '-' && CH != '\n' && CH != ',' && CH != '.'){
-				//printf("invalid character\n");
+					&& CH != '-' && CH != '\n' && CH != '.' && CH!=' '){
+				printf("invalid character\n");
 				continue;
 			}
 			else
 			{
-				if (!(CH==',' || CH=='\n'))
+				if (CH!='\n')
 				{
 					STR[k]=CH;
+					//printf("CH : %c\n", CH);
 					k++;
 				}
 				else if (k!=0){
 					if (word_cnt >= RTDATA_CHUNK_SIZE*chunk_number)
 					{
-						in_data[j]=quantize_param((char*)STR, (uint8_t)NBDIGIT_RTDATA);
-						//printf("params before concat: %d data input number %d\n", in_data[j], word_cnt);
+						//printf("before :: concatenate: %s\n", STR);
+						*(in_data+j)=(int32_t)(strtof(STR, NULL)*16);
+						//printf("before concatenate: 0x%d\n", *(in_data+j));
+
 					}
 
 					if (j == 4)
 					{
 						j = 0;
 						if (word_cnt >= RTDATA_CHUNK_SIZE*chunk_number){
+
 							*(words+word_cnt-RTDATA_CHUNK_SIZE*chunk_number) = params2word(in_data);
+							//printf("after concatenate: 0x%x\n", *(words+word_cnt-RTDATA_CHUNK_SIZE*chunk_number));
+
 							for (i = 0; i < NBPARAM_IN_WORD; i++)
-								in_data[i]=0;
+							{
+								*(in_data+i)=0;
+							}
 							//printf("after concatenate: 0x%x\n", *(int32_t*)(words+word_cnt-RTDATA_CHUNK_SIZE*chunk_number));
-							//usleep(ALT_MICROSECS_IN_A_SEC/10);
 						}
 						word_cnt ++;
 					}
@@ -153,12 +155,15 @@ void parse_rtdata(char* file, int32_t* words, int32_t chunk_number){
 
 		}while(word_cnt < RTDATA_CHUNK_SIZE*chunk_number+RTDATA_CHUNK_SIZE);
 		fclose(rtdata_file);
+		printf("pointer malloc : %p\n", in_data);
+
+		free(in_data);
 	}
 	//printf("check if program crashed \n");
 
 }
 
-int8_t process_string(char* STR, uint8_t size){
+int8_t process_string(char* STR, uint32_t size){
 	//from format "-6.250000000000000000e-02,...." to "-00.0001" => "11.1111"
 	char digit;
 	char mantissa[4];
@@ -197,7 +202,7 @@ int8_t process_string(char* STR, uint8_t size){
 	return number;
 }
 
-int8_t quantize_param(char* STR, uint8_t size){
+int32_t quantize_param(char* STR, uint32_t size){
 	//char mantissa[4];
 	float number=0;
 	int8_t quantized_nb = 0;
@@ -215,6 +220,7 @@ int8_t quantize_param(char* STR, uint8_t size){
 
 	number = strtof(STR, (char**)NULL);
 	//printf("here? in quantize param2\n");
+	printf("no problem with strtof function\n");
 
 	//printf("%f\n", number);
 	number /= MAX_XDATA;
@@ -228,24 +234,22 @@ int8_t quantize_param(char* STR, uint8_t size){
 	else
 		number = number * 16;
 	//printf("multiplied by 16 : %f\n", number);
-	quantized_nb = (int8_t)round(number);
+	quantized_nb = (int32_t)round(number);
+	printf("no problem with rounding function\n");
 	//printf("%d\n and rint() output: %f\n", quantized_nb, round(number));
 
 	//usleep(ALT_MICROSECS_IN_A_SEC/10);
 
 	return quantized_nb;
 }
-int32_t params2word(int8_t* param){
+int32_t params2word(int32_t* param){
 	int32_t word = 0;
-	uint8_t i;
-	uint8_t MASK = 0b00111111;
+	uint32_t i;
+	int32_t MASK = 0b00111111;
 	for (i = 0; i <NBPARAM_IN_WORD; i++)
 	{
 		word = word | (*(param+i)&MASK)<<(i*NBITS);
-		printf("%d\n", *(param+i));
-
 	}
-	printf(" word : %x \n", word);
 	return word;
 }
 

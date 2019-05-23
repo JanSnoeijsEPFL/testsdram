@@ -2,10 +2,8 @@ void load_param(uint32_t* av_slave, uint32_t* u_ocram, uint32_t* w_ocram, uint32
 void ocram_init(uint32_t* u_ocram, uint32_t* w_ocram, uint32_t* x_ocram);
 void xocram_fill_RT(uint32_t* x_ocram, uint32_t* data_ptr);
 void ocram_empty(uint32_t* ocram, uint32_t RAM_SIZE);
-void xocram_read_Conv2D(uint32_t* x_ocram, uint32_t size);
-void read_xocram(uint32_t mode, uint32_t* ocram, int32_t* data);
-void read_uocram(uint32_t* ocram);
 void rearrange_conv2d_param(int32_t * word0, int32_t* word1);
+void read_xocram(uint32_t mode, uint32_t* ocram, int32_t* data);
 void get_data_maxp(int32_t* data, int32_t* word_data);
 void get_data_gru(int32_t* data, int32_t*word_data);
 #define UOCRAM_SIZE 307*20

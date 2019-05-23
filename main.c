@@ -24,19 +24,19 @@ int main() {
     uint32_t* av_slave = get_fpga_accelerator_base();
 	write_accelerator(0, 0);
 
-    int32_t words[NBWORDS];
-    int32_t xdata[RT_DATA_CHUNK_SIZE];
-    int32_t DEBUG_data_words[520];
-    int32_t DEBUG_data_maxp[1078];
-    int32_t DEBUG_data_gru[400];
+    int32_t* words = malloc(NBWORDS * sizeof(int32_t));
+   // int32_t xdata[RT_DATA_CHUNK_SIZE];
+
     //printf("%p\n",&words);
     //if (words == NULL)
     //	return EXIT_FAILURE;
     parse_weights("FINAL_signed_6b.txt", words);
     ocram_init(uocram, wocram, xocram);
-    rearrange_conv2d_param(&words[0], &words[1]);
+    rearrange_conv2d_param(words, words+1);
     load_param(av_slave, uocram, wocram, words);
-
+    printf("no problem before freeing memory\n");
+    free(words);
+    printf("no problem while freeing memory\n");
    // free(words);
 
     //int32_t* xdata = NULL;
@@ -60,15 +60,24 @@ int main() {
 	//if (DEBUG_data_gru == NULL)
 	//	return EXIT_FAILURE;
 
-
+    int32_t DEBUG_data_words[540];
+	int32_t DEBUG_data_maxp[1078];
+	int32_t DEBUG_data_gru[500];
     uint8_t timesteps = 0;
     uint8_t hps_DEBUG_read = 0;
     uint8_t hps_write_new_batch = 0;
 	FILE* res_file;
 	char filename[20];
 	char prt_step;
+	char seq_nb[3];
+	printf("no problem before new memory allocation\n");
+	int32_t* xdata = malloc(RTDATA_CHUNK_SIZE * sizeof(int32_t));
+	printf("no problem while allocating new memory\n");
+
 	//FIRST algorithm iteration
-	parse_rtdata("RT_datastream.txt", xdata, 0);
+
+	parse_rtdata("RT_NormQuantdata_seq0", xdata, 0);
+	printf("no problem parsing RT_datastream file memory\n");
 	xocram_fill_RT(xocram, xdata);
 	//free(xdata);
 
@@ -131,11 +140,42 @@ int main() {
 			}
 		}
 		fclose(res_file);
-		parse_rtdata("RT_datastream.txt", xdata, timesteps+1);
+		snprintf(filename,sizeof(filename), "res_acc/SR_t%c.txt", prt_step);
+		res_file = fopen(filename, "w");
+		if (!res_file)
+				printf("file never opened\n");
+			else{
+				printf("opened resfile\n");
+				for (n=400; n<500; n++){
+					fprintf(res_file, "%f\n",((float)*(DEBUG_data_gru+n))/16);
+			}
+		}
+		fclose(res_file);
+		//snprintf(filename,sizeof(filename), "RT_NormQuantdata_seq%c.txt", seq_nb);
+		parse_rtdata("RT_NormQuantdata_seq0", xdata, timesteps+1);
 		if (timesteps != 9)
 			xocram_fill_RT(xocram, xdata);
-    }
+		else{
+			write_accelerator(0,6);
+			uint32_t y0 = read_accelerator(6);
+			write_accelerator(1,6);
+			uint32_t y1 = read_accelerator(6);
+			write_accelerator(2,6);
+			uint32_t y2 = read_accelerator(6);
+			res_file = fopen("res_acc/Y.txt", "w");
+			if (!res_file)
+				printf("file never opened\n");
+			else{
+				printf("opened resfile\n");
+				fprintf(res_file, "%f\n",((float)(y0))/2048);
+				fprintf(res_file, "%f\n",((float)(y1))/2048);
+				fprintf(res_file, "%f\n",((float)(y2))/2048);
 
+			}
+
+		}
+    }
+    free(xdata);
 	//free(xdata);
 	//free(DEBUG_data_gru);
 	//free(DEBUG_data_maxp);

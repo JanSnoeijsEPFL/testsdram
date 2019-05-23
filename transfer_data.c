@@ -9,6 +9,7 @@
 
 void load_param(uint32_t* av_slave, uint32_t* u_ocram, uint32_t* w_ocram, uint32_t* data_ptr)
 {
+	uint32_t mask = 0b111111;
 	uint32_t i, j;
 	//first 2 words are conv2D parameters
 	*(av_slave+4) = *(data_ptr);
@@ -22,11 +23,19 @@ void load_param(uint32_t* av_slave, uint32_t* u_ocram, uint32_t* w_ocram, uint32
 	}
 	//rest are all to be stored in the UOCRAM (including dense layer' parameters)
 	printf("Wz, Wr, Wh parameters stored\n");
-	for( i = 0; i < UOCRAM_SIZE-19; i++)
+	for( i = 0; i < UOCRAM_SIZE-17; i++)
 	{
 		j = (uint32_t)(i/20*32 + i%20); //shift line address by 5 (2^5 = 32) lower part is the address inside a line
 		*(u_ocram + j) = *(int32_t*)(data_ptr+i+2+WOCRAM_SIZE);
+
 	}
+//	for( i = 0; i < UOCRAM_SIZE-17; i++)
+//		if (i >= 256*20 && i % 20 == 0)
+//		{
+//			j = (uint32_t)(i/20*32 + i%20); //shift line address by 5 (2^5 = 32) lower part is the address inside a line
+//			printf("uocram UH weights: 0x%x %d \n", (*(u_ocram + j)&(mask<<6))>>6, j);
+//			usleep(1000000);
+//		}
 	printf("Uz, Ur, Uh, Bz, Br, Bh, Wlin, Blin parameters stored\n");
 }
 
@@ -56,7 +65,7 @@ void xocram_fill_RT(uint32_t* x_ocram, uint32_t* data_ptr){
 }
 void read_xocram(uint32_t mode, uint32_t* ocram, int32_t* data){
 	uint32_t i, j;
-	for( i = 0+23*20; i < 20*26+23*20; i++)
+	for( i = 0+23*20; i < 20*27+23*20; i++)
 	{
 		j = (uint32_t)(i/20*32 + i%20);
 		if (mode == 0){
@@ -69,15 +78,7 @@ void read_xocram(uint32_t mode, uint32_t* ocram, int32_t* data){
 		//usleep(ALT_MICROSECS_IN_A_SEC/10);
 	}
 }
-void read_uocram(uint32_t* ocram){
-	uint32_t i, j;
-	for( i = 0; i < RTDATA_CHUNK_SIZE; i++)
-	{
-		j = (uint32_t)(i/20*32 + i%20);
-		printf("uocram data %d\n",*(ocram + j));
-		usleep(ALT_MICROSECS_IN_A_SEC/10);
-	}
-}
+
 void ocram_empty(uint32_t* ocram, uint32_t RAM_SIZE){
 	uint32_t i, j;
 	printf("in xocram empty\n");
@@ -87,16 +88,6 @@ void ocram_empty(uint32_t* ocram, uint32_t RAM_SIZE){
 		*(ocram + j) = 0;
 	}
 }
-
-void xocram_read_Conv2D(uint32_t* x_ocram, uint32_t size){
-	uint32_t i, j;
-	for( i = 23; i < size+23; i++){
-		j = (uint32_t)(i/20*32 + i%20);
-		printf("data %d : %d\n", i, *(x_ocram+j));
-		usleep(ALT_MICROSECS_IN_A_SEC);
-	}
-}
-
 void rearrange_conv2d_param(int32_t * word0, int32_t* word1){
 	int32_t mask = 0b111111;
 	int32_t wordconv0, wordconv1;
@@ -139,7 +130,7 @@ void get_data_gru(int32_t* data, int32_t *word_data)
 	int32_t mask = 0b111111;
 	int32_t sgnextneg = 0b11111111111111111111111111000000;
 	uint32_t k,i,j = 0;
-	for (k = 0; k <400; k++){
+	for (k = 0; k <500; k++){
 		i = k/5;
 		j = k%5;
 		*(data + k) = (*(word_data+i) & (mask << j*6))>>j*6;
